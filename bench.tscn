@@ -1,5 +1,55 @@
-[gd_scene format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=5 format=3 uid="uid://b4rb4np51o66m"]
+
+[ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://bench.gd" id="1_3f1fh"]
+[ext_resource type="Script" uid="uid://domph6oksm6me" path="res://action_buttons.gd" id="2_a5qnj"]
+[ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://signal_graph.tscn" id="2_yj3it"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ynj0"]
+font_size = 88
+font_color = Color(0, 0, 0, 1)
 
 [node name="Bench" type="ColorRect"]
 offset_right = 3300.0
 offset_bottom = 1950.0
+script = ExtResource("1_3f1fh")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1250.0
+offset_top = 36.0
+offset_right = 2050.0
+offset_bottom = 164.0
+text = "Whack an Action"
+label_settings = SubResource("LabelSettings_6ynj0")
+horizontal_alignment = 1
+
+[node name="ActionButtons" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 184.0
+offset_right = 3296.0
+offset_bottom = 384.0
+script = ExtResource("2_a5qnj")
+action_array = Array[Dictionary]([{
+"name": "Rest"
+}, {
+"name": "Walk"
+}, {
+"name": "Drink"
+}, {
+"name": "Eat"
+}, {
+"name": "Pee"
+}, {
+"name": "Poo"
+}])
+
+[node name="SignalGraph" parent="." instance=ExtResource("2_yj3it")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 388.0
+offset_bottom = 1948.0
+grow_vertical = 1
+color = Color(0.784314, 0.784314, 0.784314, 1)
