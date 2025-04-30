@@ -4,6 +4,7 @@ extends ColorRect
 @export var signal_array_dicts: Array[Dictionary]
 @export var signal_graph_row_template: PackedScene
 
+var frame_count: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,3 +27,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+	
+func add_frame() -> void:
+	frame_count = frame_count + 1
+	$Label.text = str(frame_count)
+	
