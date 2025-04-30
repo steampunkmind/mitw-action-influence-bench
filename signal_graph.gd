@@ -15,6 +15,9 @@ func _ready() -> void:
 		var row = signal_graph_row_template.instantiate()
 		row.set_row_location(row_location)
 		row.set_signal_name(signal_dict.name)
+		row.set_signal_min(signal_dict.min)
+		row.set_signal_max(signal_dict.max)
+		row.set_signal_value(signal_dict.value)
 		row.size.y = row_size - row_margin
 		add_child(row)
 		row_location = row_location + row_size

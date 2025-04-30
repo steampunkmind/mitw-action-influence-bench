@@ -19,20 +19,50 @@ offset_bottom = 88.0
 text = "Name"
 label_settings = SubResource("LabelSettings_hncfd")
 
+[node name="SignalMin" type="Label" parent="."]
+layout_mode = 0
+offset_left = 580.0
+offset_top = -3.0
+offset_right = 694.0
+offset_bottom = 44.0
+text = "Min"
+label_settings = SubResource("LabelSettings_hncfd")
+horizontal_alignment = 2
+
 [node name="SignalValue" type="Label" parent="."]
 layout_mode = 0
-offset_left = 387.0
-offset_top = 1.0
-offset_right = 571.0
-offset_bottom = 89.0
-text = "Signal"
+offset_left = 580.0
+offset_top = 27.0
+offset_right = 694.0
+offset_bottom = 74.0
+text = "Value"
 label_settings = SubResource("LabelSettings_hncfd")
+horizontal_alignment = 2
+
+[node name="SignalMax" type="Label" parent="."]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 57.0
+offset_right = 694.0
+offset_bottom = 104.0
+text = "Max"
+label_settings = SubResource("LabelSettings_hncfd")
+horizontal_alignment = 2
 
 [node name="ActionValue" type="Label" parent="."]
 layout_mode = 0
-offset_left = 590.0
-offset_top = 3.0
-offset_right = 787.0
-offset_bottom = 91.0
+offset_left = 338.0
+offset_right = 535.0
+offset_bottom = 88.0
 text = "Action"
 label_settings = SubResource("LabelSettings_hncfd")
+
+[node name="StartLine" type="Line2D" parent="."]
+points = PackedVector2Array(700, 0, 700, 100)
+width = 4.0
+default_color = Color(0.313726, 0.54902, 0.784314, 1)
+
+[node name="SignalLine" type="Line2D" parent="."]
+points = PackedVector2Array(700, 50, 730, 50)
+width = 4.0
+default_color = Color(0.313726, 0.54902, 0.784314, 1)

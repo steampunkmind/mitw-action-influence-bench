@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://signal_graph_row.tscn" id="3_vdl7c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kc2xn"]
-font_size = 48
+font_size = 42
 font_color = Color(0, 0, 0, 1)
 
 [node name="SignalGraph" type="ColorRect"]
@@ -17,17 +17,35 @@ offset_bottom = -950.0
 grow_vertical = 0
 script = ExtResource("1_kc2xn")
 signal_array_dicts = Array[Dictionary]([{
-"name": "Energy"
+"max": 100.0,
+"min": 0.0,
+"name": "Energy",
+"value": 20.0
 }, {
-"name": "Stomach Liquid"
+"max": 100.0,
+"min": 0.0,
+"name": "Stomach Liquid",
+"value": 30.0
 }, {
-"name": "Stomach Solid"
+"max": 100.0,
+"min": 0.0,
+"name": "Stomach Solid",
+"value": 40.0
 }, {
-"name": "Stomach Total"
+"max": 100.0,
+"min": 0.0,
+"name": "Stomach Total",
+"value": 50.0
 }, {
-"name": "Bladder"
+"max": 100.0,
+"min": 0.0,
+"name": "Bladder",
+"value": 60.0
 }, {
-"name": "Bowels"
+"max": 100.0,
+"min": 0.0,
+"name": "Bowels",
+"value": 70.0
 }])
 signal_graph_row_template = ExtResource("3_vdl7c")
 metadata/_custom_type_script = "uid://3sk4l6dcbxo0"
@@ -36,7 +54,7 @@ metadata/_custom_type_script = "uid://3sk4l6dcbxo0"
 layout_mode = 0
 offset_left = 29.0
 offset_top = 3.0
-offset_right = 260.0
-offset_bottom = 91.0
-text = "Signal                 Value      Action"
+offset_right = 170.0
+offset_bottom = 74.0
+text = "Signal"
 label_settings = SubResource("LabelSettings_kc2xn")
