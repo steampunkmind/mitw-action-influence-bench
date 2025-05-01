@@ -20,7 +20,7 @@ font_color = Color(0, 0, 0, 1)
 offset_right = 3300.0
 offset_bottom = 1950.0
 script = ExtResource("1_3f1fh")
-frame_rate = 40.0
+frame_rate = 60.0
 
 [node name="Header" type="Label" parent="."]
 layout_mode = 0
@@ -58,7 +58,7 @@ offset_top = 100.0
 offset_right = 320.0
 offset_bottom = 121.0
 scale = Vector2(3, 3)
-max_value = 60.0
+max_value = 120.0
 step = 0.5
 
 [node name="FrameRateValue" type="Label" parent="."]

@@ -63,6 +63,6 @@ width = 4.0
 default_color = Color(0.313726, 0.54902, 0.784314, 1)
 
 [node name="SignalLine" type="Line2D" parent="."]
-points = PackedVector2Array(700, 50, 730, 50)
+points = PackedVector2Array(700, 50, 700, 50)
 width = 4.0
 default_color = Color(0.313726, 0.54902, 0.784314, 1)

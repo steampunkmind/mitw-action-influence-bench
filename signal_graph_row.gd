@@ -4,6 +4,7 @@ extends ColorRect
 var signal_min
 var signal_max
 var signal_value
+var signal_change_value = 0.4 #TEMP FOR TESTING
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,10 +24,6 @@ func _ready() -> void:
 	$SignalLine.set_point_position(1, point)
 	
 	
-func signal_value_y() -> float:
-	return size.y - (signal_value * (size.y/(signal_max - signal_min)))
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -50,4 +47,39 @@ func set_signal_max(value: float) -> void:
 
 func set_signal_value(value: float) -> void:
 	signal_value = value
-	$SignalValue.text = str(value)
+	$SignalValue.text = str("%.1f" % value)
+	
+	
+func add_frame_to_graph() -> void:
+	var line = $SignalLine
+		
+	# Move points to right
+	for i in range(line.get_point_count()):
+		var point = line.get_point_position(i)
+		point.x = point.x + 1
+		line.set_point_position(i, point)
+		
+	# Remove if off right side
+	if (line.get_point_position(0).x > size.x):
+		line.remove_point(0)
+	
+	# Add new point
+	var point = line.get_point_position(line.get_point_count()-1)
+	point.x = point.x - 1
+	update_signal_change_value()
+	point.y = signal_value_y()
+	line.add_point(point)
+
+
+# Utils	
+func update_signal_change_value() -> void:
+	#TEMP TO CREATE CHANGING POINT
+	if (signal_value < signal_min):
+		signal_change_value = +.4
+	elif (signal_value > signal_max):
+		signal_change_value = -.4
+	set_signal_value(signal_value + signal_change_value)
+	
+	
+func signal_value_y() -> float:
+	return size.y - (signal_value * (size.y/(signal_max - signal_min)))
