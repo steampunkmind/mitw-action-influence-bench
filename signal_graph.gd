@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
 
 	
 func add_frame() -> void:
-	frame_count = frame_count + 1
 	for child in get_children():
 		if (is_instance_of(child, SignalGraphRow)):
 			child.add_frame_to_graph()
