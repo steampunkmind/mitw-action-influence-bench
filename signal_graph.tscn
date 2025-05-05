@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx0kddlfv7xvs"]
+[gd_scene load_steps=5 format=3 uid="uid://bx0kddlfv7xvs"]
 
 [ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://signal_graph.gd" id="1_kc2xn"]
 [ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://signal_graph_row.tscn" id="3_vdl7c"]
@@ -7,13 +7,17 @@
 font_size = 42
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_lqfjh"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
 [node name="SignalGraph" type="ColorRect"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -1950.0
 offset_right = 3300.0
-offset_bottom = -950.0
+offset_bottom = -390.0
 grow_vertical = 0
 script = ExtResource("1_kc2xn")
 signal_array_dicts = Array[Dictionary]([{
@@ -58,3 +62,20 @@ offset_right = 170.0
 offset_bottom = 74.0
 text = "Signal"
 label_settings = SubResource("LabelSettings_kc2xn")
+
+[node name="ActionNameTemplate" type="Label" parent="."]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 56.0
+offset_right = 686.0
+offset_bottom = 101.0
+text = "Action"
+label_settings = SubResource("LabelSettings_lqfjh")
+horizontal_alignment = 2
+
+[node name="ActionLineTemplate" type="Line2D" parent="."]
+z_index = 1000
+position = Vector2(700, 60)
+points = PackedVector2Array(0, 0, 0, 1500)
+width = 2.0
+default_color = Color(0.313726, 0.470588, 0.705882, 1)

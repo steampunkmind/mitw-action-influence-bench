@@ -27,9 +27,10 @@ func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	
 	
 func _on_timer_timeout() -> void:
-	$SignalGraph.add_frame()
+	$SignalGraph.add_frame_to_graph()
 
 
 func _on_action_button_pressed(dict: Dictionary) -> void:
-	print("Bench._on_action_button_pressed " + dict.name + " " + str(dict.get("Energy", 0)))
+	$SignalGraph.set_action(dict)
+	
 	

@@ -18,8 +18,10 @@ func _ready() -> void:
 		button.pressed.connect(_action_button_pressed.bind(action_dict))
 		add_child(button)
 		button_location = button.position.x + (button.size.x * button_scale.x) + button_margin
-		
 	$ActionButtonTemplate.visible = false
+	
+	# Init bench with first action in array
+	_action_button_pressed(action_array[0])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
