@@ -4,13 +4,13 @@ extends ColorRect
 var signal_min
 var signal_max
 var signal_value
-var signal_change_value = 0.4 #TEMP FOR TESTING
-
+var signal_influence = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$SignalValue.position.y = (size.y/2) - ($SignalValue.size.y/2)
-	$SignalMax.position.y = size.y - $SignalValue.size.y
+	$ActionValue.position.y = (size.y/2) - ($ActionValue.size.y/2)
+	$SignalMin.position.y = size.y - $SignalValue.size.y
 
 	var point = $StartLine.get_point_position(1)
 	point.y = size.y
@@ -70,16 +70,22 @@ func add_frame_to_graph() -> void:
 	point.y = signal_value_y()
 	line.add_point(point)
 
+func set_influence(value: float):
+	$ActionValue.text = str(value)
+	signal_influence = value
+	
 
 # Utils	
 func update_signal_change_value() -> void:
-	#TEMP TO CREATE CHANGING POINT
-	if (signal_value < signal_min):
-		signal_change_value = +.4
-	elif (signal_value > signal_max):
-		signal_change_value = -.4
-	set_signal_value(signal_value + signal_change_value)
+	var new_signal_value = signal_value + signal_influence
+	if (new_signal_value < signal_min):
+		new_signal_value = signal_min
+	elif (new_signal_value > signal_max):
+		new_signal_value = signal_max
+	set_signal_value(new_signal_value)
 	
 	
 func signal_value_y() -> float:
 	return size.y - (signal_value * (size.y/(signal_max - signal_min)))
+	
+	

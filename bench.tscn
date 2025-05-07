@@ -20,7 +20,7 @@ font_color = Color(0, 0, 0, 1)
 offset_right = 3300.0
 offset_bottom = 1950.0
 script = ExtResource("1_3f1fh")
-frame_rate = 60.0
+frame_rate = 30.0
 
 [node name="Header" type="Label" parent="."]
 layout_mode = 0
@@ -70,6 +70,52 @@ offset_bottom = 166.0
 text = "0"
 label_settings = SubResource("LabelSettings_a5qnj")
 
+[node name="SignalGraph" parent="." instance=ExtResource("2_yj3it")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 388.0
+offset_bottom = 1948.0
+grow_vertical = 1
+color = Color(0.784314, 0.784314, 0.784314, 1)
+signal_array_dicts = Array[Dictionary]([{
+"max": 100.0,
+"min": 0.0,
+"name": "Mood",
+"value": 50.0
+}, {
+"max": 100.0,
+"min": 0.0,
+"name": "Energy",
+"value": 50.0
+}, {
+"max": 100.0,
+"min": 0.0,
+"name": "Stomach Liquid",
+"value": 50.0
+}, {
+"max": 100.0,
+"min": 0.0,
+"name": "Stomach Solid",
+"value": 50.0
+}, {
+"max": 100.0,
+"min": 0.0,
+"name": "Stomach Total",
+"value": 50.0
+}, {
+"max": 100.0,
+"min": 0.0,
+"name": "Bladder",
+"value": 50.0
+}, {
+"max": 100.0,
+"min": 0.0,
+"name": "Bowels",
+"value": 70.0
+}])
+
 [node name="ActionButtons" type="ColorRect" parent="." node_paths=PackedStringArray("action_button_template")]
 layout_mode = 0
 offset_top = 184.0
@@ -77,11 +123,23 @@ offset_right = 3300.0
 offset_bottom = 384.0
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
-"Energy": 1.0,
-"name": "Rest"
+"influences": {
+"Energy": 0.03,
+"Mood": -0.03,
+"Stomach Liquid": -0.005
+},
+"name": "Sit"
 }, {
+"influences": {
+"Energy": -0.03,
+"Mood": 0.03,
+"Stomach Liquid": -0.02
+},
 "name": "Walk"
 }, {
+"influences": {
+"Stomach Liquid": 0.3
+},
 "name": "Drink"
 }, {
 "name": "Eat"
@@ -100,16 +158,6 @@ offset_right = 35.0
 offset_bottom = 47.0
 scale = Vector2(2.8, 2.8)
 text = "Action"
-
-[node name="SignalGraph" parent="." instance=ExtResource("2_yj3it")]
-layout_mode = 0
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 388.0
-offset_bottom = 1948.0
-grow_vertical = 1
-color = Color(0.784314, 0.784314, 0.784314, 1)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
