@@ -93,13 +93,16 @@ signal_array_dicts = Array[Dictionary]([{
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Liquid",
-"value": 50.0
+"value": 25.0
 }, {
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Solid",
-"value": 50.0
+"value": 25.0
 }, {
+"formulas": {
+"Sum": ["Stomach Liquid", "Stomach Solid"]
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Total",
@@ -126,14 +129,16 @@ action_array = Array[Dictionary]([{
 "influences": {
 "Energy": 0.03,
 "Mood": -0.03,
-"Stomach Liquid": -0.005
+"Stomach Liquid": -0.005,
+"Stomach Solid": -0.003
 },
 "name": "Sit"
 }, {
 "influences": {
 "Energy": -0.03,
 "Mood": 0.03,
-"Stomach Liquid": -0.02
+"Stomach Liquid": -0.02,
+"Stomach Solid": -0.015
 },
 "name": "Walk"
 }, {
@@ -142,6 +147,12 @@ action_array = Array[Dictionary]([{
 },
 "name": "Drink"
 }, {
+"influences": {
+"Energy": 0.03,
+"Mood": 0.03,
+"Stomach Liquid": -0.005,
+"Stomach Solid": 0.15
+},
 "name": "Eat"
 }, {
 "name": "Pee"

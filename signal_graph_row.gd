@@ -5,6 +5,7 @@ var signal_min
 var signal_max
 var signal_value
 var signal_influence = 0
+var signal_formulas = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,6 +35,14 @@ func set_row_location(y: float) -> void:
 	p.y = y
 	set_position(p)
 	
+func set_signal_dict(signal_dict: Dictionary) -> void:
+	set_name(signal_dict.name) # sets name of node
+	set_signal_name(signal_dict.name) #!needed?
+	set_signal_min(signal_dict.min)
+	set_signal_max(signal_dict.max)
+	set_signal_value(signal_dict.value)
+	signal_formulas = signal_dict.get("formulas")
+	
 func set_signal_name(value: String) -> void:
 	$Name.text = value
 	
@@ -48,6 +57,9 @@ func set_signal_max(value: float) -> void:
 func set_signal_value(value: float) -> void:
 	signal_value = value
 	$SignalValue.text = str("%.1f" % value)
+
+func get_signal_value() -> float:
+	return signal_value
 	
 	
 func add_frame_to_graph() -> void:
@@ -75,9 +87,14 @@ func set_influence(value: float):
 	signal_influence = value
 	
 
-# Utils	
+### Utils ###	
 func update_signal_change_value() -> void:
-	var new_signal_value = signal_value + signal_influence
+	var new_signal_value
+	if (signal_formulas == null):
+		new_signal_value = signal_value + signal_influence
+	else:
+		new_signal_value = get_parent().calc_signal_formulas(signal_formulas)
+	
 	if (new_signal_value < signal_min):
 		new_signal_value = signal_min
 	elif (new_signal_value > signal_max):
