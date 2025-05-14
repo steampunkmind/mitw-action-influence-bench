@@ -54,6 +54,9 @@ func set_signal_max(value: float) -> void:
 	signal_max = value
 	$SignalMax.text = str(value)
 
+func get_signal_max() -> float:
+	return signal_max
+	
 func set_signal_value(value: float) -> void:
 	signal_value = value
 	$SignalValue.text = str("%.1f" % value)
@@ -86,6 +89,9 @@ func set_influence(value: float):
 	$ActionValue.text = str(value)
 	signal_influence = value
 	
+func get_influence() -> float:
+	return signal_influence
+	
 
 ### Utils ###	
 func update_signal_change_value() -> void:
@@ -93,7 +99,7 @@ func update_signal_change_value() -> void:
 	if (signal_formulas == null):
 		new_signal_value = signal_value + signal_influence
 	else:
-		new_signal_value = get_parent().calc_signal_formulas(signal_formulas)
+		new_signal_value = get_parent().calc_signal_formulas(self, signal_formulas)
 	
 	if (new_signal_value < signal_min):
 		new_signal_value = signal_min

@@ -90,11 +90,17 @@ signal_array_dicts = Array[Dictionary]([{
 "name": "Energy",
 "value": 50.0
 }, {
+"formulas": {
+"Max Limit": ["Stomach Total"]
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Liquid",
 "value": 25.0
 }, {
+"formulas": {
+"Max Limit": ["Stomach Total"]
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Solid",

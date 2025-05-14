@@ -81,7 +81,7 @@ func set_action(dict: Dictionary) -> void:
 # All signal values that depend on other rows 
 # should be calculated by the SignalGraph
 # SignalGraphRows should be blind to other rows.
-func calc_signal_formulas(formulas: Dictionary) -> float:
+func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> float:
 	var result = 0.0
 	for key: String in formulas.keys():
 		#This should be done with a base class and a subclass for each formula type
@@ -91,6 +91,20 @@ func calc_signal_formulas(formulas: Dictionary) -> float:
 				for signal_name: String in signal_names:
 					var signal_graph_row = signal_graph_rows.get(signal_name)
 					result += signal_graph_row.get_signal_value()
+			"Max Limit":
+				result = source_row.get_signal_value()
+				var limit_value = false
+				var influence = source_row.get_influence()
+				if (influence > 0):	
+					var signal_names = formulas.get(key)
+					for signal_name: String in signal_names:
+						var signal_graph_row = signal_graph_rows.get(signal_name)
+						if (signal_graph_row.get_signal_value() >= signal_graph_row.get_signal_max()):
+							limit_value = true
+							break
+							
+				if (!limit_value):
+					result += influence
 			_:
 				print(key + " formula not found.")
 	
