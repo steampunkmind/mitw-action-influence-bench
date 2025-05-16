@@ -82,7 +82,6 @@ func set_action(dict: Dictionary) -> void:
 # should be calculated by the SignalGraph
 # SignalGraphRows should be blind to other rows.
 func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> float:
-	var result = 0.0
 	var result = source_row.get_signal_value()
 	for key: String in formulas.keys():
 		#This should be done with a base class and a subclass for each formula type
