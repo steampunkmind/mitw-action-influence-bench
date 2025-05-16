@@ -91,7 +91,8 @@ signal_array_dicts = Array[Dictionary]([{
 "value": 50.0
 }, {
 "formulas": {
-"Max Limit": ["Stomach Total"]
+"Max Limit": ["Stomach Total"],
+"Outflow Percent": 0.002
 },
 "max": 100.0,
 "min": 0.0,
@@ -114,15 +115,21 @@ signal_array_dicts = Array[Dictionary]([{
 "name": "Stomach Total",
 "value": 50.0
 }, {
+"formulas": {
+"Inflow Percent": [{
+"inflow_percent": 0.001,
+"signal_name": "Stomach Liquid"
+}]
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Bladder",
-"value": 50.0
+"value": 0.0
 }, {
 "max": 100.0,
 "min": 0.0,
 "name": "Bowels",
-"value": 70.0
+"value": 0.0
 }])
 
 [node name="ActionButtons" type="ColorRect" parent="." node_paths=PackedStringArray("action_button_template")]
@@ -133,6 +140,7 @@ offset_bottom = 384.0
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
+"Bladder": 0.0,
 "Energy": 0.03,
 "Mood": -0.03,
 "Stomach Liquid": -0.005,
@@ -141,6 +149,7 @@ action_array = Array[Dictionary]([{
 "name": "Sit"
 }, {
 "influences": {
+"Bladder": 0.0,
 "Energy": -0.03,
 "Mood": 0.03,
 "Stomach Liquid": -0.02,
@@ -149,11 +158,13 @@ action_array = Array[Dictionary]([{
 "name": "Walk"
 }, {
 "influences": {
+"Bladder": 0.0,
 "Stomach Liquid": 0.3
 },
 "name": "Drink"
 }, {
 "influences": {
+"Bladder": 0.0,
 "Energy": 0.03,
 "Mood": 0.03,
 "Stomach Liquid": -0.005,
@@ -161,6 +172,9 @@ action_array = Array[Dictionary]([{
 },
 "name": "Eat"
 }, {
+"influences": {
+"Bladder": -0.2
+},
 "name": "Pee"
 }, {
 "name": "Poo"

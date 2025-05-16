@@ -83,16 +83,17 @@ func set_action(dict: Dictionary) -> void:
 # SignalGraphRows should be blind to other rows.
 func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> float:
 	var result = 0.0
+	var result = source_row.get_signal_value()
 	for key: String in formulas.keys():
 		#This should be done with a base class and a subclass for each formula type
 		match (key):
 			"Sum":
+				result = 0.0
 				var signal_names = formulas.get(key)
 				for signal_name: String in signal_names:
 					var signal_graph_row = signal_graph_rows.get(signal_name)
 					result += signal_graph_row.get_signal_value()
 			"Max Limit":
-				result = source_row.get_signal_value()
 				var limit_value = false
 				var influence = source_row.get_influence()
 				if (influence > 0):	
@@ -102,9 +103,20 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 						if (signal_graph_row.get_signal_value() >= signal_graph_row.get_signal_max()):
 							limit_value = true
 							break
-							
 				if (!limit_value):
 					result += influence
+			"Outflow Percent":
+				var outflow_percent = formulas.get(key)
+				result = result - (result * outflow_percent)  
+			"Inflow Percent":
+				result += source_row.get_influence()
+				var formula = formulas.get(key)
+				for formula_dict: Dictionary in formula:
+					var signal_name = formula_dict.get("signal_name")
+					var inflow_percent = formula_dict.get("inflow_percent")
+					var signal_graph_row = signal_graph_rows.get(signal_name)
+					var signal_value = signal_graph_row.get_signal_value()
+					result += signal_value * inflow_percent
 			_:
 				print(key + " formula not found.")
 	
