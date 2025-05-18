@@ -100,7 +100,8 @@ signal_array_dicts = Array[Dictionary]([{
 "value": 25.0
 }, {
 "formulas": {
-"Max Limit": ["Stomach Total"]
+"Max Limit": ["Stomach Total"],
+"Outflow Percent": 0.001
 },
 "max": 100.0,
 "min": 0.0,
@@ -126,6 +127,12 @@ signal_array_dicts = Array[Dictionary]([{
 "name": "Bladder",
 "value": 0.0
 }, {
+"formulas": {
+"Inflow Percent": [{
+"inflow_percent": 0.001,
+"signal_name": "Stomach Solid"
+}]
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Bowels",
@@ -141,6 +148,7 @@ script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
 "Bladder": 0.0,
+"Bowels": 0.0,
 "Energy": 0.03,
 "Mood": -0.03,
 "Stomach Liquid": -0.005,
@@ -150,6 +158,7 @@ action_array = Array[Dictionary]([{
 }, {
 "influences": {
 "Bladder": 0.0,
+"Bowels": 0.0,
 "Energy": -0.03,
 "Mood": 0.03,
 "Stomach Liquid": -0.02,
@@ -159,12 +168,15 @@ action_array = Array[Dictionary]([{
 }, {
 "influences": {
 "Bladder": 0.0,
-"Stomach Liquid": 0.3
+"Bowels": 0.0,
+"Stomach Liquid": 0.3,
+"Stomach Solid": -0.003
 },
 "name": "Drink"
 }, {
 "influences": {
 "Bladder": 0.0,
+"Bowels": 0.0,
 "Energy": 0.03,
 "Mood": 0.03,
 "Stomach Liquid": -0.005,
@@ -177,6 +189,9 @@ action_array = Array[Dictionary]([{
 },
 "name": "Pee"
 }, {
+"influences": {
+"Bowels": -0.2
+},
 "name": "Poo"
 }])
 action_button_template = NodePath("ActionButtonTemplate")
