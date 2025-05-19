@@ -4,7 +4,6 @@ extends ColorRect
 var signal_min
 var signal_max
 var signal_value
-var signal_influence = 0
 var signal_formulas = null
 
 # Called when the node enters the scene tree for the first time.
@@ -84,28 +83,23 @@ func add_frame_to_graph() -> void:
 	update_signal_change_value()
 	point.y = signal_value_y()
 	line.add_point(point)
-
-func set_influence(value: float):
-	$ActionValue.text = str(value)
-	signal_influence = value
 	
-func get_influence() -> float:
-	return signal_influence
 	
-
+func set_formulas(formulas: Array):
+	for formula: Dictionary in formulas:
+		for formula_key: String in formula:
+			signal_formulas.set(formula_key, formula.get(formula_key))
+	
+	
 ### Utils ###	
 func update_signal_change_value() -> void:
-	var new_signal_value
-	if (signal_formulas == null):
-		new_signal_value = signal_value + signal_influence
-	else:
-		new_signal_value = get_parent().calc_signal_formulas(self, signal_formulas)
-	
-	if (new_signal_value < signal_min):
-		new_signal_value = signal_min
-	elif (new_signal_value > signal_max):
-		new_signal_value = signal_max
-	set_signal_value(new_signal_value)
+	if (signal_formulas != null):
+		var new_signal_value = get_parent().calc_signal_formulas(self, signal_formulas)
+		if (new_signal_value < signal_min):
+			new_signal_value = signal_min
+		elif (new_signal_value > signal_max):
+			new_signal_value = signal_max
+		set_signal_value(new_signal_value)
 	
 	
 func signal_value_y() -> float:

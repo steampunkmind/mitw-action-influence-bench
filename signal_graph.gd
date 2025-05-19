@@ -27,12 +27,12 @@ func _ready() -> void:
 		add_child(row)
 		signal_graph_rows.set(signal_dict.name, row)
 		row_location = row_location + row_size
-
-
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
+	
 	
 func add_frame_to_graph() -> void:
 	for control in action_names:
@@ -69,23 +69,29 @@ func set_action(dict: Dictionary) -> void:
 	add_child(new_action_line)
 	action_lines.insert(0, new_action_line)
 	
-	# Set influences
+	## Set influences
 	var influences = dict.get("influences")
 	if (influences != null):
-		for row in signal_graph_rows.values():
-			var influence = influences.get(row.name)
-			if (influence != null):
-				row.set_influence(influence)
-		
+		for key: String in influences.keys():
+			var formulas = influences.get(key)
+			if (formulas is Array):
+				var signal_graph_row = signal_graph_rows.get(key)
+				signal_graph_row.set_formulas(formulas)
+	
+	
 ### Support for signal graph rows ###
 # All signal values that depend on other rows 
 # should be calculated by the SignalGraph
 # SignalGraphRows should be blind to other rows.
 func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> float:
 	var result = source_row.get_signal_value()
+	var limit_value = false
 	for key: String in formulas.keys():
 		#This should be done with a base class and a subclass for each formula type
 		match (key):
+			"Linear":
+				var linear_change = formulas.get(key)
+				result += linear_change
 			"Sum":
 				result = 0.0
 				var signal_names = formulas.get(key)
@@ -93,37 +99,29 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 					var signal_graph_row = signal_graph_rows.get(signal_name)
 					result += signal_graph_row.get_signal_value()
 			"Max Limit":
-				var limit_value = false
-				var influence = source_row.get_influence()
-				if (influence > 0):	
-					var signal_names = formulas.get(key)
-					for signal_name: String in signal_names:
-						var signal_graph_row = signal_graph_rows.get(signal_name)
-						if (signal_graph_row.get_signal_value() >= signal_graph_row.get_signal_max()):
-							limit_value = true
-							break
-				if (!limit_value):
-					result += influence
+				var signal_names = formulas.get(key)
+				for signal_name: String in signal_names:
+					var signal_graph_row = signal_graph_rows.get(signal_name)
+					if (signal_graph_row.get_signal_value() >= signal_graph_row.get_signal_max()):
+						limit_value = true
+						break
 			"Outflow Percent":
 				var outflow_percent = formulas.get(key)
-				result = result - (result * outflow_percent)  
+				result -= result * (outflow_percent/100) 
 			"Inflow Percent":
-				result += source_row.get_influence()
 				var formula = formulas.get(key)
 				for formula_dict: Dictionary in formula:
 					var signal_name = formula_dict.get("signal_name")
 					var inflow_percent = formula_dict.get("inflow_percent")
 					var signal_graph_row = signal_graph_rows.get(signal_name)
 					var signal_value = signal_graph_row.get_signal_value()
-					result += signal_value * inflow_percent
+					result += signal_value * (inflow_percent/100)
 			_:
 				print(key + " formula not found.")
-	
-	return result
-	
-func sum_formula(signal_names: Array) -> float:
-	var result = 0.0
-	for signal_name: String in signal_names:
-		result = 2
+				
+	if (limit_value && result > source_row.get_signal_value()):
+		return source_row.get_signal_value()
 		
 	return result
+	
+	

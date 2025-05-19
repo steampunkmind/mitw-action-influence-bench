@@ -80,11 +80,17 @@ offset_bottom = 1948.0
 grow_vertical = 1
 color = Color(0.784314, 0.784314, 0.784314, 1)
 signal_array_dicts = Array[Dictionary]([{
+"formulas": {
+"Linear": 0.0
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Mood",
 "value": 50.0
 }, {
+"formulas": {
+"Linear": 0.0
+},
 "max": 100.0,
 "min": 0.0,
 "name": "Energy",
@@ -92,7 +98,7 @@ signal_array_dicts = Array[Dictionary]([{
 }, {
 "formulas": {
 "Max Limit": ["Stomach Total"],
-"Outflow Percent": 0.002
+"Outflow Percent": 0.75
 },
 "max": 100.0,
 "min": 0.0,
@@ -101,7 +107,7 @@ signal_array_dicts = Array[Dictionary]([{
 }, {
 "formulas": {
 "Max Limit": ["Stomach Total"],
-"Outflow Percent": 0.001
+"Outflow Percent": 0.05
 },
 "max": 100.0,
 "min": 0.0,
@@ -118,7 +124,7 @@ signal_array_dicts = Array[Dictionary]([{
 }, {
 "formulas": {
 "Inflow Percent": [{
-"inflow_percent": 0.001,
+"inflow_percent": 0.038,
 "signal_name": "Stomach Liquid"
 }]
 },
@@ -129,7 +135,7 @@ signal_array_dicts = Array[Dictionary]([{
 }, {
 "formulas": {
 "Inflow Percent": [{
-"inflow_percent": 0.001,
+"inflow_percent": 0.038,
 "signal_name": "Stomach Solid"
 }]
 },
@@ -147,50 +153,101 @@ offset_bottom = 384.0
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
-"Bladder": 0.0,
-"Bowels": 0.0,
-"Energy": 0.03,
-"Mood": -0.03,
-"Stomach Liquid": -0.005,
-"Stomach Solid": -0.003
+"Bladder": [{
+"Linear": 0.0
+}],
+"Bowels": [{
+"Linear": 0.0
+}],
+"Energy": [{
+"Linear": 0.03
+}],
+"Mood": [{
+"Linear": -0.03
+}],
+"Stomach Liquid": [{
+"Linear": 0.0,
+"Outflow Percent": 0.025
+}],
+"Stomach Solid": [{
+"Linear": -0.003
+}]
 },
 "name": "Sit"
 }, {
 "influences": {
-"Bladder": 0.0,
-"Bowels": 0.0,
-"Energy": -0.03,
-"Mood": 0.03,
-"Stomach Liquid": -0.02,
-"Stomach Solid": -0.015
+"Bladder": [{
+"Linear": 0.0
+}],
+"Bowels": [{
+"Linear": 0.0
+}],
+"Energy": [{
+"Linear": -0.03
+}],
+"Mood": [{
+"Linear": 0.03
+}],
+"Stomach Liquid": [{
+"Linear": 0.0,
+"Outflow Percent": 0.125
+}],
+"Stomach Solid": [{
+"Linear": -0.015
+}]
 },
 "name": "Walk"
 }, {
 "influences": {
-"Bladder": 0.0,
-"Bowels": 0.0,
-"Stomach Liquid": 0.3,
-"Stomach Solid": -0.003
+"Bladder": [{
+"Linear": 0.0
+}],
+"Bowels": [{
+"Linear": 0.0
+}],
+"Stomach Liquid": [{
+"Linear": 0.3,
+"Outflow Percent": 0.0
+}],
+"Stomach Solid": [{
+"Linear": -0.003
+}]
 },
 "name": "Drink"
 }, {
 "influences": {
-"Bladder": 0.0,
-"Bowels": 0.0,
-"Energy": 0.03,
-"Mood": 0.03,
-"Stomach Liquid": -0.005,
-"Stomach Solid": 0.15
+"Bladder": [{
+"Linear": 0.0
+}],
+"Bowels": [{
+"Linear": 0.0
+}],
+"Energy": [{
+"Linear": 0.03
+}],
+"Mood": [{
+"Linear": 0.03
+}],
+"Stomach Liquid": [{
+"Linear": -0.005
+}],
+"Stomach Solid": [{
+"Linear": 0.15
+}]
 },
 "name": "Eat"
 }, {
 "influences": {
-"Bladder": -0.2
+"Bladder": [{
+"Linear": -0.2
+}]
 },
 "name": "Pee"
 }, {
 "influences": {
-"Bowels": -0.2
+"Bowels": [{
+"Linear": -0.2
+}]
 },
 "name": "Poo"
 }])
