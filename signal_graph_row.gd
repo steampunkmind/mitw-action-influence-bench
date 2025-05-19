@@ -9,7 +9,6 @@ var signal_formulas = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$SignalValue.position.y = (size.y/2) - ($SignalValue.size.y/2)
-	$ActionValue.position.y = (size.y/2) - ($ActionValue.size.y/2)
 	$SignalMin.position.y = size.y - $SignalValue.size.y
 
 	var point = $StartLine.get_point_position(1)
@@ -41,6 +40,7 @@ func set_signal_dict(signal_dict: Dictionary) -> void:
 	set_signal_max(signal_dict.max)
 	set_signal_value(signal_dict.value)
 	signal_formulas = signal_dict.get("formulas")
+	update_formulas_text()
 	
 func set_signal_name(value: String) -> void:
 	$Name.text = value
@@ -85,10 +85,11 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	
-func set_formulas(formulas: Array):
+func set_formulas(formulas: Array) -> void:
 	for formula: Dictionary in formulas:
-		for formula_key: String in formula:
-			signal_formulas.set(formula_key, formula.get(formula_key))
+		for key: String in formula:
+			signal_formulas.set(key, formula.get(key))
+	update_formulas_text()
 	
 	
 ### Utils ###	
@@ -106,3 +107,52 @@ func signal_value_y() -> float:
 	return size.y - (signal_value * (size.y/(signal_max - signal_min)))
 	
 	
+func update_formulas_text() -> void:
+	var text: String = ""
+	# should call to_string method in future SignalFormula Class
+	for key: String in signal_formulas:
+		text += key + ": "
+		var formula_value = signal_formulas.get(key)
+		
+		match (key):
+			"Linear":
+				text += str(formula_value)
+			"Sum":
+				text += "["
+				var cnt = 0
+				for signal_name: String in formula_value:
+					if (cnt > 0):
+						text += ", "
+					text += signal_name
+					cnt += 1
+				text += "]"
+			"Max Limit":
+				text += "["
+				var cnt = 0
+				for signal_name: String in formula_value:
+					if (cnt > 0):
+						text += ", "
+					text += signal_name
+					cnt += 1
+				text += "]"
+			"Outflow Percent":
+				text += str(formula_value)
+				#var outflow_percent = formulas.get(key)
+				#text += "-"
+				#result -= result * (outflow_percent/100) 
+			"Inflow Percent":
+				text += "["
+				var cnt = 0
+				for signal_inflow: Dictionary in formula_value:
+					if (cnt > 0):
+						text += ", "
+					var signal_name = signal_inflow.get("signal_name")
+					var inflow_percent = signal_inflow.get("inflow_percent")
+					text += "{" + signal_name + ": " + str(inflow_percent) + "}"
+				text += "]"
+			_:
+				print(key + " formula not found.")
+				
+		text += "\r"
+			
+	$Formulas.text = str(text)
