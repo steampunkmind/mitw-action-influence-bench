@@ -5,6 +5,7 @@ extends ColorRect
 @export var signal_graph_row_template: PackedScene
 
 var name_line_offset: float
+var init_action = null
 var action_names: Array[Control]
 var action_lines: Array[Node2D]
 var signal_graph_rows: Dictionary[String, SignalGraphRow]
@@ -15,10 +16,44 @@ func _ready() -> void:
 	$ActionNameTemplate.visible = false
 	$ActionLineTemplate.visible = false
 	name_line_offset = $ActionLineTemplate.position.x - ($ActionNameTemplate.position.x + $ActionNameTemplate.size.x)
-	var header_margin = 100
+	add_signal_graph_rows()
+	
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+func _on_add_button_button_up() -> void:
+	# Clear all current children to clear screen
+	for action_name: Control in action_names:
+		remove_child(action_name)
+	action_names.clear()
+	
+	for action_line: Node2D in action_lines:
+		remove_child(action_line)
+	action_lines.clear()
+		
+	for signal_graph_row: SignalGraphRow in signal_graph_rows.values():
+		remove_child(signal_graph_row)
+	
+	var signal_dict = Dictionary()
+	signal_dict.set('name', "Untitled " + str(signal_array_dicts.size()+1))
+	signal_dict.set('min', 0 as float)
+	signal_dict.set('max', 100 as float)
+	signal_dict.set('value', 50 as float)
+	signal_array_dicts.insert(signal_array_dicts.size(), signal_dict)
+	
+	signal_graph_rows.clear()
+	add_signal_graph_rows()
+	set_action(init_action)
+	
+	
+func add_signal_graph_rows() -> void:
+	var header_margin = 80
 	var row_margin = 10
 	var row_size = (size.y - header_margin) / signal_array_dicts.size()
 	var row_location = header_margin
+	
 	for signal_dict: Dictionary in signal_array_dicts:
 		var row = signal_graph_row_template.instantiate()
 		row.set_signal_dict(signal_dict)
@@ -27,12 +62,6 @@ func _ready() -> void:
 		add_child(row)
 		signal_graph_rows.set(signal_dict.name, row)
 		row_location = row_location + row_size
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 	
 func add_frame_to_graph() -> void:
 	for control in action_names:
@@ -58,6 +87,8 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_action(dict: Dictionary) -> void:
+	if (init_action == null):
+		init_action = dict
 	var new_action_name = $ActionNameTemplate.duplicate(1)
 	new_action_name.visible = true
 	new_action_name.text = dict.name

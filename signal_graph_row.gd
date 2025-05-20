@@ -110,49 +110,50 @@ func signal_value_y() -> float:
 func update_formulas_text() -> void:
 	var text: String = ""
 	# should call to_string method in future SignalFormula Class
-	for key: String in signal_formulas:
-		text += key + ": "
-		var formula_value = signal_formulas.get(key)
-		
-		match (key):
-			"Linear":
-				text += str(formula_value)
-			"Sum":
-				text += "["
-				var cnt = 0
-				for signal_name: String in formula_value:
-					if (cnt > 0):
-						text += ", "
-					text += signal_name
-					cnt += 1
-				text += "]"
-			"Max Limit":
-				text += "["
-				var cnt = 0
-				for signal_name: String in formula_value:
-					if (cnt > 0):
-						text += ", "
-					text += signal_name
-					cnt += 1
-				text += "]"
-			"Outflow Percent":
-				text += str(formula_value)
-				#var outflow_percent = formulas.get(key)
-				#text += "-"
-				#result -= result * (outflow_percent/100) 
-			"Inflow Percent":
-				text += "["
-				var cnt = 0
-				for signal_inflow: Dictionary in formula_value:
-					if (cnt > 0):
-						text += ", "
-					var signal_name = signal_inflow.get("signal_name")
-					var inflow_percent = signal_inflow.get("inflow_percent")
-					text += "{" + signal_name + ": " + str(inflow_percent) + "}"
-				text += "]"
-			_:
-				print(key + " formula not found.")
-				
-		text += "\r"
+	if (signal_formulas):
+		for key: String in signal_formulas:
+			text += key + ": "
+			var formula_value = signal_formulas.get(key)
+			
+			match (key):
+				"Linear":
+					text += str(formula_value)
+				"Sum":
+					text += "["
+					var cnt = 0
+					for signal_name: String in formula_value:
+						if (cnt > 0):
+							text += ", "
+						text += signal_name
+						cnt += 1
+					text += "]"
+				"Max Limit":
+					text += "["
+					var cnt = 0
+					for signal_name: String in formula_value:
+						if (cnt > 0):
+							text += ", "
+						text += signal_name
+						cnt += 1
+					text += "]"
+				"Outflow Percent":
+					text += str(formula_value)
+					#var outflow_percent = formulas.get(key)
+					#text += "-"
+					#result -= result * (outflow_percent/100) 
+				"Inflow Percent":
+					text += "["
+					var cnt = 0
+					for signal_inflow: Dictionary in formula_value:
+						if (cnt > 0):
+							text += ", "
+						var signal_name = signal_inflow.get("signal_name")
+						var inflow_percent = signal_inflow.get("inflow_percent")
+						text += "{" + signal_name + ": " + str(inflow_percent) + "}"
+					text += "]"
+				_:
+					print(key + " formula not found.")
+					
+			text += "\r"
 			
 	$Formulas.text = str(text)
