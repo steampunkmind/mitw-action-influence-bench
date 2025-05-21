@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=10 format=3 uid="uid://b4rb4np51o66m"]
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://bench.gd" id="1_3f1fh"]
 [ext_resource type="Script" uid="uid://domph6oksm6me" path="res://action_buttons.gd" id="2_a5qnj"]
 [ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://signal_graph.tscn" id="2_yj3it"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://add.svg" id="3_a5qnj"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://add_pressed.svg" id="5_i6k0q"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://add_hover.svg" id="6_tjv83"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ynj0"]
 font_size = 88
@@ -78,7 +81,6 @@ anchor_bottom = 0.0
 offset_top = 388.0
 offset_bottom = 1948.0
 grow_vertical = 1
-color = Color(0.784314, 0.784314, 0.784314, 1)
 signal_array_dicts = Array[Dictionary]([{
 "formulas": {
 "Linear": 0.0
@@ -262,9 +264,20 @@ offset_bottom = 47.0
 scale = Vector2(2.8, 2.8)
 text = "Action"
 
+[node name="AddButton" type="TextureButton" parent="ActionButtons"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -23.0
+offset_right = 50.0
+offset_bottom = 9.0
+texture_normal = ExtResource("3_a5qnj")
+texture_pressed = ExtResource("5_i6k0q")
+texture_hover = ExtResource("6_tjv83")
+
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
 [connection signal="action_button_pressed" from="ActionButtons" to="." method="_on_action_button_pressed"]
+[connection signal="button_up" from="ActionButtons/AddButton" to="ActionButtons" method="_on_add_button_button_up"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
