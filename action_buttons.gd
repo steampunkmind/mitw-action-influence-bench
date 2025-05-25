@@ -9,13 +9,23 @@ var new_button_location
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# TEMP fill actions from action_array
+	var actions: Array
+	for action_dict: Dictionary in action_array:
+		var action = Action.new()
+		action.name = action_dict.get("name")
+		action.influences = action_dict.get("influences")
+		actions.insert(actions.size(), action)	
+	get_parent().actions = actions
+	
 	$ActionButtonTemplate.visible = false
 	new_button_location = $ActionButtonTemplate.position.x
-	for action_dict: Dictionary in action_array:
-		add_action_button(action_dict)
+	for action: Action in actions:
+		add_action_button(action)
 	
 	# Init bench with first action in array
-	_action_button_pressed(action_array[0])
+	_action_button_pressed(actions[0])
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,25 +33,25 @@ func _process(delta: float) -> void:
 	pass
 	
 	
-func _action_button_pressed(dict: Dictionary) -> void:
-	action_button_pressed.emit(dict)
+func _action_button_pressed(action: Action) -> void:
+	action_button_pressed.emit(action)
 	
 	
 func _on_add_button_button_up() -> void:
-	var action_dict = Dictionary()
-	var action_name = "Untitled " + str(action_array.size() + 1)
-	action_dict.set("name", action_name)
-	action_array.insert(action_array.size(), action_dict)
-	add_action_button(action_dict)
+	var actions = get_parent().actions
+	var action = Action.new()
+	action.name = "Untitled " + str(actions.size() + 1)
+	actions.insert(actions.size(), action)
+	add_action_button(action)
 	
 	
 ### Utils ###
-func add_action_button(action_dict: Dictionary) -> void:
+func add_action_button(action: Action) -> void:
 	var button = $ActionButtonTemplate.duplicate(1)
 	var button_margin = button.position.x
-	button.text = action_dict.name
+	button.text = action.name
 	button.offset_left = new_button_location
-	button.pressed.connect(_action_button_pressed.bind(action_dict))
+	button.pressed.connect(_action_button_pressed.bind(action))
 	add_child(button)
 	button.visible = true
 	new_button_location = button.position.x + (button.size.x * button.get_scale().x) + button_margin

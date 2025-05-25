@@ -1,7 +1,7 @@
 extends ColorRect
 
 @export var frame_rate: float
-
+var actions: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +30,7 @@ func _on_timer_timeout() -> void:
 	$SignalGraph.add_frame_to_graph()
 
 
-func _on_action_button_pressed(dict: Dictionary) -> void:
-	$SignalGraph.set_action(dict)
+func _on_action_button_pressed(action: Action) -> void:
+	$SignalGraph.set_action(action)
 	
 	

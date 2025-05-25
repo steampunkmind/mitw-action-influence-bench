@@ -86,12 +86,12 @@ func add_frame_to_graph() -> void:
 		row.add_frame_to_graph()
 	
 	
-func set_action(dict: Dictionary) -> void:
+func set_action(action: Action) -> void:
 	if (init_action == null):
-		init_action = dict
+		init_action = action
 	var new_action_name = $ActionNameTemplate.duplicate(1)
 	new_action_name.visible = true
-	new_action_name.text = dict.name
+	new_action_name.text = action.name
 	add_child(new_action_name)
 	action_names.insert(0, new_action_name)
 	
@@ -101,7 +101,7 @@ func set_action(dict: Dictionary) -> void:
 	action_lines.insert(0, new_action_line)
 	
 	## Set influences
-	var influences = dict.get("influences")
+	var influences = action.influences
 	if (influences != null):
 		for key: String in influences.keys():
 			var formulas = influences.get(key)
