@@ -10,12 +10,17 @@ var new_button_location
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	# TEMP fill actions from action_array
-	var actions: Array
+	# fill actions from action_array
+	var actions: Array[Action]
 	for action_dict: Dictionary in action_array:
 		var action = Action.new()
 		action.name = action_dict.get("name")
-		action.influences = action_dict.get("influences")
+		var dict_influence = action_dict.get("influences")
+		for signal_name: String in dict_influence:
+			var influence = Influence.new()
+			influence.signal_name = signal_name
+			# add formulas here
+			action.influences.append(influence)			
 		actions.insert(actions.size(), action)	
 	get_parent().actions = actions
 	

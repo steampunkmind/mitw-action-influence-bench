@@ -1,7 +1,7 @@
 extends ColorRect
 
 @export var frame_rate: float
-var actions: Array
+var actions: Array[Action]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -103,11 +103,10 @@ func set_action(action: Action) -> void:
 	## Set influences
 	var influences = action.influences
 	if (influences != null):
-		for key: String in influences.keys():
-			var formulas = influences.get(key)
-			if (formulas is Array):
-				var signal_graph_row = signal_graph_rows.get(key)
-				signal_graph_row.set_formulas(formulas)
+		for influence: Influence in influences:
+			#TEMP
+			print(influence.signal_name)
+			print(influence.formulas)
 	
 	
 ### Support for signal graph rows ###
