@@ -19,9 +19,17 @@ func _ready() -> void:
 		for signal_name: String in dict_influence:
 			var influence = Influence.new()
 			influence.signal_name = signal_name
-			# add formulas here
-			action.influences.append(influence)			
-		actions.insert(actions.size(), action)	
+			
+			# expressions was originally an array, 
+			# but an array is not needed so just use the first item in the array
+			var expressions = dict_influence.get(signal_name)
+			if (expressions.size() > 0):
+				var formula = Formula.new()
+				formula.expressions = expressions.get(0)
+				influence.formula = formula
+				
+			action.influences.append(influence)
+		actions.insert(actions.size(), action)
 	get_parent().actions = actions
 	
 	$ActionButtonTemplate.visible = false

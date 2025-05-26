@@ -101,12 +101,9 @@ func set_action(action: Action) -> void:
 	action_lines.insert(0, new_action_line)
 	
 	## Set influences
-	var influences = action.influences
-	if (influences != null):
-		for influence: Influence in influences:
-			#TEMP
-			print(influence.signal_name)
-			print(influence.formulas)
+	for influence: Influence in action.influences:
+		var signal_graph_row = signal_graph_rows.get(influence.signal_name)
+		signal_graph_row.set_formula(influence.formula)
 	
 	
 ### Support for signal graph rows ###

@@ -85,10 +85,9 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	
-func set_formulas(formulas: Array) -> void:
-	for formula: Dictionary in formulas:
-		for key: String in formula:
-			signal_formulas.set(key, formula.get(key))
+func set_formula(formula: Formula) -> void:
+	for key: String in formula.expressions:
+		signal_formulas.set(key, formula.expressions.get(key))
 	update_formulas_text()
 	
 	
