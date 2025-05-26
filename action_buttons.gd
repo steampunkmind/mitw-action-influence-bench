@@ -13,23 +13,21 @@ func _ready() -> void:
 	# fill actions from action_array
 	var actions: Array[Action]
 	for action_dict: Dictionary in action_array:
-		var action = Action.new()
-		action.name = action_dict.get("name")
-		var dict_influence = action_dict.get("influences")
-		for signal_name: String in dict_influence:
-			var influence = Influence.new()
-			influence.signal_name = signal_name
+		var influences: Array[Influence]
+		var influence_dict = action_dict.get("influences")
+		for signal_name: String in influence_dict:
 			
 			# expressions was originally an array, 
 			# but an array is not needed so just use the first item in the array
-			var expressions = dict_influence.get(signal_name)
+			var formula: Formula
+			var expressions = influence_dict.get(signal_name)
 			if (expressions.size() > 0):
-				var formula = Formula.new()
-				formula.expressions = expressions.get(0)
-				influence.formula = formula
+				formula = Formula.new(expressions.get(0))
 				
-			action.influences.append(influence)
-		actions.insert(actions.size(), action)
+			var influence = Influence.new(signal_name, formula)
+			influences.append(influence)
+		
+		actions.append(Action.new(action_dict.get("name"), influences))
 	get_parent().actions = actions
 	
 	$ActionButtonTemplate.visible = false
@@ -52,9 +50,8 @@ func _action_button_pressed(action: Action) -> void:
 	
 func _on_add_button_button_up() -> void:
 	var actions = get_parent().actions
-	var action = Action.new()
-	action.name = "Untitled " + str(actions.size() + 1)
-	actions.insert(actions.size(), action)
+	var action = Action.new("Untitled " + str(actions.size() + 1))
+	actions.append(action)
 	add_action_button(action)
 	
 	
