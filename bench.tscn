@@ -82,65 +82,36 @@ offset_top = 388.0
 offset_bottom = 1948.0
 grow_vertical = 1
 signal_array_dicts = Array[Dictionary]([{
-"formulas": {
-"Linear": 0.0
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Mood",
 "value": 50.0
 }, {
-"formulas": {
-"Linear": 0.0
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Energy",
 "value": 50.0
 }, {
-"formulas": {
-"Max Limit": ["Stomach Total"],
-"Outflow Percent": 0.75
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Liquid",
 "value": 25.0
 }, {
-"formulas": {
-"Max Limit": ["Stomach Total"],
-"Outflow Percent": 0.05
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Solid",
 "value": 25.0
 }, {
-"formulas": {
-"Sum": ["Stomach Liquid", "Stomach Solid"]
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Stomach Total",
 "value": 50.0
 }, {
-"formulas": {
-"Inflow Percent": [{
-"inflow_percent": 0.038,
-"signal_name": "Stomach Liquid"
-}]
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Bladder",
 "value": 0.0
 }, {
-"formulas": {
-"Inflow Percent": [{
-"inflow_percent": 0.038,
-"signal_name": "Stomach Solid"
-}]
-},
 "max": 100.0,
 "min": 0.0,
 "name": "Bowels",
@@ -156,9 +127,17 @@ script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
 "Bladder": [{
+"Inflow Percent": [{
+"inflow_percent": 0.038,
+"signal_name": "Stomach Liquid"
+}],
 "Linear": 0.0
 }],
 "Bowels": [{
+"Inflow Percent": [{
+"inflow_percent": 0.038,
+"signal_name": "Stomach Solid"
+}],
 "Linear": 0.0
 }],
 "Energy": [{
@@ -169,10 +148,16 @@ action_array = Array[Dictionary]([{
 }],
 "Stomach Liquid": [{
 "Linear": 0.0,
+"Max Limit": ["Stomach Total"],
 "Outflow Percent": 0.025
 }],
 "Stomach Solid": [{
-"Linear": -0.003
+"Linear": -0.003,
+"Max Limit": ["Stomach Total"],
+"Outflow Percent": 0.05
+}],
+"Stomach Total": [{
+"Sum": ["Stomach Liquid", "Stomach Solid"]
 }]
 },
 "name": "Sit"

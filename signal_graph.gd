@@ -13,6 +13,16 @@ var signal_graph_rows: Dictionary[String, SignalGraphRow]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	## fill sensors from signal_array_dicts
+	var sensors: Array[Sensor]
+	for signal_dict: Dictionary in signal_array_dicts:
+		var name = signal_dict.get('name')
+		var min = signal_dict.get('min')
+		var max = signal_dict.get('max')
+		var value = signal_dict.get('value')
+		sensors.append(Sensor.new(name, min, max, value))
+	get_parent().sensors = sensors
+	
 	$ActionNameTemplate.visible = false
 	$ActionLineTemplate.visible = false
 	name_line_offset = $ActionLineTemplate.position.x - ($ActionNameTemplate.position.x + $ActionNameTemplate.size.x)
@@ -36,12 +46,9 @@ func _on_add_button_button_up() -> void:
 	for signal_graph_row: SignalGraphRow in signal_graph_rows.values():
 		remove_child(signal_graph_row)
 	
-	var signal_dict = Dictionary()
-	signal_dict.set('name', "Untitled " + str(signal_array_dicts.size()+1))
-	signal_dict.set('min', 0 as float)
-	signal_dict.set('max', 100 as float)
-	signal_dict.set('value', 50 as float)
-	signal_array_dicts.insert(signal_array_dicts.size(), signal_dict)
+	var sensors = get_parent().sensors
+	var name = "Untitled " + str(sensors.size()+1)
+	sensors.append(Sensor.new(name, 0, 100, 50))
 	
 	signal_graph_rows.clear()
 	add_signal_graph_rows()
@@ -51,16 +58,16 @@ func _on_add_button_button_up() -> void:
 func add_signal_graph_rows() -> void:
 	var header_margin = 80
 	var row_margin = 10
-	var row_size = (size.y - header_margin) / signal_array_dicts.size()
 	var row_location = header_margin
-	
-	for signal_dict: Dictionary in signal_array_dicts:
+	var sensors = get_parent().sensors
+	var row_size = (size.y - header_margin) / sensors.size()
+	for sensor: Sensor in sensors:
 		var row = signal_graph_row_template.instantiate()
-		row.set_signal_dict(signal_dict)
+		row.set_sensor(sensor)
 		row.set_row_location(row_location)
 		row.size.y = row_size - row_margin
 		add_child(row)
-		signal_graph_rows.set(signal_dict.name, row)
+		signal_graph_rows.set(sensor.name, row)
 		row_location = row_location + row_size
 	
 func add_frame_to_graph() -> void:

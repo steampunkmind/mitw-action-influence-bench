@@ -4,7 +4,7 @@ extends ColorRect
 var signal_min
 var signal_max
 var signal_value
-var signal_formulas = null
+var signal_formulas = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,14 +33,14 @@ func set_row_location(y: float) -> void:
 	p.y = y
 	set_position(p)
 	
-func set_signal_dict(signal_dict: Dictionary) -> void:
-	set_name(signal_dict.name) # sets name of node
-	set_signal_name(signal_dict.name) #!needed?
-	set_signal_min(signal_dict.min)
-	set_signal_max(signal_dict.max)
-	set_signal_value(signal_dict.value)
-	signal_formulas = signal_dict.get("formulas")
-	update_formulas_text()
+func set_sensor(sensor: Sensor) -> void:
+	set_name(sensor.name) # sets name of node
+	set_signal_name(sensor.name) #!needed?
+	set_signal_min(sensor.min)
+	set_signal_max(sensor.max)
+	set_signal_value(sensor.value)
+	#signal_formulas = signal_dict.get("formulas")
+	# update_formulas_text()
 	
 func set_signal_name(value: String) -> void:
 	$Name.text = value
