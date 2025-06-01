@@ -35,3 +35,23 @@ func _on_action_button_pressed(action: Action) -> void:
 	$SignalGraph.set_action(action)
 	
 	
+func _on_load_button_pressed() -> void:
+	$OpenFileDialog.popup_centered_ratio()
+	
+	
+func _on_open_file_dialog_file_selected(path: String) -> void:
+	$ModelPath.text = path
+	var file = FileAccess.open(path, FileAccess.READ)
+	var content = file.get_as_text()
+	print(content) # load this into the model
+	$SaveButton.visible = true
+	$ModelPath.visible = true
+	
+	
+func _on_save_button_pressed() -> void:
+	var file = FileAccess.open($ModelPath.text, FileAccess.WRITE)
+	var content = "this is a test string 67898"
+	print(content)
+	file.store_line(content)
+	
+	
