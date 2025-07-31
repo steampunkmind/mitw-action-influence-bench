@@ -86,8 +86,9 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_formula(formula: Formula) -> void:
-	for key: String in formula.expressions:
-		signal_formulas.set(key, formula.expressions.get(key))
+	var expressions = formula.get_expressions()
+	for key: String in expressions:
+		signal_formulas.set(key, expressions.get(key))
 	update_formulas_text()
 	
 	

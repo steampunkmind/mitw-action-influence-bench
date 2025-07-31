@@ -1,7 +1,6 @@
 extends ColorRect
 
 @export var frame_rate: float
-var actions: Array[Action]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,6 +50,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	
 func get_dict() -> Dictionary:
 	var dict = {}
+	dict.set('actions', $ActionButtons.get_action_dicts())
 	dict.set('sensors', $SignalGraph.get_sensor_dicts())
 	return dict
 	

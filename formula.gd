@@ -1,9 +1,17 @@
 class_name Formula extends RefCounted
 
-var expressions: Dictionary
+var _dict
 
 # Constructor
 func _init(expressions: Dictionary):
-	self.expressions = expressions
+	_dict = expressions.duplicate(true)
+	
+	
+func get_expressions() -> Dictionary:
+	return _dict
+	
+	
+func get_dict() -> Dictionary:
+	return _dict
 	
 	

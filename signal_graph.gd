@@ -119,7 +119,7 @@ func set_action(action: Action) -> void:
 		init_action = action
 	var new_action_name = $ActionNameTemplate.duplicate(1)
 	new_action_name.visible = true
-	new_action_name.text = action.name
+	new_action_name.text = action.get_name()
 	add_child(new_action_name)
 	action_names.insert(0, new_action_name)
 	
@@ -129,9 +129,9 @@ func set_action(action: Action) -> void:
 	action_lines.insert(0, new_action_line)
 	
 	## Set influences
-	for influence: Influence in action.influences:
-		var signal_graph_row = signal_graph_rows.get(influence.signal_name)
-		signal_graph_row.set_formula(influence.formula)
+	for influence: Influence in action.get_influences():
+		var signal_graph_row = signal_graph_rows.get(influence.get_signal_name())
+		signal_graph_row.set_formula(influence.get_formula())
 	
 	
 ### Support for signal graph rows ###
