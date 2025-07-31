@@ -67,7 +67,7 @@ func add_signal_graph_rows() -> void:
 		row.set_row_location(row_location)
 		row.size.y = row_size - row_margin
 		add_child(row)
-		signal_graph_rows.set(sensor.name, row)
+		signal_graph_rows.set(sensor.get_name(), row)
 		row_location = row_location + row_size
 	
 func add_frame_to_graph() -> void:

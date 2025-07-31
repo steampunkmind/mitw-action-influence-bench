@@ -34,11 +34,11 @@ func set_row_location(y: float) -> void:
 	set_position(p)
 	
 func set_sensor(sensor: Sensor) -> void:
-	set_name(sensor.name) # sets name of node
-	set_signal_name(sensor.name) #!needed?
-	set_signal_min(sensor.min)
-	set_signal_max(sensor.max)
-	set_signal_value(sensor.value)
+	set_name(sensor.get_name()) # sets name of node
+	set_signal_name(sensor.get_name()) #!needed?
+	set_signal_min(sensor.get_min())
+	set_signal_max(sensor.get_max())
+	set_signal_value(sensor.get_value())
 	#signal_formulas = signal_dict.get("formulas")
 	# update_formulas_text()
 	
