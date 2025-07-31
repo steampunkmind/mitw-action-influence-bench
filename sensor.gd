@@ -1,6 +1,6 @@
 class_name Sensor extends RefCounted
 
-var dict: Dictionary
+var dict = {}
 
 # Constructor
 func _init(name: String, min: float, max: float, value: float):

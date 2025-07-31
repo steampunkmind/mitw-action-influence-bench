@@ -2,7 +2,6 @@ extends ColorRect
 
 @export var frame_rate: float
 var actions: Array[Action]
-var sensors: Array[Sensor]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,18 +44,16 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	var json = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	$SignalGraph.set_sensors(json.get('sensors'))
+	$SignalGraph.set_sensor_dicts(json.get('sensors'))
 	$SaveButton.visible = true
 	$ModelPath.visible = true
 	
 	
 func get_dict() -> Dictionary:
-	var data: Dictionary
-	var sensors: Array
-	for sensor: Sensor in self.sensors:
-		sensors.append(sensor.get_dict())	
-	data.set('sensors', sensors)
-	return data
+	var dict = {}
+	dict.set('sensors', $SignalGraph.get_sensor_dicts())
+	return dict
+	
 	
 func _on_save_button_pressed() -> void:
 	var file = FileAccess.open($ModelPath.text, FileAccess.WRITE)
