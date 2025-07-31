@@ -13,19 +13,10 @@ var signal_graph_rows: Dictionary[String, SignalGraphRow]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	## fill sensors from signal_array_dicts
-	var sensors: Array[Sensor]
-	for signal_dict: Dictionary in signal_array_dicts:
-		var name = signal_dict.get('name')
-		var min = signal_dict.get('min')
-		var max = signal_dict.get('max')
-		var value = signal_dict.get('value')
-		sensors.append(Sensor.new(name, min, max, value))
-	get_parent().sensors = sensors
-	
 	$ActionNameTemplate.visible = false
 	$ActionLineTemplate.visible = false
 	name_line_offset = $ActionLineTemplate.position.x - ($ActionNameTemplate.position.x + $ActionNameTemplate.size.x)
+	fill_sensors(signal_array_dicts)
 	add_signal_graph_rows()
 	
 	
@@ -34,6 +25,31 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_add_button_button_up() -> void:
+	clear_signal_graph_rows()
+	new_signal_graph_row()
+	add_signal_graph_rows()
+	set_action(init_action)
+	
+	
+func set_sensors(sensor_dicts: Array)-> void:
+	clear_signal_graph_rows()
+	fill_sensors(sensor_dicts)
+	add_signal_graph_rows()
+	set_action(init_action)
+	
+	
+func fill_sensors(sensor_dicts: Array)-> void:
+	var sensors: Array[Sensor]
+	for signal_dict: Dictionary in sensor_dicts:
+		var name = signal_dict.get('name')
+		var min = signal_dict.get('min')
+		var max = signal_dict.get('max')
+		var value = signal_dict.get('value')
+		sensors.append(Sensor.new(name, min, max, value))
+	get_parent().sensors = sensors
+	
+	
+func clear_signal_graph_rows() -> void:
 	# Clear all current children to clear screen
 	for action_name: Control in action_names:
 		remove_child(action_name)
@@ -46,13 +62,13 @@ func _on_add_button_button_up() -> void:
 	for signal_graph_row: SignalGraphRow in signal_graph_rows.values():
 		remove_child(signal_graph_row)
 	
+	signal_graph_rows.clear()
+	
+	
+func new_signal_graph_row() -> void:
 	var sensors = get_parent().sensors
 	var name = "Untitled " + str(sensors.size()+1)
 	sensors.append(Sensor.new(name, 0, 100, 50))
-	
-	signal_graph_rows.clear()
-	add_signal_graph_rows()
-	set_action(init_action)
 	
 	
 func add_signal_graph_rows() -> void:

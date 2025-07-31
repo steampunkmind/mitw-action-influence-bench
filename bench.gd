@@ -42,8 +42,10 @@ func _on_load_button_pressed() -> void:
 func _on_open_file_dialog_file_selected(path: String) -> void:
 	$ModelPath.text = path
 	var file = FileAccess.open(path, FileAccess.READ)
-	var content = file.get_as_text()
-	print(content) # load this into the model
+	var json = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	$SignalGraph.set_sensors(json.get('sensors'))
 	$SaveButton.visible = true
 	$ModelPath.visible = true
 	
