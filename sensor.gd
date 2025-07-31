@@ -1,25 +1,25 @@
 class_name Sensor extends RefCounted
 
-var data: Dictionary
+var dict: Dictionary
 
 # Constructor
 func _init(name: String, min: float, max: float, value: float):
-	data.set('name', name)
-	data.set('min', min)
-	data.set('max', max)
-	data.set('value', value)
+	dict.set('name', name)
+	dict.set('min', min)
+	dict.set('max', max)
+	dict.set('value', value)
 	
 func get_name():
-	return data.get('name')
+	return dict.get('name')
 
 func get_min():
-	return data.get('min')
+	return dict.get('min')
 
 func get_max():
-	return data.get('max')
+	return dict.get('max')
 
 func get_value():
-	return data.get('value')
+	return dict.get('value')
 	
-func get_data() -> Dictionary:
-	return data
+func get_dict() -> Dictionary:
+	return dict

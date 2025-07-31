@@ -50,19 +50,17 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	$ModelPath.visible = true
 	
 	
-func get_data() -> Dictionary:
+func get_dict() -> Dictionary:
 	var data: Dictionary
 	var sensors: Array
 	for sensor: Sensor in self.sensors:
-		sensors.append(sensor.get_data())	
+		sensors.append(sensor.get_dict())	
 	data.set('sensors', sensors)
 	return data
 	
 func _on_save_button_pressed() -> void:
 	var file = FileAccess.open($ModelPath.text, FileAccess.WRITE)
-	var data = get_data()
-	var content = JSON.stringify(data, "\t") # Remove the tab to reduce file size someday?
-	print(content)
+	var content = JSON.stringify(get_dict(), "\t") # Remove the tab to reduce file size someday?
 	file.store_line(content)
 	
 	
