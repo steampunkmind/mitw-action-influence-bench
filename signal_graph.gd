@@ -46,7 +46,7 @@ func set_sensor_dicts(sensor_dicts: Array) -> void:
 	set_action(init_action)
 	
 	
-func fill_sensors(sensor_dicts: Array)-> void:
+func fill_sensors(sensor_dicts: Array) -> void:
 	sensors = []
 	for signal_dict: Dictionary in sensor_dicts:
 		var name = signal_dict.get('name')

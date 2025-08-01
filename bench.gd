@@ -43,7 +43,8 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	var json = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	$SignalGraph.set_sensor_dicts(json.get('sensors'))
+	$ActionButtons.set_action_dicts(json.get('actions') as Array)
+	$SignalGraph.set_sensor_dicts(json.get('sensors') as Array)
 	$SaveButton.visible = true
 	$ModelPath.visible = true
 	
