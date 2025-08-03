@@ -32,6 +32,12 @@ func _on_add_button_button_up() -> void:
 	add_action_buttons()
 	
 	
+func set_new_model() -> void:
+	actions.clear()
+	fill_actions(action_array)
+	clear_action_buttons()
+	add_action_buttons()
+	
 func get_action_dicts() -> Array:
 	var result = []
 	for action: Action in actions:

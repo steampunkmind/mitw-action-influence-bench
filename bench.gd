@@ -33,10 +33,6 @@ func _on_action_button_pressed(action: Action) -> void:
 	$SignalGraph.set_action(action)
 	
 	
-func _on_load_button_pressed() -> void:
-	$OpenFileDialog.popup_centered_ratio()
-	
-	
 func _on_open_file_dialog_file_selected(path: String) -> void:
 	$ModelPath.text = path
 	var file = FileAccess.open(path, FileAccess.READ)
@@ -56,9 +52,26 @@ func get_dict() -> Dictionary:
 	return dict
 	
 	
+func _on_new_button_pressed() -> void:
+	$ActionButtons.set_new_model()
+	$SignalGraph.set_new_model()
+	
+	
+func _on_open_button_pressed() -> void:
+	$OpenFileDialog.popup_centered_ratio()
+	
+	
+func _on_close_button_pressed() -> void:
+	pass # Replace with function body.
+	
+	
 func _on_save_button_pressed() -> void:
 	var file = FileAccess.open($ModelPath.text, FileAccess.WRITE)
 	var content = JSON.stringify(get_dict(), "\t") # Remove the tab to reduce file size someday?
 	file.store_line(content)
+	
+	
+func _on_save_as_button_pressed() -> void:
+	pass # Replace with function body.
 	
 	

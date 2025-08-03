@@ -25,6 +25,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
+	
+func set_new_model() -> void:
+	clear_signal_graph_rows()
+	fill_sensors(signal_array_dicts)
+	add_signal_graph_rows()
+	set_action(init_action)
+	
+	
 func _on_add_button_button_up() -> void:
 	clear_signal_graph_rows()
 	new_signal_graph_row()
