@@ -6,17 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://add.svg" id="3_a5qnj"]
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://add_pressed.svg" id="5_i6k0q"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://add_hover.svg" id="6_tjv83"]
+[ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://bench.tres" id="7_tjv83"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ynj0"]
-font_size = 88
+font_size = 64
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lps7h"]
-font_size = 58
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_i6k0q"]
-font_size = 36
+font_size = 48
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_a5qnj"]
@@ -32,33 +29,21 @@ frame_rate = 30.0
 [node name="Header" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1250.0
-offset_top = 15.0
-offset_right = 2050.0
-offset_bottom = 143.0
-text = "Whack a Mole"
+offset_top = 8.0
+offset_right = 2227.0
+offset_bottom = 96.0
+text = "Action Influence Bench"
 label_settings = SubResource("LabelSettings_6ynj0")
 horizontal_alignment = 1
 
 [node name="SubHeader" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1250.0
-offset_top = 118.0
-offset_right = 2050.0
-offset_bottom = 204.0
-text = "Action Influence Bench"
+offset_left = 867.0
+offset_top = 93.0
+offset_right = 2611.0
+offset_bottom = 166.0
 label_settings = SubResource("LabelSettings_lps7h")
 horizontal_alignment = 1
-
-[node name="ModelPath" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 840.0
-offset_top = -12.0
-offset_right = 1818.0
-offset_bottom = 54.0
-text = "Path: "
-label_settings = SubResource("LabelSettings_i6k0q")
-vertical_alignment = 1
 
 [node name="NewButton" type="Button" parent="."]
 layout_mode = 0
@@ -325,19 +310,26 @@ autostart = true
 [node name="OpenFileDialog" type="FileDialog" parent="."]
 title = "Open a File"
 initial_position = 1
+size = Vector2i(1280, 720)
+theme = ExtResource("7_tjv83")
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 initial_position = 1
+size = Vector2i(1280, 720)
+theme = ExtResource("7_tjv83")
 access = 2
 
 [node name="CloseConfirmationDialog" type="ConfirmationDialog" parent="."]
 title = "Save changes before closing?"
 initial_position = 1
+size = Vector2i(800, 240)
+theme = ExtResource("7_tjv83")
 ok_button_text = "Save"
-dialog_text = "If you don't save, your changes will be lost."
+dialog_text = "
+      If you don't save, your changes will be lost."
 
 [connection signal="pressed" from="NewButton" to="." method="_on_new_button_pressed"]
 [connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]

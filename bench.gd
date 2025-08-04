@@ -108,7 +108,7 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	
 	
 func _write_file() -> void:
-	var file = FileAccess.open($ModelPath.text, FileAccess.WRITE)
+	var file = FileAccess.open($SubHeader.text, FileAccess.WRITE)
 	var content = JSON.stringify(get_dict(), "\t") # Remove the tab to reduce file size someday?
 	file.store_line(content)
 	_set_is_dirty(false)
@@ -124,13 +124,13 @@ func get_dict() -> Dictionary:
 	
 func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	_is_model = is_model
-	$ModelPath.visible = is_model
+	$SubHeader.visible = is_model
 	$ActionButtons.visible = is_model
 	$SignalGraph.visible = is_model
 	$NewButton.disabled = is_model
 	$OpenButton.disabled = is_model
 	$CloseButton.disabled = !is_model
-	$ModelPath.text = model_path
+	$SubHeader.text = model_path
 	if model_path == "":
 		_is_model_file = false
 	else:
