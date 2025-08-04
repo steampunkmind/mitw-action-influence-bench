@@ -1,6 +1,8 @@
 class_name SignalGraph
 extends ColorRect
 
+signal model_changed
+
 @export var signal_array_dicts: Array[Dictionary]
 @export var signal_graph_row_template: PackedScene
 
@@ -17,8 +19,6 @@ func _ready() -> void:
 	$ActionNameTemplate.visible = false
 	$ActionLineTemplate.visible = false
 	name_line_offset = $ActionLineTemplate.position.x - ($ActionNameTemplate.position.x + $ActionNameTemplate.size.x)
-	fill_sensors(signal_array_dicts)
-	add_signal_graph_rows()
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +38,7 @@ func _on_add_button_button_up() -> void:
 	new_signal_graph_row()
 	add_signal_graph_rows()
 	set_action(init_action)
+	model_changed.emit()
 	
 	
 func get_sensor_dicts() -> Array:
@@ -139,7 +140,8 @@ func set_action(action: Action) -> void:
 	## Set influences
 	for influence: Influence in action.get_influences():
 		var signal_graph_row = signal_graph_rows.get(influence.get_signal_name())
-		signal_graph_row.set_formula(influence.get_formula())
+		if signal_graph_row != null :
+			signal_graph_row.set_formula(influence.get_formula())
 	
 	
 ### Support for signal graph rows ###

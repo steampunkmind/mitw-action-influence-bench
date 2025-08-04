@@ -52,10 +52,10 @@ horizontal_alignment = 1
 [node name="ModelPath" type="Label" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 317.0
-offset_top = 21.0
-offset_right = 1295.0
-offset_bottom = 87.0
+offset_left = 840.0
+offset_top = -12.0
+offset_right = 1818.0
+offset_bottom = 54.0
 text = "Path: "
 label_settings = SubResource("LabelSettings_i6k0q")
 vertical_alignment = 1
@@ -324,9 +324,20 @@ autostart = true
 
 [node name="OpenFileDialog" type="FileDialog" parent="."]
 title = "Open a File"
+initial_position = 1
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+initial_position = 1
+access = 2
+
+[node name="CloseConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Save changes before closing?"
+initial_position = 1
+ok_button_text = "Save"
+dialog_text = "If you don't save, your changes will be lost."
 
 [connection signal="pressed" from="NewButton" to="." method="_on_new_button_pressed"]
 [connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]
@@ -334,7 +345,12 @@ access = 2
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="SaveAsButton" to="." method="_on_save_as_button_pressed"]
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
+[connection signal="model_changed" from="SignalGraph" to="." method="_on_model_changed"]
 [connection signal="action_button_pressed" from="ActionButtons" to="." method="_on_action_button_pressed"]
+[connection signal="model_changed" from="ActionButtons" to="." method="_on_model_changed"]
 [connection signal="button_up" from="ActionButtons/AddButton" to="ActionButtons" method="_on_add_button_button_up"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="file_selected" from="OpenFileDialog" to="." method="_on_open_file_dialog_file_selected"]
+[connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
+[connection signal="confirmed" from="CloseConfirmationDialog" to="." method="_on_close_confirmation_dialog_confirmed"]
+[connection signal="custom_action" from="CloseConfirmationDialog" to="." method="_on_close_confirmation_dialog_custom_action"]

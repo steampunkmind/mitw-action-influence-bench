@@ -1,5 +1,6 @@
 extends ColorRect
 
+signal model_changed
 signal action_button_pressed
 
 @export var action_array: Array[Dictionary]
@@ -12,8 +13,6 @@ var actions: Array[Action]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$ActionButtonTemplate.visible = false
-	fill_actions(action_array)
-	add_action_buttons()
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,6 +29,7 @@ func _on_add_button_button_up() -> void:
 	actions.append(action)
 	clear_action_buttons()
 	add_action_buttons()
+	model_changed.emit()
 	
 	
 func set_new_model() -> void:
