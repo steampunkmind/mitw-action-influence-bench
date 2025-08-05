@@ -15,6 +15,8 @@ func _ready() -> void:
 	$CloseConfirmationDialog.add_button("Don't Save", false, DONT_SAVE)
 	_set_is_model(false)
 	_set_is_dirty(false)
+	$OpenFileDialog.set_current_dir("models")
+	$SaveFileDialog.set_current_dir("models")
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
