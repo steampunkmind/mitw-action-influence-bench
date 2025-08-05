@@ -129,38 +129,8 @@ grow_vertical = 1
 signal_array_dicts = Array[Dictionary]([{
 "max": 100.0,
 "min": 0.0,
-"name": "Mood",
+"name": "Sensor 1",
 "value": 50.0
-}, {
-"max": 100.0,
-"min": 0.0,
-"name": "Energy",
-"value": 50.0
-}, {
-"max": 100.0,
-"min": 0.0,
-"name": "Stomach Liquid",
-"value": 25.0
-}, {
-"max": 100.0,
-"min": 0.0,
-"name": "Stomach Solid",
-"value": 25.0
-}, {
-"max": 100.0,
-"min": 0.0,
-"name": "Stomach Total",
-"value": 50.0
-}, {
-"max": 100.0,
-"min": 0.0,
-"name": "Bladder",
-"value": 0.0
-}, {
-"max": 100.0,
-"min": 0.0,
-"name": "Bowels",
-"value": 0.0
 }])
 
 [node name="ActionButtons" type="ColorRect" parent="." node_paths=PackedStringArray("action_button_template")]
@@ -171,117 +141,25 @@ offset_bottom = 384.0
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
-"Bladder": [{
-"Inflow Percent": [{
-"inflow_percent": 0.038,
-"signal_name": "Stomach Liquid"
-}],
+"Sensor 1": {
 "Linear": 0.0
-}],
-"Bowels": [{
-"Inflow Percent": [{
-"inflow_percent": 0.038,
-"signal_name": "Stomach Solid"
-}],
-"Linear": 0.0
-}],
-"Energy": [{
+}
+},
+"name": "None"
+}, {
+"influences": {
+"Sensor 1": {
 "Linear": 0.03
-}],
-"Mood": [{
+}
+},
+"name": "Up"
+}, {
+"influences": {
+"Sensor 1": {
 "Linear": -0.03
-}],
-"Stomach Liquid": [{
-"Linear": 0.0,
-"Max Limit": ["Stomach Total"],
-"Outflow Percent": 0.025
-}],
-"Stomach Solid": [{
-"Linear": -0.003,
-"Max Limit": ["Stomach Total"],
-"Outflow Percent": 0.05
-}],
-"Stomach Total": [{
-"Sum": ["Stomach Liquid", "Stomach Solid"]
-}]
+}
 },
-"name": "Sit"
-}, {
-"influences": {
-"Bladder": [{
-"Linear": 0.0
-}],
-"Bowels": [{
-"Linear": 0.0
-}],
-"Energy": [{
-"Linear": -0.03
-}],
-"Mood": [{
-"Linear": 0.03
-}],
-"Stomach Liquid": [{
-"Linear": 0.0,
-"Outflow Percent": 0.125
-}],
-"Stomach Solid": [{
-"Linear": -0.015
-}]
-},
-"name": "Walk"
-}, {
-"influences": {
-"Bladder": [{
-"Linear": 0.0
-}],
-"Bowels": [{
-"Linear": 0.0
-}],
-"Stomach Liquid": [{
-"Linear": 0.3,
-"Outflow Percent": 0.0
-}],
-"Stomach Solid": [{
-"Linear": -0.003
-}]
-},
-"name": "Drink"
-}, {
-"influences": {
-"Bladder": [{
-"Linear": 0.0
-}],
-"Bowels": [{
-"Linear": 0.0
-}],
-"Energy": [{
-"Linear": 0.03
-}],
-"Mood": [{
-"Linear": 0.03
-}],
-"Stomach Liquid": [{
-"Linear": -0.005
-}],
-"Stomach Solid": [{
-"Linear": 0.15
-}]
-},
-"name": "Eat"
-}, {
-"influences": {
-"Bladder": [{
-"Linear": -0.2
-}]
-},
-"name": "Pee"
-}, {
-"influences": {
-"Bowels": [{
-"Linear": -0.2
-}]
-},
-"name": "Poo"
+"name": "Down"
 }])
 action_button_template = NodePath("ActionButtonTemplate")
 

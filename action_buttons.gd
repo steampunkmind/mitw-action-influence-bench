@@ -58,13 +58,6 @@ func fill_actions(action_array: Array) -> void:
 		var influence_dict = action_dict.get("influences")
 		for signal_name: String in influence_dict:
 			var expressions = influence_dict.get(signal_name)
-			# expressions was originally an array, 
-			# but an array is not needed so just use the first item in the array
-			# remove this when values from editor are fixed and array is removed.
-			if expressions is Array:
-				if (expressions.size() > 0):
-					expressions = expressions.get(0)
-					
 			var formula = Formula.new(expressions)
 			var influence = Influence.new(signal_name, formula)
 			influences.append(influence)
