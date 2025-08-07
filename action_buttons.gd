@@ -38,6 +38,12 @@ func set_new_model() -> void:
 	clear_action_buttons()
 	add_action_buttons()
 	
+	
+func init_action() -> void:
+	# called by bench to init after other scenes are set up. 
+	_action_button_pressed(actions[0])
+	
+	
 func get_action_dicts() -> Array:
 	var result = []
 	for action: Action in actions:
@@ -75,9 +81,6 @@ func add_action_buttons():
 	new_button_location = $ActionButtonTemplate.position.x
 	for action: Action in actions:
 		add_action_button(action)
-	
-	# Init bench with first action in array
-	_action_button_pressed(actions[0])
 	
 	
 func add_action_button(action: Action) -> void:

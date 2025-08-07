@@ -49,6 +49,7 @@ func _on_action_button_pressed(action: Action) -> void:
 func _on_new_button_pressed() -> void:
 	$ActionButtons.set_new_model()
 	$SignalGraph.set_new_model()
+	$ActionButtons.init_action()
 	_set_is_model(true)
 	
 	
@@ -63,6 +64,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	
 	$ActionButtons.set_action_dicts(json.get('actions') as Array)
 	$SignalGraph.set_sensor_dicts(json.get('sensors') as Array)
+	$ActionButtons.init_action()
 	_set_is_model(true, path)
 	
 	

@@ -7,7 +7,6 @@ signal model_changed
 @export var signal_graph_row_template: PackedScene
 
 var name_line_offset: float
-var init_action = null
 var action_names: Array[Control]
 var action_lines: Array[Node2D]
 var signal_graph_rows: Dictionary[String, SignalGraphRow]
@@ -30,14 +29,12 @@ func set_new_model() -> void:
 	clear_signal_graph_rows()
 	fill_sensors(signal_array_dicts)
 	add_signal_graph_rows()
-	set_action(init_action)
 	
 	
 func _on_add_button_button_up() -> void:
 	clear_signal_graph_rows()
 	new_signal_graph_row()
 	add_signal_graph_rows()
-	set_action(init_action)
 	model_changed.emit()
 	
 	
@@ -52,7 +49,6 @@ func set_sensor_dicts(sensor_dicts: Array) -> void:
 	clear_signal_graph_rows()
 	fill_sensors(sensor_dicts)
 	add_signal_graph_rows()
-	set_action(init_action)
 	
 	
 func fill_sensors(sensor_dicts: Array) -> void:
@@ -124,8 +120,6 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_action(action: Action) -> void:
-	if (init_action == null):
-		init_action = action
 	var new_action_name = $ActionNameTemplate.duplicate(1)
 	new_action_name.visible = true
 	new_action_name.text = action.get_name()
