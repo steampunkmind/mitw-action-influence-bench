@@ -3,7 +3,7 @@ extends ColorRect
 const DONT_SAVE = "Don't Save"
 
 var _is_model: bool = false
-var _is_model_file: bool = false
+var _model_path: String = ""
 var _is_dirty: bool = false
 var _close_after_save: bool = false
 
@@ -13,7 +13,7 @@ var _close_after_save: bool = false
 func _ready() -> void:
 	$FrameRateSlider.value = frame_rate
 	$FrameRateValue.text = str(frame_rate)
-	$CloseConfirmationDialog.add_button("Don't Save", false, DONT_SAVE)
+	$CloseConfirmationDialog.add_button(DONT_SAVE, false, DONT_SAVE)
 	_set_is_model(false)
 	_set_is_dirty(false)
 	$OpenFileDialog.set_current_dir("models")
@@ -113,7 +113,7 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	
 	
 func _write_file() -> void:
-	var file = FileAccess.open($SubHeader.text, FileAccess.WRITE)
+	var file = FileAccess.open(_model_path, FileAccess.WRITE)
 	var content = JSON.stringify(get_dict(), "\t") # Remove the tab to reduce file size someday?
 	file.store_line(content)
 	_set_is_dirty(false)
@@ -136,11 +136,8 @@ func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	$OpenButton.disabled = is_model
 	$CloseButton.disabled = !is_model
 	$EditActionsButton.disabled = !is_model
-	$SubHeader.text = model_path
-	if model_path == "":
-		_is_model_file = false
-	else:
-		_is_model_file = true
+	$SubHeader.text = model_path.get_basename().get_file()
+	_model_path = model_path
 	
 	
 func _get_is_model() -> bool:
@@ -148,7 +145,7 @@ func _get_is_model() -> bool:
 	
 	
 func _get_is_model_file() -> bool:
-	return _is_model_file
+	return _model_path != ""
 	
 	
 func _on_model_changed() -> void:
