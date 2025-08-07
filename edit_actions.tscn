@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://sutkkenme5nk"]
+
+[ext_resource type="Script" uid="uid://b5mnr478y58b6" path="res://edit_actions.gd" id="1_fsf4l"]
+[ext_resource type="PackedScene" uid="uid://cblkrfosd0s10" path="res://edit_action_row.tscn" id="2_iysti"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fsf4l"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="EditActions" type="ColorRect"]
+offset_right = 3300.0
+offset_bottom = 1790.0
+color = Color(0.784314, 0.784314, 0.784314, 1)
+script = ExtResource("1_fsf4l")
+edit_action_row_template = ExtResource("2_iysti")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1500.0
+offset_right = 1800.0
+offset_bottom = 67.0
+text = "Edit Actions"
+label_settings = SubResource("LabelSettings_fsf4l")
+horizontal_alignment = 1

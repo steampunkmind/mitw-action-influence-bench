@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cblkrfosd0s10"]
+
+[ext_resource type="Script" uid="uid://sj762fijttxy" path="res://edit_action_row.gd" id="1_qp8pv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_meo7u"]
+font_size = 32
+font_color = Color(0.313726, 0.54902, 0.784314, 1)
+
+[node name="EditActionRow" type="ColorRect"]
+offset_right = 3300.0
+offset_bottom = 240.0
+script = ExtResource("1_qp8pv")
+
+[node name="Name" type="Label" parent="."]
+offset_left = 15.0
+offset_top = 2.0
+offset_right = 395.0
+offset_bottom = 47.0
+text = "Name"
+label_settings = SubResource("LabelSettings_meo7u")

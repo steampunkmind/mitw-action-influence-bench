@@ -4,6 +4,7 @@ const DONT_SAVE = "Don't Save"
 
 var _is_model: bool = false
 var _is_model_file: bool = false
+var _is_dirty: bool = false
 var _close_after_save: bool = false
 
 @export var frame_rate: float
@@ -66,7 +67,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	
 	
 func _on_close_button_pressed() -> void:
-	if _is_dirty():
+	if _is_dirty:
 		$CloseConfirmationDialog.popup()
 	else:
 		_set_is_dirty(false)
@@ -132,6 +133,7 @@ func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	$NewButton.disabled = is_model
 	$OpenButton.disabled = is_model
 	$CloseButton.disabled = !is_model
+	$EditActionsButton.disabled = !is_model
 	$SubHeader.text = model_path
 	if model_path == "":
 		_is_model_file = false
@@ -147,20 +149,49 @@ func _get_is_model_file() -> bool:
 	return _is_model_file
 	
 	
-func _on_action_buttons_model_changed() -> void:
-	$SaveButton.disabled = false # use SaveButton.disabled as dirty flag
-	
-	
 func _on_model_changed() -> void:
 	_set_is_dirty(true)
 	
 	
 func _set_is_dirty(is_dirty: bool) -> void:
-	$SaveButton.disabled = !is_dirty # use SaveButton.disabled as dirty flag
+	_is_dirty = is_dirty
+	$SaveButton.disabled = !is_dirty
 	$SaveAsButton.disabled = !is_dirty
 	
 	
-func _is_dirty() -> bool:
-	return $SaveButton.disabled == false # use SaveButton.disabled as dirty flag
+## Edit Actions ##
+func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		$EditActions.set_actions($ActionButtons.actions)
+		$EditActionsButton.text = "Done"
+		_disable_interface()
+		$EditActionsButton.disabled = false
+	else:
+		$EditActions.clear_edit_action_rows()
+		$EditActionsButton.text = "Edit Actions"
+		_enable_interface()
+		
+	$EditActions.visible = toggled_on
+
+
+func _disable_interface() -> void:
+	$ActionButtons.visible = false
+	$SignalGraph.visible = false
+	$NewButton.disabled = true
+	$OpenButton.disabled = true
+	$CloseButton.disabled = true
+	$SaveButton.disabled = true
+	$SaveAsButton.disabled = true
 	
+	
+func _enable_interface() -> void:
+	$ActionButtons.visible = true
+	$SignalGraph.visible = true
+	if _is_model:
+		$NewButton.disabled = true
+		$OpenButton.disabled = true
+		$CloseButton.disabled = false
+	if _is_dirty:
+		$SaveButton.disabled = false
+		$SaveAsButton.disabled = false
 	
