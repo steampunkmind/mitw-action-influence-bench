@@ -1,6 +1,5 @@
 extends ColorRect
 
-signal model_changed
 signal action_button_pressed
 
 @export var action_array: Array[Dictionary]
@@ -8,7 +7,8 @@ signal action_button_pressed
 
 var new_button_location
 var action_buttons: Array[Button]
-var actions: Array[Action]
+var actions: Array[Action]:
+	get = get_actions, set = set_actions
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,23 +20,27 @@ func _process(delta: float) -> void:
 	pass
 	
 	
-func _action_button_pressed(action: Action) -> void:
-	action_button_pressed.emit(action)
+func get_actions() -> Array[Action]:
+	return actions
 	
 	
-func _on_add_button_button_up() -> void:
-	var action = Action.new("Untitled " + str(actions.size() + 1))
-	actions.append(action)
+func set_actions(value: Array[Action]):
+	actions = value
+	update_buttons()
+	
+	
+func update_buttons():
 	clear_action_buttons()
 	add_action_buttons()
-	model_changed.emit()
+	
+func _action_button_pressed(action: Action) -> void:
+	action_button_pressed.emit(action)
 	
 	
 func set_new_model() -> void:
 	actions.clear()
 	fill_actions(action_array)
-	clear_action_buttons()
-	add_action_buttons()
+	update_buttons()
 	
 	
 func init_action() -> void:
@@ -54,8 +58,7 @@ func get_action_dicts() -> Array:
 func set_action_dicts(action_dicts: Array) -> void:
 	actions.clear()
 	fill_actions(action_dicts)
-	clear_action_buttons()
-	add_action_buttons()
+	update_buttons()
 	
 	
 func fill_actions(action_array: Array) -> void:

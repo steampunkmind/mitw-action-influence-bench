@@ -119,6 +119,7 @@ func _write_file() -> void:
 	_set_is_dirty(false)
 	if _close_after_save:
 		_set_is_model(false)
+	_reset_interface()
 	
 func get_dict() -> Dictionary:
 	var dict = {}
@@ -130,14 +131,9 @@ func get_dict() -> Dictionary:
 func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	_is_model = is_model
 	$SubHeader.visible = is_model
-	$ActionButtons.visible = is_model
-	$SignalGraph.visible = is_model
-	$NewButton.disabled = is_model
-	$OpenButton.disabled = is_model
-	$CloseButton.disabled = !is_model
-	$EditActionsButton.disabled = !is_model
-	$SubHeader.text = model_path.get_basename().get_file()
+	$SubHeader.text = model_path.get_basename().get_file().capitalize()
 	_model_path = model_path
+	_reset_interface()
 	
 	
 func _get_is_model() -> bool:
@@ -148,27 +144,33 @@ func _get_is_model_file() -> bool:
 	return _model_path != ""
 	
 	
-func _on_model_changed() -> void:
+func _on_edit_actions_model_changed() -> void:
 	_set_is_dirty(true)
+	
+	
+func _on_signal_graph_model_changed() -> void:
+	_set_is_dirty(true)
+	_reset_interface()
 	
 	
 func _set_is_dirty(is_dirty: bool) -> void:
 	_is_dirty = is_dirty
-	$SaveButton.disabled = !is_dirty
-	$SaveAsButton.disabled = !is_dirty
 	
 	
 ## Edit Actions ##
 func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
+		$ActionButtons.clear_action_buttons()
 		$EditActions.set_actions($ActionButtons.actions)
 		$EditActionsButton.text = "Done"
 		_disable_interface()
 		$EditActionsButton.disabled = false
 	else:
+		$ActionButtons.set_actions($EditActions.get_actions())
+		$ActionButtons.update_buttons();
 		$EditActions.clear_edit_action_rows()
 		$EditActionsButton.text = "Edit Actions"
-		_enable_interface()
+		_reset_interface()
 		
 	$EditActions.visible = toggled_on
 
@@ -183,14 +185,13 @@ func _disable_interface() -> void:
 	$SaveAsButton.disabled = true
 	
 	
-func _enable_interface() -> void:
-	$ActionButtons.visible = true
-	$SignalGraph.visible = true
-	if _is_model:
-		$NewButton.disabled = true
-		$OpenButton.disabled = true
-		$CloseButton.disabled = false
-	if _is_dirty:
-		$SaveButton.disabled = false
-		$SaveAsButton.disabled = false
+func _reset_interface() -> void:
+	$ActionButtons.visible = _is_model
+	$SignalGraph.visible = _is_model
+	$NewButton.disabled = _is_model
+	$OpenButton.disabled = _is_model
+	$CloseButton.disabled = !_is_model
+	$SaveButton.disabled = !_is_dirty
+	$SaveAsButton.disabled = !_is_dirty
+	
 	
