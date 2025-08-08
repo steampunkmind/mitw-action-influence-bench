@@ -193,5 +193,6 @@ func _reset_interface() -> void:
 	$CloseButton.disabled = !_is_model
 	$SaveButton.disabled = !_is_dirty
 	$SaveAsButton.disabled = !_is_dirty
+	$EditActionsButton.disabled = !_is_model
 	
 	
