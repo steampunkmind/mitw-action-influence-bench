@@ -39,8 +39,6 @@ func set_sensor(sensor: Sensor) -> void:
 	set_signal_min(sensor.get_min())
 	set_signal_max(sensor.get_max())
 	set_signal_value(sensor.get_value())
-	#signal_formulas = signal_dict.get("formulas")
-	# update_formulas_text()
 	
 func set_signal_name(value: String) -> void:
 	$Name.text = value
@@ -104,7 +102,11 @@ func update_signal_change_value() -> void:
 	
 	
 func signal_value_y() -> float:
-	return size.y - (signal_value * (size.y/(signal_max - signal_min)))
+	var value_above_min = signal_value - signal_min
+	var range = signal_max - signal_min
+	var ratio = size.y/range
+	var scaled_value = value_above_min * ratio
+	return size.y - scaled_value;
 	
 	
 func update_formulas_text() -> void:
