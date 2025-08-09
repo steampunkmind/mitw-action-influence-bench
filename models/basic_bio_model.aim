@@ -47,7 +47,8 @@
 					]
 				}
 			},
-			"name": "Sit"
+			"name": "Sit",
+			"visible": true
 		},
 		{
 			"influences": {
@@ -71,7 +72,8 @@
 					"Linear": -0.015
 				}
 			},
-			"name": "Walk"
+			"name": "Walk",
+			"visible": true
 		},
 		{
 			"influences": {
@@ -89,7 +91,8 @@
 					"Linear": -0.003
 				}
 			},
-			"name": "Drink"
+			"name": "Drink",
+			"visible": true
 		},
 		{
 			"influences": {
@@ -112,7 +115,8 @@
 					"Linear": 0.15
 				}
 			},
-			"name": "Eat"
+			"name": "Eat",
+			"visible": true
 		},
 		{
 			"influences": {
@@ -120,7 +124,8 @@
 					"Linear": -0.2
 				}
 			},
-			"name": "Pee"
+			"name": "Pee",
+			"visible": true
 		},
 		{
 			"influences": {
@@ -128,7 +133,8 @@
 					"Linear": -0.2
 				}
 			},
-			"name": "Poo"
+			"name": "Poo",
+			"visible": true
 		}
 	],
 	"sensors": [

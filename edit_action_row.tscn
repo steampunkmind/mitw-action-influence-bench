@@ -12,6 +12,7 @@ offset_bottom = 240.0
 script = ExtResource("1_qp8pv")
 
 [node name="Name" type="Label" parent="."]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 2.0
 offset_right = 395.0

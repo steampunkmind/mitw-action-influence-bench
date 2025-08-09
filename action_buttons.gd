@@ -71,7 +71,7 @@ func fill_actions(action_array: Array) -> void:
 			var influence = Influence.new(signal_name, formula)
 			influences.append(influence)
 		
-		actions.append(Action.new(action_dict.get("name"), influences))
+		actions.append(Action.new(action_dict.get("name"), action_dict.get("visible"), influences))
 	
 	
 func clear_action_buttons():

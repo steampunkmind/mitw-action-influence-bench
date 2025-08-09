@@ -154,21 +154,24 @@ action_array = Array[Dictionary]([{
 "Linear": 0.0
 }
 },
-"name": "None"
+"name": "None",
+"visible": true
 }, {
 "influences": {
 "Sensor 1": {
 "Linear": 0.03
 }
 },
-"name": "Up"
+"name": "Up",
+"visible": true
 }, {
 "influences": {
 "Sensor 1": {
 "Linear": -0.03
 }
 },
-"name": "Down"
+"name": "Down",
+"visible": true
 }])
 action_button_template = NodePath("ActionButtonTemplate")
 

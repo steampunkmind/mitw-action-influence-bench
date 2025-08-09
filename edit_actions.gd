@@ -51,7 +51,7 @@ func add_edit_action_rows() -> void:
 
 
 func _on_add_button_button_up() -> void:
-	var action = Action.new("Untitled " + str(actions.size() + 1))
+	var action = Action.new("Untitled " + str(actions.size() + 1), true)
 	actions.append(action)
 	clear_edit_action_rows()
 	add_edit_action_rows()

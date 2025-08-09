@@ -4,13 +4,18 @@ var _dict = {}
 var _influences: Array[Influence]
 
 # Constructor
-func _init(name: String, influences: Array[Influence] = []):
+func _init(name: String, visible: bool, influences: Array[Influence] = []):
 	_dict.set('name', name)
+	_dict.set('visible', visible)
 	_influences = influences
 	
 	
 func get_name():
 	return _dict.get('name')
+	
+	
+func get_visible():
+	return _dict.get('visible')
 	
 	
 func get_influences():

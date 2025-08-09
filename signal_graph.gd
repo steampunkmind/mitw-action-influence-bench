@@ -120,16 +120,17 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_action(action: Action) -> void:
-	var new_action_name = $ActionNameTemplate.duplicate(1)
-	new_action_name.visible = true
-	new_action_name.text = action.get_name()
-	add_child(new_action_name)
-	action_names.insert(0, new_action_name)
+	if (action.get_visible()):
+		var new_action_name = $ActionNameTemplate.duplicate(1)
+		new_action_name.visible = true
+		new_action_name.text = action.get_name()
+		add_child(new_action_name)
+		action_names.insert(0, new_action_name)
 	
-	var new_action_line = $ActionLineTemplate.duplicate(1)
-	new_action_line.visible = true
-	add_child(new_action_line)
-	action_lines.insert(0, new_action_line)
+		var new_action_line = $ActionLineTemplate.duplicate(1)
+		new_action_line.visible = true
+		add_child(new_action_line)
+		action_lines.insert(0, new_action_line)
 	
 	## Set influences
 	for influence: Influence in action.get_influences():
