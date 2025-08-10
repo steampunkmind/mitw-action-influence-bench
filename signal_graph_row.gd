@@ -116,8 +116,9 @@ func update_formulas_text() -> void:
 		for key: String in signal_formulas:
 			text += key + ": "
 			var formula_value = signal_formulas.get(key)
-			
-			match (key):
+			# remove group extension from key for formula
+			var formula_type = key.get_basename()
+			match (formula_type):
 				"Linear":
 					text += str(formula_value)
 				"Sum":
@@ -154,7 +155,7 @@ func update_formulas_text() -> void:
 						text += "{" + signal_name + ": " + str(inflow_percent) + "}"
 					text += "]"
 				_:
-					print(key + " formula not found.")
+					print(formula_type + " formula not found.")
 					
 			text += "\r"
 			

@@ -148,7 +148,9 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 	var limit_value = false
 	for key: String in formulas.keys():
 		#This should be done with a base class and a subclass for each formula type
-		match (key):
+		# remove group extension from key for formula type
+		var formula_type = key.get_basename() 
+		match (formula_type):
 			"Linear":
 				var linear_change = formulas.get(key)
 				result += linear_change
@@ -177,7 +179,7 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 					var signal_value = signal_graph_row.get_signal_value()
 					result += signal_value * (inflow_percent/100)
 			_:
-				print(key + " formula not found.")
+				print(formula_type + " formula not found.")
 				
 	if (limit_value && result > source_row.get_signal_value()):
 		return source_row.get_signal_value()

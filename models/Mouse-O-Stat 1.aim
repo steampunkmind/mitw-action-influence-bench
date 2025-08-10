@@ -30,7 +30,7 @@
 		{
 			"influences": {
 				"Temperature": {
-					"Linear": 0.00
+					"Linear.ext": 0.00
 				}
 			},
 			"name": "No Change",
@@ -39,7 +39,7 @@
 		{
 			"influences": {
 				"Temperature": {
-					"Linear": 0.01
+					"Linear.ext": 0.01
 				}
 			},
 			"name": "Warming",
@@ -48,7 +48,7 @@
 		{
 			"influences": {
 				"Temperature": {
-					"Linear": -0.01
+					"Linear.ext": -0.01
 				}
 			},
 			"name": "Cooling",
