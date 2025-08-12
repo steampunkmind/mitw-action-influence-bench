@@ -3,6 +3,25 @@
 		{
 			"influences": {
 				"Temperature": {
+				  "Linear": -0.01,
+					"Select Action": {
+					  "min_delay": 200,
+					  "max_delay": 400,
+					  "value": 400,
+					  "actions": [
+						  "No Change",
+						  "Warming",
+						  "Cooling"
+					  ]
+					}
+				}
+			},
+			"name": "Init",
+			"visible": false
+		},
+		{
+			"influences": {
+				"Temperature": {
 					"Linear": 0.0
 				}
 			},
@@ -12,7 +31,7 @@
 		{
 			"influences": {
 				"Temperature": {
-					"Linear": 0.03
+					"Linear": 0.02
 				}
 			},
 			"name": "Heat",
@@ -21,7 +40,7 @@
 		{
 			"influences": {
 				"Temperature": {
-					"Linear": -0.03
+					"Linear": -0.02
 				}
 			},
 			"name": "Cool",

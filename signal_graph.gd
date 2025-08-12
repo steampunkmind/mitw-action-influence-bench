@@ -2,6 +2,7 @@ class_name SignalGraph
 extends ColorRect
 
 signal model_changed
+signal select_action
 
 @export var signal_array_dicts: Array[Dictionary]
 @export var signal_graph_row_template: PackedScene
@@ -178,6 +179,21 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 					var signal_graph_row = signal_graph_rows.get(signal_name)
 					var signal_value = signal_graph_row.get_signal_value()
 					result += signal_value * (inflow_percent/100)
+			"Select Action":
+				var formula = formulas.get(key)
+				var value = formula.get("value") - 1
+				if (value < 0):
+					var actions = formula.get("actions")
+					var i = randi() % actions.size()
+					var action_name = actions[i]
+					# For now send a signal to the Action buttons
+					# But I think it would be better to have this object 
+					# have direct access to model_data object that holds 
+					# the action and sensor (currently called signal) data 
+					select_action.emit(action_name) # signal to action buttons
+					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
+				formula.set("value", value)
+				formulas.set(key, formula)
 			_:
 				print(formula_type + " formula not found.")
 				

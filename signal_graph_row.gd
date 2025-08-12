@@ -141,9 +141,6 @@ func update_formulas_text() -> void:
 					text += "]"
 				"Outflow Percent":
 					text += str(formula_value)
-					#var outflow_percent = formulas.get(key)
-					#text += "-"
-					#result -= result * (outflow_percent/100) 
 				"Inflow Percent":
 					text += "["
 					var cnt = 0
@@ -154,6 +151,8 @@ func update_formulas_text() -> void:
 						var inflow_percent = signal_inflow.get("inflow_percent")
 						text += "{" + signal_name + ": " + str(inflow_percent) + "}"
 					text += "]"
+				"Select Action":
+					text += str(formula_value)
 				_:
 					print(formula_type + " formula not found.")
 					

@@ -98,3 +98,13 @@ func add_action_button(action: Action) -> void:
 	new_button_location = button.position.x + (button.size.x * button.get_scale().x) + button_margin
 	
 	
+# signal from signal graph
+# Probably should make model data object that holds actions and sensor data. 
+# And then remove this and let the signal graph take care of it directly
+func _on_signal_graph_select_action(action_name: String) -> void:
+	for action: Action in actions:
+		if (action.get_name() == action_name):
+			action_button_pressed.emit(action)
+			break
+	
+	
