@@ -197,4 +197,9 @@ func _reset_interface() -> void:
 	
 	
 func _on_eye_button_toggled(toggled_on: bool) -> void:
-	$ActionButtons.set_hide_buttons(toggled_on)
+	if toggled_on:
+		$EditActionsButton.show()
+	else:
+		$EditActionsButton.hide()
+	$ActionButtons.set_edit_mode(toggled_on)
+	$SignalGraph.set_edit_mode(toggled_on)

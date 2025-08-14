@@ -9,8 +9,8 @@ var new_button_location
 var action_buttons: Array[Button]
 var actions: Array[Action]:
 	get = get_actions, set = set_actions
-var hide_buttons: bool = true:
-	get = get_hide_buttons, set = set_hide_buttons
+var edit_mode: bool = false:
+	get = get_edit_mode, set = set_edit_mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -112,12 +112,12 @@ func _on_signal_graph_select_action(action_name: String) -> void:
 			break
 	
 	
-func get_hide_buttons() -> bool:
-	return hide_buttons
+func get_edit_mode() -> bool:
+	return edit_mode
 	
 	
-func set_hide_buttons(value: bool) -> void:
-	hide_buttons = value
+func set_edit_mode(value: bool) -> void:
+	edit_mode = value
 	_show_hide_buttons()
 	
 	
@@ -125,9 +125,9 @@ func _show_hide_buttons():
 	for action: Action in actions:
 		if !action.get_visible():
 			var child = find_child(action.get_name(), false, false)
-			if hide_buttons:
-				child.hide()
-			else:
+			if edit_mode:
 				child.show()
+			else:
+				child.hide()
 	
 	

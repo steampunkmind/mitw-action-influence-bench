@@ -5,6 +5,9 @@ var signal_min
 var signal_max
 var signal_value
 var signal_formulas = {}
+var _formulas_text = ""
+var edit_mode: bool = false:
+	get = get_edit_mode, set = set_edit_mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -83,7 +86,7 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	
-func set_formula(formula: Formula) -> void:
+func set_formula(formula: Formula, edit_mode: bool) -> void:
 	var expressions = formula.get_expressions()
 	for key: String in expressions:
 		signal_formulas.set(key, expressions.get(key))
@@ -110,52 +113,65 @@ func signal_value_y() -> float:
 	
 	
 func update_formulas_text() -> void:
-	var text: String = ""
+	_formulas_text = ""
 	# should call to_string method in future SignalFormula Class
 	if (signal_formulas):
 		for key: String in signal_formulas:
-			text += key + ": "
+			_formulas_text += key + ": "
 			var formula_value = signal_formulas.get(key)
 			# remove group extension from key for formula
 			var formula_type = key.get_basename()
 			match (formula_type):
 				"Linear":
-					text += str(formula_value)
+					_formulas_text += str(formula_value)
 				"Sum":
-					text += "["
+					_formulas_text += "["
 					var cnt = 0
 					for signal_name: String in formula_value:
 						if (cnt > 0):
-							text += ", "
-						text += signal_name
+							_formulas_text += ", "
+						_formulas_text += signal_name
 						cnt += 1
-					text += "]"
+					_formulas_text += "]"
 				"Max Limit":
-					text += "["
+					_formulas_text += "["
 					var cnt = 0
 					for signal_name: String in formula_value:
 						if (cnt > 0):
-							text += ", "
-						text += signal_name
+							_formulas_text += ", "
+						_formulas_text += signal_name
 						cnt += 1
-					text += "]"
+					_formulas_text += "]"
 				"Outflow Percent":
-					text += str(formula_value)
+					_formulas_text += str(formula_value)
 				"Inflow Percent":
-					text += "["
+					_formulas_text += "["
 					var cnt = 0
 					for signal_inflow: Dictionary in formula_value:
 						if (cnt > 0):
-							text += ", "
+							_formulas_text += ", "
 						var signal_name = signal_inflow.get("signal_name")
 						var inflow_percent = signal_inflow.get("inflow_percent")
-						text += "{" + signal_name + ": " + str(inflow_percent) + "}"
-					text += "]"
+						_formulas_text += "{" + signal_name + ": " + str(inflow_percent) + "}"
+					_formulas_text += "]"
 				"Select Action":
-					text += str(formula_value)
+					_formulas_text += str(formula_value)
 				_:
 					print(formula_type + " formula not found.")
 					
-			text += "\r"
+			_formulas_text += "\r"
 			
-	$Formulas.text = str(text)
+	
+	
+func get_edit_mode() -> bool:
+	return edit_mode
+	
+	
+func set_edit_mode(value: bool) -> void:
+	edit_mode = value
+	if edit_mode:
+		$Formulas.text = str(_formulas_text)
+	else:
+		$Formulas.text = str("")
+		
+		

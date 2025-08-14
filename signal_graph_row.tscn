@@ -61,7 +61,6 @@ offset_left = 15.0
 offset_top = 40.0
 offset_right = 405.0
 offset_bottom = 98.0
-text = "No Formula"
 label_settings = SubResource("LabelSettings_8kchh")
 autowrap_mode = 2
 

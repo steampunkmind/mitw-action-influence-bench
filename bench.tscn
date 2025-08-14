@@ -91,6 +91,7 @@ scale = Vector2(2.8, 2.8)
 text = "Save As..."
 
 [node name="EditActionsButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 2480.0
 offset_top = 10.0
@@ -107,9 +108,8 @@ offset_top = 16.0
 offset_right = 3284.0
 offset_bottom = 80.0
 toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("2_tjv83")
-texture_pressed = ExtResource("3_cjidc")
+texture_normal = ExtResource("3_cjidc")
+texture_pressed = ExtResource("2_tjv83")
 
 [node name="FrameRateLabel" type="Label" parent="."]
 layout_mode = 0
