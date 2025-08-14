@@ -9,6 +9,8 @@ var new_button_location
 var action_buttons: Array[Button]
 var actions: Array[Action]:
 	get = get_actions, set = set_actions
+var hide_buttons: bool = true:
+	get = get_hide_buttons, set = set_hide_buttons
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,6 +34,7 @@ func set_actions(value: Array[Action]):
 func update_buttons():
 	clear_action_buttons()
 	add_action_buttons()
+	_show_hide_buttons()
 	
 func _action_button_pressed(action: Action) -> void:
 	action_button_pressed.emit(action)
@@ -89,6 +92,7 @@ func add_action_buttons():
 func add_action_button(action: Action) -> void:
 	var button = $ActionButtonTemplate.duplicate(1)
 	var button_margin = button.position.x
+	button.name = action.get_name()
 	button.text = action.get_name()
 	button.offset_left = new_button_location
 	button.pressed.connect(_action_button_pressed.bind(action))
@@ -106,5 +110,24 @@ func _on_signal_graph_select_action(action_name: String) -> void:
 		if (action.get_name() == action_name):
 			action_button_pressed.emit(action)
 			break
+	
+	
+func get_hide_buttons() -> bool:
+	return hide_buttons
+	
+	
+func set_hide_buttons(value: bool) -> void:
+	hide_buttons = value
+	_show_hide_buttons()
+	
+	
+func _show_hide_buttons():
+	for action: Action in actions:
+		if !action.get_visible():
+			var child = find_child(action.get_name(), false, false)
+			if hide_buttons:
+				child.hide()
+			else:
+				child.show()
 	
 	

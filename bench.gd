@@ -196,3 +196,5 @@ func _reset_interface() -> void:
 	$EditActionsButton.disabled = !_is_model
 	
 	
+func _on_eye_button_toggled(toggled_on: bool) -> void:
+	$ActionButtons.set_hide_buttons(toggled_on)

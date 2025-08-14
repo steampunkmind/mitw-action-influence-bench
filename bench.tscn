@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=11 format=3 uid="uid://b4rb4np51o66m"]
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://bench.gd" id="1_3f1fh"]
 [ext_resource type="Script" uid="uid://domph6oksm6me" path="res://action_buttons.gd" id="2_a5qnj"]
+[ext_resource type="Texture2D" uid="uid://6y74xinemfm1" path="res://eye_open.svg" id="2_tjv83"]
 [ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://signal_graph.tscn" id="2_yj3it"]
+[ext_resource type="Texture2D" uid="uid://doomh0n86fwf4" path="res://eye_close.svg" id="3_cjidc"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://edit_actions.tscn" id="8_cjidc"]
 
@@ -97,6 +99,17 @@ offset_bottom = 41.0
 scale = Vector2(2.8, 2.8)
 toggle_mode = true
 text = "Edit Actions"
+
+[node name="EyeButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 3220.0
+offset_top = 16.0
+offset_right = 3284.0
+offset_bottom = 80.0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("2_tjv83")
+texture_pressed = ExtResource("3_cjidc")
 
 [node name="FrameRateLabel" type="Label" parent="."]
 layout_mode = 0
@@ -223,6 +236,7 @@ dialog_text = "
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="SaveAsButton" to="." method="_on_save_as_button_pressed"]
 [connection signal="toggled" from="EditActionsButton" to="." method="_on_edit_actions_button_toggled"]
+[connection signal="toggled" from="EyeButton" to="." method="_on_eye_button_toggled"]
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
 [connection signal="model_changed" from="SignalGraph" to="." method="_on_signal_graph_model_changed"]
 [connection signal="select_action" from="SignalGraph" to="ActionButtons" method="_on_signal_graph_select_action"]
