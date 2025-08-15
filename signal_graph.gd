@@ -201,6 +201,22 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
 				formula.set("value", value)
 				formulas.set(key, formula)
+			"Delay Action":
+				var formula = formulas.get(key)
+				var value = formula.get("value")
+				if value == null:
+					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
+				else:
+					value = value - 1
+				if (value < 0):
+					var action = formula.get("action")
+					select_action.emit(action) # signal to action buttons
+					formula.erase("value")
+					formulas.set(key, formula)
+					formulas.erase(key)
+				else:
+					formula.set("value", value)
+					formulas.set(key, formula)
 			_:
 				print(formula_type + " formula not found.")
 				

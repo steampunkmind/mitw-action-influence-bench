@@ -157,7 +157,7 @@ func update_formulas_text() -> void:
 						var inflow_percent = signal_inflow.get("inflow_percent")
 						_formulas_text += "{" + signal_name + ": " + str(inflow_percent) + "}"
 					_formulas_text += "]"
-				"Select Action":
+				"Select Action", "Delay Action":
 					_formulas_text += str(formula_value)
 				_:
 					print(formula_type + " formula not found.")
