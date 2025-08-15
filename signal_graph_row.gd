@@ -85,12 +85,15 @@ func add_frame_to_graph() -> void:
 	point.y = signal_value_y()
 	line.add_point(point)
 	
+	if edit_mode:
+		update_formulas_text()
+		$Formulas.text = str(_formulas_text)
+	
 	
 func set_formula(formula: Formula, edit_mode: bool) -> void:
 	var expressions = formula.get_expressions()
 	for key: String in expressions:
 		signal_formulas.set(key, expressions.get(key))
-	update_formulas_text()
 	
 	
 ### Utils ###	
@@ -169,9 +172,7 @@ func get_edit_mode() -> bool:
 	
 func set_edit_mode(value: bool) -> void:
 	edit_mode = value
-	if edit_mode:
-		$Formulas.text = str(_formulas_text)
-	else:
+	if !edit_mode:
 		$Formulas.text = str("")
 		
 		

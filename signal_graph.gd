@@ -95,6 +95,7 @@ func add_signal_graph_rows() -> void:
 		row.set_sensor(sensor)
 		row.set_row_location(row_location)
 		row.size.y = row_size - row_margin
+		row.set_edit_mode(edit_mode)
 		add_child(row)
 		signal_graph_rows.set(sensor.get_name(), row)
 		row_location = row_location + row_size
@@ -183,7 +184,11 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 					result += signal_value * (inflow_percent/100)
 			"Select Action":
 				var formula = formulas.get(key)
-				var value = formula.get("value") - 1
+				var value = formula.get("value")
+				if value == null:
+					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
+				else:
+					value = value - 1
 				if (value < 0):
 					var actions = formula.get("actions")
 					var i = randi() % actions.size()
