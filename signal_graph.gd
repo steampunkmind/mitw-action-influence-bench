@@ -3,6 +3,7 @@ extends ColorRect
 
 signal model_changed
 signal select_action
+signal shuffle_action
 
 @export var signal_array_dicts: Array[Dictionary]
 @export var signal_graph_row_template: PackedScene
@@ -197,6 +198,7 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 					# But I think it would be better to have this object 
 					# have direct access to model_data object that holds 
 					# the action and sensor (currently called signal) data 
+					# and the same for the other emits below
 					select_action.emit(action_name) # signal to action buttons
 					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
 				formula.set("value", value)
@@ -217,6 +219,18 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 				else:
 					formula.set("value", value)
 					formulas.set(key, formula)
+			"Shuffle Action":
+				var formula = formulas.get(key)
+				var value = formula.get("value")
+				if value == null:
+					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
+				else:
+					value = value - 1
+				if (value < 0):
+					shuffle_action.emit(formula.get("actions")) # signal to action buttons
+					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
+				formula.set("value", value)
+				formulas.set(key, formula)
 			_:
 				print(formula_type + " formula not found.")
 				

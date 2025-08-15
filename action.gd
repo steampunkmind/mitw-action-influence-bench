@@ -18,8 +18,12 @@ func get_visible():
 	return _dict.get('visible')
 	
 	
-func get_influences():
+func get_influences() -> Array[Influence]:
 	return _influences
+	
+	
+func set_influences(value: Array[Influence]) -> void:
+	_influences = value
 	
 	
 func get_dict() -> Dictionary:

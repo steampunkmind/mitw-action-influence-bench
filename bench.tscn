@@ -240,6 +240,7 @@ dialog_text = "
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
 [connection signal="model_changed" from="SignalGraph" to="." method="_on_signal_graph_model_changed"]
 [connection signal="select_action" from="SignalGraph" to="ActionButtons" method="_on_signal_graph_select_action"]
+[connection signal="shuffle_action" from="SignalGraph" to="ActionButtons" method="_on_signal_graph_shuffle_action"]
 [connection signal="action_button_pressed" from="ActionButtons" to="." method="_on_action_button_pressed"]
 [connection signal="model_changed" from="EditActions" to="." method="_on_edit_actions_model_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

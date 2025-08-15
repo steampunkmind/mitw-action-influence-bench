@@ -131,3 +131,23 @@ func _show_hide_buttons():
 				child.hide()
 	
 	
+func _on_signal_graph_shuffle_action(action_names) -> void:
+	var actions_to_shuffle = []
+	for action: Action in actions:
+		if action_names.has(action.get_name()):
+			actions_to_shuffle.append(action)
+	
+	var influences_array = []
+	for action: Action in actions_to_shuffle:
+		var influences = action.get_influences()
+		influences_array.append(influences)
+		
+	influences_array.shuffle()
+	
+	var influences_index = 0
+	for action: Action in actions_to_shuffle:
+		var influences = influences_array[influences_index]
+		action.set_influences(influences)
+		influences_index = influences_index + 1
+	
+	
