@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6y74xinemfm1"
-path="res://.godot/imported/eye_open.svg-9c0cc718ed00fc123a9328dc02e392f0.ctex"
+uid="uid://c082kq4f2nay"
+path="res://.godot/imported/add_hover.svg-2038edb3d9a5c60859937dc7ba7862ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://eye_open.svg"
-dest_files=["res://.godot/imported/eye_open.svg-9c0cc718ed00fc123a9328dc02e392f0.ctex"]
+source_file="res://graphics/add_hover.svg"
+dest_files=["res://.godot/imported/add_hover.svg-2038edb3d9a5c60859937dc7ba7862ca.ctex"]
 
 [params]
 

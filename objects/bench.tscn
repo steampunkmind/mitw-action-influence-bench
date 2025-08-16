@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://bench.gd" id="1_3f1fh"]
 [ext_resource type="Script" uid="uid://domph6oksm6me" path="res://action_buttons.gd" id="2_a5qnj"]
-[ext_resource type="Texture2D" uid="uid://6y74xinemfm1" path="res://eye_open.svg" id="2_tjv83"]
+[ext_resource type="Texture2D" uid="uid://6y74xinemfm1" path="res://svg/eye_open.svg" id="2_tjv83"]
 [ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://signal_graph.tscn" id="2_yj3it"]
-[ext_resource type="Texture2D" uid="uid://doomh0n86fwf4" path="res://eye_close.svg" id="3_cjidc"]
+[ext_resource type="Texture2D" uid="uid://doomh0n86fwf4" path="res://svg/eye_close.svg" id="3_cjidc"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://edit_actions.tscn" id="8_cjidc"]
 
