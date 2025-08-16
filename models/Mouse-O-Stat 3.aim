@@ -24,7 +24,16 @@
 					"Linear": 0.0
 				}
 			},
-			"name": "Off",
+			"name": "A",
+			"visible": true
+		},
+		{
+			"influences": {
+				"Temperature": {
+					"Linear": 0.01
+				}
+			},
+			"name": "B",
 			"visible": true
 		},
 		{
@@ -33,7 +42,16 @@
 					"Linear": 0.02
 				}
 			},
-			"name": "Heat",
+			"name": "C",
+			"visible": true
+		},
+		{
+			"influences": {
+				"Temperature": {
+					"Linear": -0.01
+				}
+			},
+			"name": "D",
 			"visible": true
 		},
 		{
@@ -42,7 +60,7 @@
 					"Linear": -0.02
 				}
 			},
-			"name": "Cool",
+			"name": "E",
 			"visible": true
 		},
 		{
