@@ -2,6 +2,7 @@ extends ColorRect
 
 const DONT_SAVE = "Don't Save"
 
+var _model: ActionInfluenceModel
 var _is_model: bool = false
 var _model_path: String = ""
 var _is_dirty: bool = false
@@ -18,6 +19,8 @@ func _ready() -> void:
 	_set_is_dirty(false)
 	$OpenFileDialog.set_current_dir("models")
 	$SaveFileDialog.set_current_dir("models")
+	_model = ActionInfluenceModel.new()
+	$ActionButtons.set_model(_model)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,7 +65,8 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	var json = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	$ActionButtons.set_action_dicts(json.get('actions') as Array)
+	_model.set_action_dicts(json.get('actions') as Array)
+	$ActionButtons.update_buttons()
 	$SignalGraph.set_sensor_dicts(json.get('sensors') as Array)
 	$ActionButtons.init_action()
 	_set_is_model(true, path)
@@ -123,7 +127,7 @@ func _write_file() -> void:
 	
 func get_dict() -> Dictionary:
 	var dict = {}
-	dict.set('actions', $ActionButtons.get_action_dicts())
+	dict.set('actions', _model.get_action_dicts())
 	dict.set('sensors', $SignalGraph.get_sensor_dicts())
 	return dict
 	
@@ -161,12 +165,11 @@ func _set_is_dirty(is_dirty: bool) -> void:
 func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$ActionButtons.clear_action_buttons()
-		$EditActions.set_actions($ActionButtons.actions)
+		$EditActions.set_actions(_model.get_actions())
 		$EditActionsButton.text = "Done"
 		_disable_interface()
 		$EditActionsButton.disabled = false
 	else:
-		$ActionButtons.set_actions($EditActions.get_actions())
 		$ActionButtons.update_buttons();
 		$EditActions.clear_edit_action_rows()
 		$EditActionsButton.text = "Edit Actions"
