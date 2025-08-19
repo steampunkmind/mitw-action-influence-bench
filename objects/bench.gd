@@ -67,8 +67,9 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	file.close()
 	
 	_model.set_action_dicts(json.get('actions') as Array)
+	_model.set_sensor_dicts(json.get('sensors') as Array)
 	$ActionButtons.update_buttons()
-	$SignalGraph.set_sensor_dicts(json.get('sensors') as Array)
+	$SignalGraph.update_sensors()
 	$ActionButtons.init_action()
 	_set_is_model(true, path)
 	
@@ -129,7 +130,7 @@ func _write_file() -> void:
 func get_dict() -> Dictionary:
 	var dict = {}
 	dict.set('actions', _model.get_action_dicts())
-	dict.set('sensors', $SignalGraph.get_sensor_dicts())
+	dict.set('sensors', _model.get_sensor_dicts())
 	return dict
 	
 	

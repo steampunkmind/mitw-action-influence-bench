@@ -13,7 +13,6 @@ var name_line_offset: float
 var action_names: Array[Control]
 var action_lines: Array[Node2D]
 var signal_graph_rows: Dictionary[String, SignalGraphRow]
-var sensors: Array[Sensor]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,39 +32,20 @@ func set_model(value: ActionInfluenceModel):
 
 
 func set_new_model() -> void:
-	clear_signal_graph_rows()
-	fill_sensors(signal_array_dicts)
-	add_signal_graph_rows()
+	_model.fill_sensors(signal_array_dicts)
+	update_sensors()
 	
 	
 func _on_add_button_button_up() -> void:
+	_model.new_sensor()
 	clear_signal_graph_rows()
-	new_signal_graph_row()
 	add_signal_graph_rows()
 	model_changed.emit()
 	
 	
-func get_sensor_dicts() -> Array:
-	var sensor_dicts = []
-	for sensor: Sensor in sensors:
-		sensor_dicts.append(sensor.get_dict())	
-	return sensor_dicts
-	
-	
-func set_sensor_dicts(sensor_dicts: Array) -> void:
+func update_sensors() -> void:
 	clear_signal_graph_rows()
-	fill_sensors(sensor_dicts)
 	add_signal_graph_rows()
-	
-	
-func fill_sensors(sensor_dicts: Array) -> void:
-	sensors = []
-	for signal_dict: Dictionary in sensor_dicts:
-		var name = signal_dict.get('name')
-		var min = signal_dict.get('min')
-		var max = signal_dict.get('max')
-		var value = signal_dict.get('value')
-		sensors.append(Sensor.new(name, min, max, value))
 	
 	
 func clear_signal_graph_rows() -> void:
@@ -84,17 +64,12 @@ func clear_signal_graph_rows() -> void:
 	signal_graph_rows.clear()
 	
 	
-func new_signal_graph_row() -> void:
-	var name = "Untitled " + str(sensors.size()+1)
-	sensors.append(Sensor.new(name, 0, 100, 50))
-	
-	
 func add_signal_graph_rows() -> void:
 	var header_margin = 80
 	var row_margin = 10
 	var row_location = header_margin
-	var row_size = (size.y - header_margin) / sensors.size()
-	for sensor: Sensor in sensors:
+	var row_size = (size.y - header_margin) / _model.get_sensors().size()
+	for sensor: Sensor in _model.get_sensors():
 		var row = signal_graph_row_template.instantiate()
 		row.set_sensor(sensor)
 		row.set_row_location(row_location)
