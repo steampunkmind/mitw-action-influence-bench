@@ -2,6 +2,8 @@ class_name ActionInfluenceModel extends Object
 
 var _actions: Array[Action]:
 	get = get_actions, set = set_actions
+var _edit_mode: bool = false:
+	get = get_edit_mode, set = set_edit_mode
 
 ## Actions ##
 func get_actions() -> Array[Action]:
@@ -35,3 +37,12 @@ func fill_actions(action_array: Array) -> void:
 			influences.append(influence)
 		
 		_actions.append(Action.new(action_dict.get("name"), action_dict.get("visible"), influences))
+
+
+## Edit Mode ##
+func get_edit_mode() -> bool:
+	return _edit_mode
+
+
+func set_edit_mode(value: bool) -> void:
+	_edit_mode = value

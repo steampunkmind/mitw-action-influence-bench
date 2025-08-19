@@ -8,8 +8,6 @@ signal action_button_pressed
 var _model: ActionInfluenceModel
 var new_button_location
 var action_buttons: Array[Button]
-var edit_mode: bool = false:
-	get = get_edit_mode, set = set_edit_mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +26,7 @@ func set_model(value: ActionInfluenceModel):
 func update_buttons():
 	clear_action_buttons()
 	add_action_buttons()
-	_show_hide_buttons()
+	show_hide_buttons()
 	
 	
 func _action_button_pressed(action: Action) -> void:
@@ -80,20 +78,11 @@ func _on_signal_graph_select_action(action_name: String) -> void:
 			break
 	
 	
-func get_edit_mode() -> bool:
-	return edit_mode
-	
-	
-func set_edit_mode(value: bool) -> void:
-	edit_mode = value
-	_show_hide_buttons()
-	
-	
-func _show_hide_buttons():
+func show_hide_buttons():
 	for action: Action in _model.get_actions():
 		if !action.get_visible():
 			var child = find_child(action.get_name(), false, false)
-			if edit_mode:
+			if _model.get_edit_mode():
 				child.show()
 			else:
 				child.hide()

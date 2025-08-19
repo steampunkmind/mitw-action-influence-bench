@@ -204,5 +204,6 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 		$EditActionsButton.show()
 	else:
 		$EditActionsButton.hide()
-	$ActionButtons.set_edit_mode(toggled_on)
+	_model.set_edit_mode(toggled_on)
+	$ActionButtons._show_hide_buttons()
 	$SignalGraph.set_edit_mode(toggled_on)
