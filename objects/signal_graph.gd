@@ -8,13 +8,12 @@ signal shuffle_action
 @export var signal_array_dicts: Array[Dictionary]
 @export var signal_graph_row_template: PackedScene
 
+var _model: ActionInfluenceModel
 var name_line_offset: float
 var action_names: Array[Control]
 var action_lines: Array[Node2D]
 var signal_graph_rows: Dictionary[String, SignalGraphRow]
 var sensors: Array[Sensor]
-var edit_mode: bool = false:
-	get = get_edit_mode, set = set_edit_mode
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +28,10 @@ func _process(delta: float) -> void:
 	pass
 	
 	
+func set_model(value: ActionInfluenceModel):
+	_model = value
+
+
 func set_new_model() -> void:
 	clear_signal_graph_rows()
 	fill_sensors(signal_array_dicts)
@@ -96,7 +99,7 @@ func add_signal_graph_rows() -> void:
 		row.set_sensor(sensor)
 		row.set_row_location(row_location)
 		row.size.y = row_size - row_margin
-		row.set_edit_mode(edit_mode)
+		row.set_edit_mode(_model.get_edit_mode())
 		add_child(row)
 		signal_graph_rows.set(sensor.get_name(), row)
 		row_location = row_location + row_size
@@ -125,7 +128,7 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_action(action: Action) -> void:
-	if edit_mode or action.get_visible():
+	if _model.get_edit_mode() or action.get_visible():
 		var new_action_name = $ActionNameTemplate.duplicate(1)
 		new_action_name.visible = true
 		new_action_name.text = action.get_name()
@@ -141,7 +144,7 @@ func set_action(action: Action) -> void:
 	for influence: Influence in action.get_influences():
 		var signal_graph_row = signal_graph_rows.get(influence.get_signal_name())
 		if signal_graph_row != null :
-			signal_graph_row.set_formula(influence.get_formula(), edit_mode)
+			signal_graph_row.set_formula(influence.get_formula(), _model.get_edit_mode())
 	
 	
 ### Support for signal graph rows ###
@@ -240,12 +243,7 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 	return result
 	
 	
-func get_edit_mode() -> bool:
-	return edit_mode
-	
-	
-func set_edit_mode(value: bool) -> void:
-	edit_mode = value
+func update_edit_mode() -> void:
 	for signal_graph_row: SignalGraphRow in signal_graph_rows.values():
-		signal_graph_row.set_edit_mode(value)
+		signal_graph_row.set_edit_mode(_model.get_edit_mode())
 	

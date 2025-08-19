@@ -21,6 +21,7 @@ func _ready() -> void:
 	$SaveFileDialog.set_current_dir("models")
 	_model = ActionInfluenceModel.new()
 	$ActionButtons.set_model(_model)
+	$SignalGraph.set_model(_model)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -205,5 +206,5 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 	else:
 		$EditActionsButton.hide()
 	_model.set_edit_mode(toggled_on)
-	$ActionButtons._show_hide_buttons()
-	$SignalGraph.set_edit_mode(toggled_on)
+	$ActionButtons.show_hide_buttons()
+	$SignalGraph.update_edit_mode()
