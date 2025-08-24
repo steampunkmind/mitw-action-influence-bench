@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://sutkkenme5nk"]
 
-[ext_resource type="Script" uid="uid://b5mnr478y58b6" path="res://edit_actions.gd" id="1_fsf4l"]
-[ext_resource type="PackedScene" uid="uid://cblkrfosd0s10" path="res://edit_action_row.tscn" id="2_iysti"]
-[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://add.svg" id="3_nksls"]
-[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://add_pressed.svg" id="4_tmxcf"]
-[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://add_hover.svg" id="5_and5y"]
+[ext_resource type="Script" uid="uid://b5mnr478y58b6" path="res://objects/edit_actions.gd" id="1_fsf4l"]
+[ext_resource type="PackedScene" uid="uid://cblkrfosd0s10" path="res://objects/edit_action_row.tscn" id="2_iysti"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_nksls"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_tmxcf"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_and5y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fsf4l"]
 font_size = 48

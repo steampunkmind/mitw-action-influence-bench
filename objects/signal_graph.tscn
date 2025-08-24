@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bx0kddlfv7xvs"]
 
-[ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://signal_graph.gd" id="1_kc2xn"]
-[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://signal_graph_row.tscn" id="3_vdl7c"]
-[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://add.svg" id="3_w0q86"]
-[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://add_pressed.svg" id="4_w0q86"]
-[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://add_hover.svg" id="5_m2as1"]
+[ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://objects/signal_graph.gd" id="1_kc2xn"]
+[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/signal_graph_row.tscn" id="3_vdl7c"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_w0q86"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_w0q86"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_m2as1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kc2xn"]
 font_size = 42
@@ -36,6 +36,7 @@ text = "Sensor"
 label_settings = SubResource("LabelSettings_kc2xn")
 
 [node name="AddButton" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 161.0
 offset_top = 5.0

@@ -202,10 +202,11 @@ func _reset_interface() -> void:
 	
 	
 func _on_eye_button_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		$EditActionsButton.show()
-	else:
-		$EditActionsButton.hide()
+	# Disable this until editing interface is implemented
+	# if toggled_on:
+	# $EditActionsButton.show()
+	# else:
+	# $EditActionsButton.hide()
 	_model.set_edit_mode(toggled_on)
 	$ActionButtons.show_hide_buttons()
 	$SignalGraph.update_edit_mode()
