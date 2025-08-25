@@ -5,7 +5,6 @@ var signal_min
 var signal_max
 var signal_value
 var signal_formulas = {}
-var _formulas_text = ""
 var edit_mode: bool = false:
 	get = get_edit_mode, set = set_edit_mode
 
@@ -86,8 +85,7 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	if edit_mode:
-		update_formulas_text()
-		$Formulas.text = str(_formulas_text)
+		$Formulas.text = str(get_parent().signal_formulas_text(signal_formulas))
 	
 	
 func set_formula(formula: Formula, edit_mode: bool) -> void:
@@ -99,7 +97,7 @@ func set_formula(formula: Formula, edit_mode: bool) -> void:
 ### Utils ###	
 func update_signal_change_value() -> void:
 	if (signal_formulas != null):
-		var new_signal_value = get_parent().calc_signal_formulas(self, signal_formulas)
+		var new_signal_value = get_parent().signal_formulas_value(self, signal_formulas)
 		if (new_signal_value < signal_min):
 			new_signal_value = signal_min
 		elif (new_signal_value > signal_max):
@@ -113,57 +111,6 @@ func signal_value_y() -> float:
 	var ratio = size.y/range
 	var scaled_value = value_above_min * ratio
 	return size.y - scaled_value;
-	
-	
-func update_formulas_text() -> void:
-	_formulas_text = ""
-	# should call to_string method in future SignalFormula Class
-	if (signal_formulas):
-		for key: String in signal_formulas:
-			_formulas_text += key + ": "
-			var formula_value = signal_formulas.get(key)
-			# remove group extension from key for formula
-			var formula_type = key.get_basename()
-			match (formula_type):
-				"Linear":
-					_formulas_text += str(formula_value)
-				"Sum":
-					_formulas_text += "["
-					var cnt = 0
-					for signal_name: String in formula_value:
-						if (cnt > 0):
-							_formulas_text += ", "
-						_formulas_text += signal_name
-						cnt += 1
-					_formulas_text += "]"
-				"Max Limit":
-					_formulas_text += "["
-					var cnt = 0
-					for signal_name: String in formula_value:
-						if (cnt > 0):
-							_formulas_text += ", "
-						_formulas_text += signal_name
-						cnt += 1
-					_formulas_text += "]"
-				"Outflow Percent":
-					_formulas_text += str(formula_value)
-				"Inflow Percent":
-					_formulas_text += "["
-					var cnt = 0
-					for signal_inflow: Dictionary in formula_value:
-						if (cnt > 0):
-							_formulas_text += ", "
-						var signal_name = signal_inflow.get("signal_name")
-						var inflow_percent = signal_inflow.get("inflow_percent")
-						_formulas_text += "{" + signal_name + ": " + str(inflow_percent) + "}"
-					_formulas_text += "]"
-				"Select Action", "Delay Action", "Shuffle Action":
-					_formulas_text += str(formula_value)
-				_:
-					print(formula_type + " formula not found.")
-					
-			_formulas_text += "\r"
-			
 	
 	
 func get_edit_mode() -> bool:

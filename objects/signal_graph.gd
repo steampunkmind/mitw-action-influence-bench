@@ -122,11 +122,16 @@ func set_action(action: Action) -> void:
 			signal_graph_row.set_formula(influence.get_formula(), _model.get_edit_mode())
 	
 	
+func update_edit_mode() -> void:
+	for signal_graph_row: SignalGraphRow in signal_graph_rows.values():
+		signal_graph_row.set_edit_mode(_model.get_edit_mode())
+	
+	
 ### Support for signal graph rows ###
 # All signal values that depend on other rows 
 # should be calculated by the SignalGraph
 # SignalGraphRows should be blind to other rows.
-func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> float:
+func signal_formulas_value(source_row: SignalGraphRow, formulas: Dictionary) -> float:
 	var result = source_row.get_signal_value()
 	var limit_value = false
 	for key: String in formulas.keys():
@@ -218,7 +223,55 @@ func calc_signal_formulas(source_row: SignalGraphRow, formulas: Dictionary) -> f
 	return result
 	
 	
-func update_edit_mode() -> void:
-	for signal_graph_row: SignalGraphRow in signal_graph_rows.values():
-		signal_graph_row.set_edit_mode(_model.get_edit_mode())
+func signal_formulas_text(signal_formulas: Dictionary) -> String:
+	var result = ""
+	# should call to_string method in future SignalFormula Class
+	if (signal_formulas):
+		for key: String in signal_formulas:
+			result += key + ": "
+			var formula_value = signal_formulas.get(key)
+			# remove group extension from key for formula
+			var formula_type = key.get_basename()
+			match (formula_type):
+				"Linear":
+					result += str(formula_value)
+				"Sum":
+					result += "["
+					var cnt = 0
+					for signal_name: String in formula_value:
+						if (cnt > 0):
+							result += ", "
+						result += signal_name
+						cnt += 1
+					result += "]"
+				"Max Limit":
+					result += "["
+					var cnt = 0
+					for signal_name: String in formula_value:
+						if (cnt > 0):
+							result += ", "
+						result += signal_name
+						cnt += 1
+					result += "]"
+				"Outflow Percent":
+					result += str(formula_value)
+				"Inflow Percent":
+					result += "["
+					var cnt = 0
+					for signal_inflow: Dictionary in formula_value:
+						if (cnt > 0):
+							result += ", "
+						var signal_name = signal_inflow.get("signal_name")
+						var inflow_percent = signal_inflow.get("inflow_percent")
+						result += "{" + signal_name + ": " + str(inflow_percent) + "}"
+					result += "]"
+				"Select Action", "Delay Action", "Shuffle Action":
+					result += str(formula_value)
+				_:
+					print(formula_type + " formula not found.")
+					
+			result += "\r"
+		
+	return result
+	
 	
