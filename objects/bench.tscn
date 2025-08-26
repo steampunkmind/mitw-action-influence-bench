@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://objects/bench.gd" id="1_3f1fh"]
 [ext_resource type="Script" uid="uid://domph6oksm6me" path="res://objects/action_buttons.gd" id="2_a5qnj"]
 [ext_resource type="Texture2D" uid="uid://6y74xinemfm1" path="res://graphics/eye_open.svg" id="2_tjv83"]
-[ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://objects/signal_graph.tscn" id="2_yj3it"]
+[ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://objects/sensor_graph.tscn" id="2_yj3it"]
 [ext_resource type="Texture2D" uid="uid://doomh0n86fwf4" path="res://graphics/eye_close.svg" id="3_cjidc"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://objects/bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://objects/edit_actions.tscn" id="8_cjidc"]
@@ -139,7 +139,7 @@ offset_bottom = 166.0
 text = "0"
 label_settings = SubResource("LabelSettings_a5qnj")
 
-[node name="SignalGraph" parent="." instance=ExtResource("2_yj3it")]
+[node name="SensorGraph" parent="." instance=ExtResource("2_yj3it")]
 visible = false
 layout_mode = 0
 anchors_preset = 0
@@ -148,12 +148,6 @@ anchor_bottom = 0.0
 offset_top = 388.0
 offset_bottom = 1948.0
 grow_vertical = 1
-signal_array_dicts = Array[Dictionary]([{
-"max": 100.0,
-"min": 0.0,
-"name": "Sensor 1",
-"value": 50.0
-}])
 
 [node name="ActionButtons" type="ColorRect" parent="." node_paths=PackedStringArray("action_button_template")]
 layout_mode = 0
@@ -238,9 +232,9 @@ dialog_text = "
 [connection signal="toggled" from="EditActionsButton" to="." method="_on_edit_actions_button_toggled"]
 [connection signal="toggled" from="EyeButton" to="." method="_on_eye_button_toggled"]
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
-[connection signal="model_changed" from="SignalGraph" to="." method="_on_signal_graph_model_changed"]
-[connection signal="select_action" from="SignalGraph" to="ActionButtons" method="_on_signal_graph_select_action"]
-[connection signal="shuffle_action" from="SignalGraph" to="ActionButtons" method="_on_signal_graph_shuffle_action"]
+[connection signal="model_changed" from="SensorGraph" to="." method="_on_sensor_graph_model_changed"]
+[connection signal="select_action" from="SensorGraph" to="ActionButtons" method="_on_sensor_graph_select_action"]
+[connection signal="shuffle_action" from="SensorGraph" to="ActionButtons" method="_on_sensor_graph_shuffle_action"]
 [connection signal="action_button_pressed" from="ActionButtons" to="." method="_on_action_button_pressed"]
 [connection signal="model_changed" from="EditActions" to="." method="_on_edit_actions_model_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

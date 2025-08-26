@@ -30,7 +30,7 @@ func get_dict() -> Dictionary:
 	var result = _dict.duplicate(true)
 	var influences = {}
 	for influence: Influence in _influences:
-		influences.set(influence.get_signal_name(), influence.get_dict())
+		influences.set(influence.get_sensor_name(), influence.get_dict())
 	result.set('influences', influences)
 	return result
 	

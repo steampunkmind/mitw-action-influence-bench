@@ -32,10 +32,10 @@ func fill_actions(action_array: Array) -> void:
 	for action_dict: Dictionary in action_array:
 		var influences: Array[Influence]
 		var influence_dict = action_dict.get("influences")
-		for signal_name: String in influence_dict:
-			var expressions = influence_dict.get(signal_name)
+		for sensor_name: String in influence_dict:
+			var expressions = influence_dict.get(sensor_name)
 			var formula = Formula.new(expressions)
-			var influence = Influence.new(signal_name, formula)
+			var influence = Influence.new(sensor_name, formula)
 			influences.append(influence)
 		
 		_actions.append(Action.new(action_dict.get("name"), action_dict.get("visible"), influences))
@@ -63,16 +63,16 @@ func set_sensor_dicts(sensor_dicts: Array) -> void:
 
 func fill_sensors(sensor_dicts: Array) -> void:
 	_sensors = []
-	for signal_dict: Dictionary in sensor_dicts:
-		var name = signal_dict.get('name')
-		var min = signal_dict.get('min')
-		var max = signal_dict.get('max')
-		var value = signal_dict.get('value')
+	for sensor_dict: Dictionary in sensor_dicts:
+		var name = sensor_dict.get('name')
+		var min = sensor_dict.get('min')
+		var max = sensor_dict.get('max')
+		var value = sensor_dict.get('value')
 		_sensors.append(Sensor.new(name, min, max, value))
 
 
 func new_sensor() -> void:
-	var name = "Untitled " + str(_sensors.size()+1)
+	var name = "Sensor " + str(_sensors.size()+1)
 	_sensors.append(Sensor.new(name, 0, 100, 50))
 
 

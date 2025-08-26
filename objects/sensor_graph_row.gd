@@ -1,0 +1,125 @@
+class_name SensorGraphRow
+extends ColorRect
+
+var sensor_min
+var sensor_max
+var sensor_value
+var sensor_formulas = {}
+var edit_mode: bool = false:
+	get = get_edit_mode, set = set_edit_mode
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$SensorValue.position.y = (size.y/2) - ($SensorValue.size.y/2)
+	$SensorMin.position.y = size.y - $SensorValue.size.y
+
+	var point = $StartLine.get_point_position(1)
+	point.y = size.y
+	$StartLine.set_point_position(1, point)
+	
+	point = $SensorLine.get_point_position(0)
+	point.y = sensor_value_y()
+	$SensorLine.set_point_position(0, point)
+	point = $SensorLine.get_point_position(1)
+	point.y = sensor_value_y()
+	$SensorLine.set_point_position(1, point)
+	
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func set_row_location(y: float) -> void:
+	var p = get_position()
+	p.y = y
+	set_position(p)
+	
+func set_sensor(sensor: Sensor) -> void:
+	set_name(sensor.get_name()) # sets name of node
+	set_sensor_name(sensor.get_name()) #!needed?
+	set_sensor_min(sensor.get_min())
+	set_sensor_max(sensor.get_max())
+	set_sensor_value(sensor.get_value())
+	
+func set_sensor_name(value: String) -> void:
+	$Name.text = value
+	
+func set_sensor_min(value: float) -> void:
+	sensor_min = value
+	$SensorMin.text = str(value)
+	
+func set_sensor_max(value: float) -> void:
+	sensor_max = value
+	$SensorMax.text = str(value)
+
+func get_sensor_max() -> float:
+	return sensor_max
+	
+func set_sensor_value(value: float) -> void:
+	sensor_value = value
+	$SensorValue.text = str("%.1f" % value)
+
+func get_sensor_value() -> float:
+	return sensor_value
+	
+	
+func add_frame_to_graph() -> void:
+	var line = $SensorLine
+		
+	# Move points to right
+	for i in range(line.get_point_count()):
+		var point = line.get_point_position(i)
+		point.x = point.x + 1
+		line.set_point_position(i, point)
+		
+	# Remove if off right side
+	if (line.get_point_position(0).x > size.x):
+		line.remove_point(0)
+	
+	# Add new point
+	var point = line.get_point_position(line.get_point_count()-1)
+	point.x = point.x - 1
+	update_sensor_change_value()
+	point.y = sensor_value_y()
+	line.add_point(point)
+	
+	if edit_mode:
+		$Formulas.text = str(get_parent().sensor_formulas_text(sensor_formulas))
+	
+	
+func set_formula(formula: Formula, edit_mode: bool) -> void:
+	var expressions = formula.get_expressions()
+	for key: String in expressions:
+		sensor_formulas.set(key, expressions.get(key))
+	
+	
+### Utils ###	
+func update_sensor_change_value() -> void:
+	if (sensor_formulas != null):
+		var new_sensor_value = get_parent().sensor_formulas_value(self, sensor_formulas)
+		if (new_sensor_value < sensor_min):
+			new_sensor_value = sensor_min
+		elif (new_sensor_value > sensor_max):
+			new_sensor_value = sensor_max
+		set_sensor_value(new_sensor_value)
+	
+	
+func sensor_value_y() -> float:
+	var value_above_min = sensor_value - sensor_min
+	var range = sensor_max - sensor_min
+	var ratio = size.y/range
+	var scaled_value = value_above_min * ratio
+	return size.y - scaled_value;
+	
+	
+func get_edit_mode() -> bool:
+	return edit_mode
+	
+	
+func set_edit_mode(value: bool) -> void:
+	edit_mode = value
+	if !edit_mode:
+		$Formulas.text = str("")
+		
+		

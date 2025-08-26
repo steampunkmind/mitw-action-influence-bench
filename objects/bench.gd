@@ -21,7 +21,7 @@ func _ready() -> void:
 	$SaveFileDialog.set_current_dir("models")
 	_model = ActionInfluenceModel.new()
 	$ActionButtons.set_model(_model)
-	$SignalGraph.set_model(_model)
+	$SensorGraph.set_model(_model)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,17 +42,17 @@ func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	
 	
 func _on_timer_timeout() -> void:
-	$SignalGraph.add_frame_to_graph()
+	$SensorGraph.add_frame_to_graph()
 	
 	
 func _on_action_button_pressed(action: Action) -> void:
-	$SignalGraph.set_action(action)
+	$SensorGraph.set_action(action)
 	
 	
 ## File Functions ##
 func _on_new_button_pressed() -> void:
 	$ActionButtons.set_new_model()
-	$SignalGraph.set_new_model()
+	$SensorGraph.set_new_model()
 	$ActionButtons.init_action()
 	_set_is_model(true)
 	
@@ -69,7 +69,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	_model.set_action_dicts(json.get('actions') as Array)
 	_model.set_sensor_dicts(json.get('sensors') as Array)
 	$ActionButtons.update_buttons()
-	$SignalGraph.update_sensors()
+	$SensorGraph.update_sensors()
 	$ActionButtons.init_action()
 	_set_is_model(true, path)
 	
@@ -154,7 +154,7 @@ func _on_edit_actions_model_changed() -> void:
 	_set_is_dirty(true)
 	
 	
-func _on_signal_graph_model_changed() -> void:
+func _on_sensor_graph_model_changed() -> void:
 	_set_is_dirty(true)
 	_reset_interface()
 	
@@ -182,7 +182,7 @@ func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 
 func _disable_interface() -> void:
 	$ActionButtons.visible = false
-	$SignalGraph.visible = false
+	$SensorGraph.visible = false
 	$NewButton.disabled = true
 	$OpenButton.disabled = true
 	$CloseButton.disabled = true
@@ -192,7 +192,7 @@ func _disable_interface() -> void:
 	
 func _reset_interface() -> void:
 	$ActionButtons.visible = _is_model
-	$SignalGraph.visible = _is_model
+	$SensorGraph.visible = _is_model
 	$NewButton.disabled = _is_model
 	$OpenButton.disabled = _is_model
 	$CloseButton.disabled = !_is_model
@@ -209,4 +209,4 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 	# $EditActionsButton.hide()
 	_model.set_edit_mode(toggled_on)
 	$ActionButtons.show_hide_buttons()
-	$SignalGraph.update_edit_mode()
+	$SensorGraph.update_edit_mode()

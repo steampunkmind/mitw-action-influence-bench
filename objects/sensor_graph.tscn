@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bx0kddlfv7xvs"]
 
-[ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://objects/signal_graph.gd" id="1_kc2xn"]
-[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/signal_graph_row.tscn" id="3_vdl7c"]
+[ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://objects/sensor_graph.gd" id="1_kc2xn"]
+[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/sensor_graph_row.tscn" id="3_vdl7c"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_w0q86"]
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_w0q86"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_m2as1"]
@@ -14,7 +14,7 @@ font_color = Color(0, 0, 0, 1)
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
-[node name="SignalGraph" type="ColorRect"]
+[node name="SensorGraph" type="ColorRect"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -24,7 +24,13 @@ offset_bottom = -390.0
 grow_vertical = 0
 color = Color(0.784314, 0.784314, 0.784314, 1)
 script = ExtResource("1_kc2xn")
-signal_graph_row_template = ExtResource("3_vdl7c")
+sensor_array_dicts = Array[Dictionary]([{
+"max": 100.0,
+"min": 0.0,
+"name": "Sensor 1",
+"value": 50.0
+}])
+sensor_graph_row_template = ExtResource("3_vdl7c")
 metadata/_custom_type_script = "uid://3sk4l6dcbxo0"
 
 [node name="Header" type="Label" parent="."]

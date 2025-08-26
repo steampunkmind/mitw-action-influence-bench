@@ -6,7 +6,7 @@
 					"Inflow Percent": [
 						{
 							"inflow_percent": 0.038,
-							"signal_name": "Stomach Liquid"
+							"sensor_name": "Stomach Liquid"
 						}
 					],
 					"Linear": 0.0
@@ -15,7 +15,7 @@
 					"Inflow Percent": [
 						{
 							"inflow_percent": 0.038,
-							"signal_name": "Stomach Solid"
+							"sensor_name": "Stomach Solid"
 						}
 					],
 					"Linear": 0.0
