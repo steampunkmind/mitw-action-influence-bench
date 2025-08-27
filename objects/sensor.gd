@@ -1,6 +1,7 @@
 class_name Sensor extends RefCounted
 
 var _dict = {}
+var _formulas = {}
 
 # Constructor
 func _init(name: String, min: float, max: float, value: float):
@@ -28,6 +29,14 @@ func get_value() -> float:
 	
 func set_value(value: float):
 	_dict.set('value', value)
+	
+	
+func get_formulas() -> Dictionary:
+	return _formulas
+	
+	
+func set_formulas(value: Dictionary):
+	_formulas = value
 	
 	
 func get_dict() -> Dictionary:

@@ -2,7 +2,6 @@ class_name SensorGraphRow
 extends ColorRect
 
 var _sensor: Sensor 
-var sensor_formulas = {}
 var edit_mode: bool = false:
 	get = get_edit_mode, set = set_edit_mode
 
@@ -81,19 +80,19 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	if edit_mode:
-		$Formulas.text = str(get_parent().sensor_formulas_text(sensor_formulas))
+		$Formulas.text = str(get_parent().sensor_formulas_text(_sensor.get_formulas()))
 	
 	
 func set_formula(formula: Formula, edit_mode: bool) -> void:
 	var expressions = formula.get_expressions()
 	for key: String in expressions:
-		sensor_formulas.set(key, expressions.get(key))
+		_sensor.get_formulas().set(key, expressions.get(key))
 	
 	
 ### Utils ###	
 func update_sensor_change_value() -> void:
-	if (sensor_formulas != null):
-		var new_sensor_value = get_parent().sensor_formulas_value(self, sensor_formulas)
+	if (_sensor.get_formulas() != null):
+		var new_sensor_value = get_parent().sensor_formulas_value(self, _sensor.get_formulas())
 		if (new_sensor_value < _sensor.get_min()):
 			new_sensor_value = _sensor.get_min()
 		elif (new_sensor_value > _sensor.get_max()):
