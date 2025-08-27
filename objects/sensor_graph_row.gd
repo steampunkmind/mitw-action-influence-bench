@@ -1,9 +1,7 @@
 class_name SensorGraphRow
 extends ColorRect
 
-var sensor_min
-var sensor_max
-var sensor_value
+var _sensor: Sensor 
 var sensor_formulas = {}
 var edit_mode: bool = false:
 	get = get_edit_mode, set = set_edit_mode
@@ -36,32 +34,30 @@ func set_row_location(y: float) -> void:
 	set_position(p)
 	
 func set_sensor(sensor: Sensor) -> void:
+	_sensor = sensor
 	set_name(sensor.get_name()) # sets name of node
-	set_sensor_name(sensor.get_name()) #!needed?
-	set_sensor_min(sensor.get_min())
-	set_sensor_max(sensor.get_max())
-	set_sensor_value(sensor.get_value())
 	
 func set_sensor_name(value: String) -> void:
+	_sensor.set_name(value)
 	$Name.text = value
 	
 func set_sensor_min(value: float) -> void:
-	sensor_min = value
+	_sensor.set_min(value)
 	$SensorMin.text = str(value)
 	
 func set_sensor_max(value: float) -> void:
-	sensor_max = value
+	_sensor.set_max(value)
 	$SensorMax.text = str(value)
 
 func get_sensor_max() -> float:
-	return sensor_max
+	return _sensor.get_max()
 	
 func set_sensor_value(value: float) -> void:
-	sensor_value = value
+	_sensor.set_value(value)
 	$SensorValue.text = str("%.1f" % value)
 
 func get_sensor_value() -> float:
-	return sensor_value
+	return _sensor.get_value()
 	
 	
 func add_frame_to_graph() -> void:
@@ -98,16 +94,16 @@ func set_formula(formula: Formula, edit_mode: bool) -> void:
 func update_sensor_change_value() -> void:
 	if (sensor_formulas != null):
 		var new_sensor_value = get_parent().sensor_formulas_value(self, sensor_formulas)
-		if (new_sensor_value < sensor_min):
-			new_sensor_value = sensor_min
-		elif (new_sensor_value > sensor_max):
-			new_sensor_value = sensor_max
+		if (new_sensor_value < _sensor.get_min()):
+			new_sensor_value = _sensor.get_min()
+		elif (new_sensor_value > _sensor.get_max()):
+			new_sensor_value = _sensor.get_max()
 		set_sensor_value(new_sensor_value)
 	
 	
 func sensor_value_y() -> float:
-	var value_above_min = sensor_value - sensor_min
-	var range = sensor_max - sensor_min
+	var value_above_min = _sensor.get_value() - _sensor.get_min()
+	var range = _sensor.get_max() - _sensor.get_min()
 	var ratio = size.y/range
 	var scaled_value = value_above_min * ratio
 	return size.y - scaled_value;

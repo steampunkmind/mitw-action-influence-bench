@@ -22,8 +22,12 @@ func get_max():
 	return _dict.get('max')
 	
 	
-func get_value():
+func get_value() -> float:
 	return _dict.get('value')
+	
+	
+func set_value(value: float):
+	_dict.set('value', value)
 	
 	
 func get_dict() -> Dictionary:
