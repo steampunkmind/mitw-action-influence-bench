@@ -1,7 +1,9 @@
 class_name SensorGraphRow
 extends ColorRect
 
+var _model: ActionInfluenceModel
 var _sensor: Sensor 
+var _formula: SensorFormula 
 var edit_mode: bool = false:
 	get = get_edit_mode, set = set_edit_mode
 
@@ -27,6 +29,11 @@ func _process(delta: float) -> void:
 	pass
 
 
+func set_model(value: ActionInfluenceModel):
+	_model = value
+	_formula = SensorFormula.new(value)
+
+
 func set_row_location(y: float) -> void:
 	var p = get_position()
 	p.y = y
@@ -35,9 +42,11 @@ func set_row_location(y: float) -> void:
 func set_sensor(sensor: Sensor) -> void:
 	_sensor = sensor
 	set_name(sensor.get_name()) # sets name of node
+	$Name.text = sensor.get_name()
 	
 func set_sensor_name(value: String) -> void:
 	_sensor.set_name(value)
+	set_name(value) # sets name of node
 	$Name.text = value
 	
 func set_sensor_min(value: float) -> void:
@@ -80,7 +89,7 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	if edit_mode:
-		$Formulas.text = str(get_parent().sensor_formulas_text(_sensor.get_formulas()))
+		$Formulas.text = str(_formula.get_text(_sensor.get_formulas()))
 	
 	
 func set_formula(formula: Formula, edit_mode: bool) -> void:
@@ -92,7 +101,7 @@ func set_formula(formula: Formula, edit_mode: bool) -> void:
 ### Utils ###	
 func update_sensor_change_value() -> void:
 	if (_sensor.get_formulas() != null):
-		var new_sensor_value = get_parent().sensor_formulas_value(self, _sensor.get_formulas())
+		var new_sensor_value = _formula.get_value(_sensor, _sensor.get_formulas())
 		if (new_sensor_value < _sensor.get_min()):
 			new_sensor_value = _sensor.get_min()
 		elif (new_sensor_value > _sensor.get_max()):
