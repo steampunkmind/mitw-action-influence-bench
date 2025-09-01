@@ -3,7 +3,6 @@ extends ColorRect
 
 var _model: ActionInfluenceModel
 var _sensor: Sensor 
-var _formula: SensorFormula 
 var edit_mode: bool = false:
 	get = get_edit_mode, set = set_edit_mode
 
@@ -31,7 +30,6 @@ func _process(delta: float) -> void:
 
 func set_model(value: ActionInfluenceModel):
 	_model = value
-	_formula = SensorFormula.new(value)
 
 
 func set_row_location(y: float) -> void:
@@ -89,7 +87,7 @@ func add_frame_to_graph() -> void:
 	line.add_point(point)
 	
 	if edit_mode:
-		$Formulas.text = str(_formula.get_text(_sensor.get_formulas()))
+		$Formulas.text = str(_sensor.get_formula_text(_sensor.get_formulas()))
 	
 	
 func set_formula(formula: Formula, edit_mode: bool) -> void:
@@ -101,7 +99,7 @@ func set_formula(formula: Formula, edit_mode: bool) -> void:
 ### Utils ###	
 func update_sensor_change_value() -> void:
 	if (_sensor.get_formulas() != null):
-		var new_sensor_value = _formula.get_value(_sensor, _sensor.get_formulas())
+		var new_sensor_value = _sensor.get_formula_value(_sensor, _sensor.get_formulas())
 		if (new_sensor_value < _sensor.get_min()):
 			new_sensor_value = _sensor.get_min()
 		elif (new_sensor_value > _sensor.get_max()):
