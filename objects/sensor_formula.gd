@@ -1,7 +1,6 @@
 class_name SensorFormula extends RefCounted
 
-signal select_action
-signal shuffle_action
+static var action_agent
 
 var _model: ActionInfluenceModel
 
@@ -56,12 +55,7 @@ func get_value(sensor: Sensor, formulas: Dictionary) -> float:
 					var actions = formula.get("actions")
 					var i = randi() % actions.size()
 					var action_name = actions[i]
-					# For now send a sensor to the Action buttons
-					# But I think it would be better to have this object 
-					# have direct access to model_data object that holds 
-					# the action and sensor data 
-					# and the same for the other emits below
-					select_action.emit(action_name) # sensor to action buttons
+					action_agent.select_action(action_name)
 					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
 				formula.set("value", value)
 				formulas.set(key, formula)
@@ -74,7 +68,7 @@ func get_value(sensor: Sensor, formulas: Dictionary) -> float:
 					value = value - 1
 				if (value < 0):
 					var action = formula.get("action")
-					select_action.emit(action) # sensor to action buttons
+					action_agent.select_action(action)
 					formula.erase("value")
 					formulas.set(key, formula)
 					formulas.erase(key)
@@ -89,7 +83,7 @@ func get_value(sensor: Sensor, formulas: Dictionary) -> float:
 				else:
 					value = value - 1
 				if (value < 0):
-					shuffle_action.emit(formula.get("actions")) # sensor to action buttons
+					action_agent.shuffle_action(formula.get("actions"))
 					value = randi_range(formula.get("min_delay"), formula.get("max_delay"))
 				formula.set("value", value)
 				formulas.set(key, formula)

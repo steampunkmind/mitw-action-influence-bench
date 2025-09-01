@@ -1,3 +1,4 @@
+class_name ActionButtons
 extends ColorRect
 
 signal action_button_pressed
@@ -68,16 +69,6 @@ func add_action_button(action: Action) -> void:
 	new_button_location = button.position.x + (button.size.x * button.get_scale().x) + button_margin
 	
 	
-# sensor from sensor graph
-# Probably should make model data object that holds actions and sensor data. 
-# And then remove this and let the sensor graph take care of it directly
-func _on_sensor_graph_select_action(action_name: String) -> void:
-	for action: Action in _model.get_actions():
-		if (action.get_name() == action_name):
-			action_button_pressed.emit(action)
-			break
-	
-	
 func show_hide_buttons():
 	for action: Action in _model.get_actions():
 		if !action.get_visible():
@@ -88,7 +79,15 @@ func show_hide_buttons():
 				child.hide()
 	
 	
-func _on_sensor_graph_shuffle_action(action_names) -> void:
+### Action Agent functions ###
+func select_action(action_name: String) -> void:
+	for action: Action in _model.get_actions():
+		if (action.get_name() == action_name):
+			action_button_pressed.emit(action)
+			break
+	
+	
+func shuffle_action(action_names) -> void:
 	var actions_to_shuffle = []
 	for action: Action in _model.get_actions():
 		if action_names.has(action.get_name()):
