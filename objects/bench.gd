@@ -20,8 +20,9 @@ func _ready() -> void:
 	$OpenFileDialog.set_current_dir("models")
 	$SaveFileDialog.set_current_dir("models")
 	_model = ActionInfluenceModel.new()
-	$ActionButtons.set_model(_model)
+	SensorFormula.model = _model # set global var
 	SensorFormula.action_agent = $ActionButtons # set global var
+	$ActionButtons.set_model(_model)
 	$SensorGraph.set_model(_model)
 	
 	
