@@ -64,6 +64,10 @@ func get_formula_value(sensor: Sensor, formulas: Dictionary) -> float:
 			print(formula_type_name + " formula type not found.")
 		else:
 			result = formula_type.get_value(result, key, formulas)
+			formula_type.increment_frame(key, formulas)
+			if formula_type.is_complete():
+				formula_type.set_complete(false)
+				sensor.get_formulas().erase(formula_type_name)
 		
 	if (SensorFormula.limit_value && result > sensor.get_value()):
 		return sensor.get_value()

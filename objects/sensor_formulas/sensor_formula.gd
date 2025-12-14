@@ -4,6 +4,8 @@ static var action_agent
 static var model
 static var limit_value
 
+var _is_complete: bool = false
+
 func get_value(value: float, key: String, formulas: Dictionary) -> float:
 	return value + formulas.get(key)
 
@@ -22,3 +24,15 @@ func _sensor_list_text(text: String, key: String, formulas: Dictionary) -> Strin
 		cnt += 1
 	result += "]"
 	return text + result
+
+
+func increment_frame(key: String, formulas: Dictionary) -> void:
+	pass # Override to track frames and set is_complete if appropriate.
+
+
+func set_complete(is_complete: bool) -> void:
+	_is_complete = is_complete
+
+
+func is_complete() -> bool:
+	return _is_complete

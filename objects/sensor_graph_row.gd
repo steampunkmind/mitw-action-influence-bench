@@ -91,8 +91,12 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_formula(formula: Formula, edit_mode: bool) -> void:
+	# This needs to moved into the sensor formula and sensor
 	var expressions = formula.get_expressions()
 	for key: String in expressions:
+		var expression = expressions.get(key)
+		if key == "Linear" and expression is Dictionary:
+			expression.set("timer", expression.get("duration"))
 		_sensor.get_formulas().set(key, expressions.get(key))
 	
 	
