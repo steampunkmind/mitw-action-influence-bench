@@ -72,8 +72,20 @@ func set_formula(formula: Formula) -> void:
 			_formulas.set(key, expression)
 
 
-func get_formula_value(sensor: Sensor, formulas: Dictionary) -> float:
-	var result = sensor.get_value()
+func update_value() -> float:
+	var new_value = 0.0
+	if (get_formulas() != null):
+		new_value = get_formula_value(get_formulas())
+		if (new_value < get_min()):
+			new_value = get_min()
+		elif (new_value > get_max()):
+			new_value = get_max()
+			
+	return new_value
+
+
+func get_formula_value(formulas: Dictionary) -> float:
+	var result = get_value()
 	SensorFormula.limit_value = false
 	for key: String in formulas.keys():
 		var formula_type = get_formula_type(key)
@@ -82,10 +94,10 @@ func get_formula_value(sensor: Sensor, formulas: Dictionary) -> float:
 			formula_type.increment_frame(key, formulas)
 			if formula_type.is_complete():
 				formula_type.set_complete(false)
-				sensor._formulas.erase(key)
+				_formulas.erase(key)
 		
-	if (SensorFormula.limit_value && result > sensor.get_value()):
-		return sensor.get_value()
+	if (SensorFormula.limit_value && result > get_value()):
+		return get_value()
 		
 	return result
 
