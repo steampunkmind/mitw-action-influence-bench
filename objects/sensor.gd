@@ -54,6 +54,15 @@ func get_dict() -> Dictionary:
 	
 	
 ### Formulas ###
+func set_formula(formula: Formula) -> void:
+	var expressions = formula.get_expressions()
+	for key: String in expressions:
+		var expression = expressions.get(key)
+		if key == "Linear" and expression is Dictionary:
+			expression.set("timer", expression.get("duration"))
+		get_formulas().set(key, expressions.get(key))
+
+
 func get_formula_value(sensor: Sensor, formulas: Dictionary) -> float:
 	var result = sensor.get_value()
 	SensorFormula.limit_value = false

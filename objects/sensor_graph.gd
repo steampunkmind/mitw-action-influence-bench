@@ -113,14 +113,8 @@ func set_action(action: Action) -> void:
 		new_action_line.visible = true
 		add_child(new_action_line)
 		action_lines.insert(0, new_action_line)
-	
-	## Set influences
-	for influence: Influence in action.get_influences():
-		var sensor_graph_row = sensor_graph_rows.get(influence.get_sensor_name())
-		if sensor_graph_row != null :
-			sensor_graph_row.set_formula(influence.get_formula(), _model.get_edit_mode())
-	
-	
+
+
 func update_edit_mode() -> void:
 	for sensor_graph_row: SensorGraphRow in sensor_graph_rows.values():
 		sensor_graph_row.set_edit_mode(_model.get_edit_mode())

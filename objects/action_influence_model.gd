@@ -42,6 +42,12 @@ func fill_actions(action_array: Array) -> void:
 		_actions.append(Action.new(action_dict.get("name"), action_dict.get("visible"), influences))
 
 
+func set_action(action: Action) -> void:
+	for influence: Influence in action.get_influences():
+		var sensor = get_sensor(influence.get_sensor_name())
+		sensor.set_formula(influence.get_formula())
+
+
 ## Sensors ##
 func get_sensors() -> Array:
 	return _sensors.values()

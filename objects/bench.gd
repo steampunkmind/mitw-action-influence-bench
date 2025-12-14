@@ -49,6 +49,7 @@ func _on_timer_timeout() -> void:
 	
 func _on_action_button_pressed(action: Action) -> void:
 	$SensorGraph.set_action(action)
+	_model.set_action(action)
 	
 	
 ## File Functions ##
