@@ -58,8 +58,13 @@ func set_formula(formula: Formula) -> void:
 	var expressions = formula.get_expressions()
 	for key: String in expressions:
 		var expression = expressions.get(key)
-		if key == "Linear" and expression is Dictionary:
-			expression.set("timer", expression.get("duration"))
+		var formula_type_name = key.get_basename()
+		var formula_type = _types.get(formula_type_name)
+		if formula_type == null:
+			print(formula_type_name + " formula type not found.")
+		else:
+			formula_type.init_expression(expression)
+		
 		get_formulas().set(key, expressions.get(key))
 
 

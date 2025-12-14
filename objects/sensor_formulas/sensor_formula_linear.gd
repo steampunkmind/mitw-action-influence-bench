@@ -2,6 +2,11 @@ class_name SensorFormulaLinear extends SensorFormula
 
 const TYPE = "Linear"
 
+func init_expression(expression) -> void:
+	if expression is Dictionary:
+		expression.set("timer", expression.get("duration"))
+
+
 func get_value(value: float, key: String, formulas: Dictionary) -> float:
 	var formula = formulas.get(key)
 	if formula is Dictionary:

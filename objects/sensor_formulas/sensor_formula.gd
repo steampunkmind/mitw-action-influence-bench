@@ -26,6 +26,10 @@ func _sensor_list_text(text: String, key: String, formulas: Dictionary) -> Strin
 	return text + result
 
 
+func init_expression(expression) -> void:
+	pass # Override to init expression before adding to sensor.
+
+
 func increment_frame(key: String, formulas: Dictionary) -> void:
 	pass # Override to track frames and set is_complete if appropriate.
 
