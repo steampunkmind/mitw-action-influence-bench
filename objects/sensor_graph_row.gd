@@ -59,7 +59,6 @@ func get_sensor_max() -> float:
 	return _sensor.get_max()
 	
 func set_sensor_value(value: float) -> void:
-	_sensor.set_value(value)
 	$SensorValue.text = str("%.1f" % value)
 
 func get_sensor_value() -> float:
@@ -82,7 +81,7 @@ func add_frame_to_graph() -> void:
 	# Add new point
 	var point = line.get_point_position(line.get_point_count()-1)
 	point.x = point.x - 1
-	update_sensor_change_value()
+	set_sensor_value(_sensor.get_value())
 	point.y = sensor_value_y()
 	line.add_point(point)
 	
@@ -91,10 +90,6 @@ func add_frame_to_graph() -> void:
 
 
 ### Utils ###	
-func update_sensor_change_value() -> void:
-	set_sensor_value(_sensor.update_value())
-	
-	
 func sensor_value_y() -> float:
 	var value_above_min = _sensor.get_value() - _sensor.get_min()
 	var range = _sensor.get_max() - _sensor.get_min()

@@ -44,6 +44,9 @@ func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	
 	
 func _on_timer_timeout() -> void:
+	for sensor in _model.get_sensors():
+		sensor.update_value()
+	
 	$SensorGraph.add_frame_to_graph()
 	
 	
