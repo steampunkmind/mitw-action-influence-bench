@@ -6,7 +6,6 @@ signal model_changed
 @export var sensor_array_dicts: Array[Dictionary]
 @export var sensor_graph_row_template: PackedScene
 
-var _model: ActionInfluenceModel
 var name_line_offset: float
 var action_names: Array[Control]
 var action_lines: Array[Node2D]
@@ -25,17 +24,13 @@ func _process(delta: float) -> void:
 	pass
 	
 	
-func set_model(value: ActionInfluenceModel):
-	_model = value
-
-
 func set_new_model() -> void:
-	_model.fill_sensors(sensor_array_dicts)
+	MITW.aim_model().fill_sensors(sensor_array_dicts)
 	update_sensors()
 	
 	
 func _on_add_button_button_up() -> void:
-	_model.new_sensor()
+	MITW.aim_model().new_sensor()
 	clear_sensor_graph_rows()
 	add_sensor_graph_rows()
 	model_changed.emit()
@@ -66,14 +61,14 @@ func add_sensor_graph_rows() -> void:
 	var header_margin = 80
 	var row_margin = 10
 	var row_location = header_margin
-	var row_size = (size.y - header_margin) / _model.get_sensors().size()
-	for sensor: Sensor in _model.get_sensors():
+	var row_size = (size.y - header_margin) / MITW.aim_model().get_sensors().size()
+	for sensor: Sensor in MITW.aim_model().get_sensors():
 		var row = sensor_graph_row_template.instantiate()
 		row.set_sensor(sensor)
 		row.set_row_location(row_location)
 		row.size.y = row_size - row_margin
-		row.set_model(_model)
-		row.set_edit_mode(_model.get_edit_mode())
+		row.set_model(MITW.aim_model())
+		row.set_edit_mode(MITW.aim_model().get_edit_mode())
 		add_child(row)
 		sensor_graph_rows.set(sensor.get_name(), row)
 		row_location = row_location + row_size
@@ -102,7 +97,7 @@ func add_frame_to_graph() -> void:
 	
 	
 func set_action(action: Action) -> void:
-	if _model.get_edit_mode() or action.get_visible():
+	if MITW.aim_model().get_edit_mode() or action.get_behavioral():
 		var new_action_name = $ActionNameTemplate.duplicate(1)
 		new_action_name.visible = true
 		new_action_name.text = action.get_name()
@@ -117,6 +112,6 @@ func set_action(action: Action) -> void:
 
 func update_edit_mode() -> void:
 	for sensor_graph_row: SensorGraphRow in sensor_graph_rows.values():
-		sensor_graph_row.set_edit_mode(_model.get_edit_mode())
+		sensor_graph_row.set_edit_mode(MITW.aim_model().get_edit_mode())
 	
 	

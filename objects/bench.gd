@@ -2,7 +2,6 @@ extends ColorRect
 
 const DONT_SAVE = "Don't Save"
 
-var _model: ActionInfluenceModel
 var _is_model: bool = false
 var _model_path: String = ""
 var _is_dirty: bool = false
@@ -19,11 +18,6 @@ func _ready() -> void:
 	_set_is_dirty(false)
 	$OpenFileDialog.set_current_dir("mitw-common/models")
 	$SaveFileDialog.set_current_dir("mitw-common/models")
-	_model = ActionInfluenceModel.new()
-	SensorFormula.model = _model # set global var
-	SensorFormula.action_agent = $ActionButtons # set global var
-	$ActionButtons.set_model(_model)
-	$SensorGraph.set_model(_model)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,7 +38,7 @@ func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	
 	
 func _on_timer_timeout() -> void:
-	for sensor in _model.get_sensors():
+	for sensor in MITW.aim_model().get_sensors():
 		sensor.update_value()
 	
 	$SensorGraph.add_frame_to_graph()
@@ -52,7 +46,7 @@ func _on_timer_timeout() -> void:
 	
 func _on_action_button_pressed(action: Action) -> void:
 	$SensorGraph.set_action(action)
-	_model.set_action(action)
+	MITW.aim_model().set_action(action)
 	
 	
 ## File Functions ##
@@ -64,6 +58,7 @@ func _on_new_button_pressed() -> void:
 	
 	
 func _on_open_button_pressed() -> void:
+	$OpenFileDialog.set_filters(["*.aim"])
 	$OpenFileDialog.popup()
 	
 	
@@ -72,8 +67,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	var json = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	_model.set_action_dicts(json.get('actions') as Array)
-	_model.set_sensor_dicts(json.get('sensors') as Array)
+	MITW.init(json, {})
 	$ActionButtons.update_buttons()
 	$SensorGraph.update_sensors()
 	$ActionButtons.init_action()
@@ -135,8 +129,8 @@ func _write_file() -> void:
 	
 func get_dict() -> Dictionary:
 	var dict = {}
-	dict.set('actions', _model.get_action_dicts())
-	dict.set('sensors', _model.get_sensor_dicts())
+	dict.set('actions', MITW.aim_model().get_action_dicts())
+	dict.set('sensors', MITW.aim_model().get_sensor_dicts())
 	return dict
 	
 	
@@ -173,7 +167,7 @@ func _set_is_dirty(is_dirty: bool) -> void:
 func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$ActionButtons.clear_action_buttons()
-		$EditActions.set_actions(_model.get_actions())
+		$EditActions.set_actions(MITW.aim_model().get_actions())
 		$EditActionsButton.text = "Done"
 		_disable_interface()
 		$EditActionsButton.disabled = false
@@ -213,6 +207,6 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 	# $EditActionsButton.show()
 	# else:
 	# $EditActionsButton.hide()
-	_model.set_edit_mode(toggled_on)
+	MITW.aim_model().set_edit_mode(toggled_on)
 	$ActionButtons.show_hide_buttons()
 	$SensorGraph.update_edit_mode()
