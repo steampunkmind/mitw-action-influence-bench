@@ -1,4 +1,4 @@
-extends ColorRect
+class_name Bench extends Node
 
 const DONT_SAVE = "Don't Save"
 
@@ -7,10 +7,14 @@ var _model_path: String = ""
 var _is_dirty: bool = false
 var _close_after_save: bool = false
 
+enum {FILE_NEW, FILE_OPEN, FILE_CLOSE, FILE_SAVE, FILE_SAVE_AS} # index and ID
+
 @export var frame_rate: float
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$FileMenu.get_popup().index_pressed.connect(_on_file_menu_index_pressed)
 	$FrameRateSlider.value = frame_rate
 	$FrameRateValue.text = str(frame_rate)
 	$CloseConfirmationDialog.add_button(DONT_SAVE, false, DONT_SAVE)
@@ -18,13 +22,22 @@ func _ready() -> void:
 	_set_is_dirty(false)
 	$OpenFileDialog.set_current_dir("mitw-common/models")
 	$SaveFileDialog.set_current_dir("mitw-common/models")
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-	
+
+
+func _on_file_menu_index_pressed(index) -> void:
+	match index:
+		FILE_NEW:
+			_on_file_new_menu_pressed()
+		FILE_OPEN:
+			_on_file_open_menu_pressed()
+		FILE_CLOSE:
+			_on_file_close_menu_pressed()
+		FILE_SAVE:
+			_on_file_save_menu_pressed()
+		FILE_SAVE_AS:
+			_on_file_save_as_menu_pressed()
+
+
 func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	if (new_value == 0):
 		$FrameRateValue.text = "PAUSED"
@@ -50,14 +63,14 @@ func _on_action_button_pressed(action: Action) -> void:
 	
 	
 ## File Functions ##
-func _on_new_button_pressed() -> void:
+func _on_file_new_menu_pressed() -> void:
 	$ActionButtons.set_new_model()
 	$SensorGraph.set_new_model()
 	$ActionButtons.init_action()
 	_set_is_model(true)
 	
 	
-func _on_open_button_pressed() -> void:
+func _on_file_open_menu_pressed() -> void:
 	$OpenFileDialog.set_filters(["*.aim"])
 	$OpenFileDialog.popup()
 	
@@ -74,7 +87,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	_set_is_model(true, path)
 	
 	
-func _on_close_button_pressed() -> void:
+func _on_file_close_menu_pressed() -> void:
 	if _is_dirty:
 		$CloseConfirmationDialog.popup()
 	else:
@@ -100,7 +113,7 @@ func _on_close_confirmation_dialog_custom_action(action: StringName) -> void:
 	$CloseConfirmationDialog.hide()
 	
 	
-func _on_save_button_pressed() -> void:
+func _on_file_save_menu_pressed() -> void:
 	_close_after_save = false
 	if (!_get_is_model_file()):
 		$SaveFileDialog.popup()
@@ -108,7 +121,7 @@ func _on_save_button_pressed() -> void:
 		_write_file()
 	
 	
-func _on_save_as_button_pressed() -> void:
+func _on_file_save_as_menu_pressed() -> void:
 	_close_after_save = false
 	$SaveFileDialog.popup()
 	
@@ -183,24 +196,24 @@ func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 func _disable_interface() -> void:
 	$ActionButtons.visible = false
 	$SensorGraph.visible = false
-	$NewButton.disabled = true
-	$OpenButton.disabled = true
-	$CloseButton.disabled = true
-	$SaveButton.disabled = true
-	$SaveAsButton.disabled = true
-	
-	
+	$FileMenu.get_popup().set_item_disabled(FILE_NEW, true)
+	$FileMenu.get_popup().set_item_disabled(FILE_OPEN, true)
+	$FileMenu.get_popup().set_item_disabled(FILE_CLOSE, true)
+	$FileMenu.get_popup().set_item_disabled(FILE_SAVE, true)
+	$FileMenu.get_popup().set_item_disabled(FILE_SAVE_AS, true)
+
+
 func _reset_interface() -> void:
 	$ActionButtons.visible = _is_model
 	$SensorGraph.visible = _is_model
-	$NewButton.disabled = _is_model
-	$OpenButton.disabled = _is_model
-	$CloseButton.disabled = !_is_model
-	$SaveButton.disabled = !_is_dirty
-	$SaveAsButton.disabled = !_is_dirty
+	$FileMenu.get_popup().set_item_disabled(FILE_NEW, _is_model)
+	$FileMenu.get_popup().set_item_disabled(FILE_OPEN, _is_model)
+	$FileMenu.get_popup().set_item_disabled(FILE_CLOSE, !_is_model)
+	$FileMenu.get_popup().set_item_disabled(FILE_SAVE, !_is_dirty)
+	$FileMenu.get_popup().set_item_disabled(FILE_SAVE_AS, !_is_dirty)
 	$EditActionsButton.disabled = !_is_model
-	
-	
+
+
 func _on_eye_button_toggled(toggled_on: bool) -> void:
 	# Disable this until editing interface is implemented
 	# if toggled_on:
