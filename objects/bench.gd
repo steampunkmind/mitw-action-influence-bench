@@ -149,8 +149,8 @@ func get_dict() -> Dictionary:
 	
 func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	_is_model = is_model
-	$SubHeader.visible = is_model
-	$SubHeader.text = model_path.get_basename().get_file().capitalize()
+	$Header.visible = is_model
+	$Header.text = model_path.get_basename().get_file()
 	_model_path = model_path
 	_reset_interface()
 	
