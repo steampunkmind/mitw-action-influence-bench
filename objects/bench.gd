@@ -39,13 +39,7 @@ func _on_file_menu_index_pressed(index) -> void:
 
 
 func _on_frame_rate_slider_value_changed(new_value: float) -> void:
-	if (new_value == 0):
-		$FrameRateValue.text = "PAUSED"
-		$Timer.paused = true
-	else:
-		$FrameRateValue.text = str(new_value)
-		$Timer.paused = false
-	
+	$FrameRateValue.text = str(new_value)
 	$Timer.set_wait_time(1/new_value)
 	frame_rate = new_value
 	
@@ -194,23 +188,33 @@ func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 
 
 func _disable_interface() -> void:
-	$ActionButtons.visible = false
-	$SensorGraph.visible = false
 	$FileMenu.get_popup().set_item_disabled(FILE_NEW, true)
 	$FileMenu.get_popup().set_item_disabled(FILE_OPEN, true)
 	$FileMenu.get_popup().set_item_disabled(FILE_CLOSE, true)
 	$FileMenu.get_popup().set_item_disabled(FILE_SAVE, true)
 	$FileMenu.get_popup().set_item_disabled(FILE_SAVE_AS, true)
+	$PlayButton.visible = false
+	$FrameRateSlider.visible = false
+	$FrameRateValue.visible = false
+	$FrameCount.visible = false
+	$EyeButton.visible = false
+	$ActionButtons.visible = false
+	$SensorGraph.visible = false
 
 
 func _reset_interface() -> void:
-	$ActionButtons.visible = _is_model
-	$SensorGraph.visible = _is_model
 	$FileMenu.get_popup().set_item_disabled(FILE_NEW, _is_model)
 	$FileMenu.get_popup().set_item_disabled(FILE_OPEN, _is_model)
 	$FileMenu.get_popup().set_item_disabled(FILE_CLOSE, !_is_model)
 	$FileMenu.get_popup().set_item_disabled(FILE_SAVE, !_is_dirty)
 	$FileMenu.get_popup().set_item_disabled(FILE_SAVE_AS, !_is_dirty)
+	$PlayButton.visible = _is_model
+	$FrameRateSlider.visible = _is_model
+	$FrameRateValue.visible = _is_model
+	$FrameCount.visible = _is_model
+	$EyeButton.visible = _is_model
+	$ActionButtons.visible = _is_model
+	$SensorGraph.visible = _is_model
 	$EditActionsButton.disabled = !_is_model
 
 
@@ -223,3 +227,7 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 	MITW.aim_model().set_edit_mode(toggled_on)
 	$ActionButtons.show_hide_buttons()
 	$SensorGraph.update_edit_mode()
+
+
+func _on_play_button_toggled(toggled_on: bool) -> void:
+	$Timer.paused = !toggled_on
