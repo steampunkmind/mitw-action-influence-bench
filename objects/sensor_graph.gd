@@ -83,11 +83,13 @@ func add_frame_to_graph() -> void:
 		else:
 			waiting_count += 1
 	
-	if (waiting_count > 1):
-		action_names.remove_at(action_names.size() - 1)
-		action_lines.remove_at(action_lines.size() - 1)
-		remove_child(action_names.get(action_names.size() - 1))
-		remove_child(action_lines.get(action_lines.size() - 1))
+	if (waiting_count > 0):
+		var i = action_names.size() - 1
+		remove_child(action_names.get(i))
+		remove_child(action_lines.get(i))
+		action_names.remove_at(i)
+		action_lines.remove_at(i)
+		
 	
 	for row in sensor_graph_rows.values():
 		row.add_frame_to_graph()
@@ -110,5 +112,3 @@ func set_action(action: Action) -> void:
 func update_edit_mode() -> void:
 	for sensor_graph_row: SensorGraphRow in sensor_graph_rows.values():
 		sensor_graph_row.set_edit_mode(MITW.aim_model().get_edit_mode())
-	
-	

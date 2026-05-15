@@ -4,6 +4,7 @@ const DONT_SAVE = "Don't Save"
 
 var _is_model: bool = false
 var _model_path: String = ""
+var _first_frame: bool = true
 var _is_dirty: bool = false
 var _close_after_save: bool = false
 
@@ -22,6 +23,9 @@ func _ready() -> void:
 	_set_is_dirty(false)
 	$OpenFileDialog.set_current_dir("mitw-common/models")
 	$SaveFileDialog.set_current_dir("mitw-common/models")
+	$PlayButton.set_pressed_no_signal(false)
+	$Timer.set_wait_time(1/frame_rate)
+	$Timer.paused = true
 
 
 func _on_file_menu_index_pressed(index) -> void:
@@ -45,6 +49,10 @@ func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	
 	
 func _on_timer_timeout() -> void:
+	if _first_frame:
+		_on_action_button_pressed(MITW.aim_model().get_actions()[0])
+		_first_frame = false
+	
 	for sensor in MITW.aim_model().get_sensors():
 		sensor.update_value()
 	
@@ -60,7 +68,6 @@ func _on_action_button_pressed(action: Action) -> void:
 func _on_file_new_menu_pressed() -> void:
 	$ActionButtons.set_new_model()
 	$SensorGraph.set_new_model()
-	$ActionButtons.init_action()
 	_set_is_model(true)
 	
 	
@@ -77,7 +84,6 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	MITW.init(json, {})
 	$ActionButtons.update_buttons()
 	$SensorGraph.update_sensors()
-	$ActionButtons.init_action()
 	_set_is_model(true, path)
 	
 	
@@ -146,6 +152,8 @@ func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	$Header.visible = is_model
 	$Header.text = model_path.get_basename().get_file()
 	_model_path = model_path
+	if is_model:
+		_first_frame = true
 	_reset_interface()
 	
 	

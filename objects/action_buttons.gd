@@ -29,11 +29,6 @@ func set_new_model() -> void:
 	update_buttons()
 	
 	
-func init_action() -> void:
-	# called by bench to init after other scenes are set up. 
-	_action_button_pressed(MITW.aim_model().get_actions()[0])
-	
-	
 func clear_action_buttons():
 	for action_button: Button in action_buttons:
 		remove_child(action_button)
