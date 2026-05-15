@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=11 format=3 uid="uid://b4rb4np51o66m"]
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://objects/bench.gd" id="1_3f1fh"]
 [ext_resource type="Texture2D" uid="uid://cneet3pbcapoc" path="res://graphics/play.svg" id="2_2ca8i"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://burvtbie2tdjm" path="res://graphics/pause.svg" id="3_rpy7a"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://objects/bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://objects/edit_actions.tscn" id="8_cjidc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ca8i"]
+font_size = 18
 
 [node name="Bench" type="Node"]
 script = ExtResource("1_3f1fh")
@@ -73,6 +76,7 @@ offset_top = 8.0
 offset_right = 1542.0
 offset_bottom = 31.0
 text = "Action Influence Bench"
+label_settings = SubResource("LabelSettings_2ca8i")
 horizontal_alignment = 1
 
 [node name="EditActionsButton" type="Button" parent="."]
@@ -93,19 +97,18 @@ texture_normal = ExtResource("3_cjidc")
 texture_pressed = ExtResource("2_tjv83")
 
 [node name="SensorGraph" parent="." instance=ExtResource("2_yj3it")]
-visible = false
 anchors_preset = 0
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_top = 388.0
-offset_bottom = 1948.0
+offset_top = 280.0
+offset_bottom = 1146.0
 grow_vertical = 1
+color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [node name="ActionButtons" type="ColorRect" parent="." node_paths=PackedStringArray("action_button_template")]
 offset_top = 80.0
 offset_right = 1924.0
 offset_bottom = 280.0
-color = Color(0.972549, 1, 0.972549, 1)
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
@@ -145,7 +148,6 @@ text = "Action"
 [node name="EditActions" parent="." instance=ExtResource("8_cjidc")]
 visible = false
 offset_top = 80.0
-offset_right = 1924.0
 offset_bottom = 1144.0
 
 [node name="Timer" type="Timer" parent="."]

@@ -17,13 +17,8 @@ func _ready() -> void:
 	$ActionNameTemplate.visible = false
 	$ActionLineTemplate.visible = false
 	name_line_offset = $ActionLineTemplate.position.x - ($ActionNameTemplate.position.x + $ActionNameTemplate.size.x)
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-	
+
+
 func set_new_model() -> void:
 	MITW.aim_model().fill_sensors(sensor_array_dicts)
 	update_sensors()
@@ -58,20 +53,22 @@ func clear_sensor_graph_rows() -> void:
 	
 	
 func add_sensor_graph_rows() -> void:
-	var header_margin = 80
-	var row_margin = 10
+	var header_margin = 28
+	var row_margin = 4
 	var row_location = header_margin
-	var row_size = (size.y - header_margin) / MITW.aim_model().get_sensors().size()
 	for sensor: Sensor in MITW.aim_model().get_sensors():
 		var row = sensor_graph_row_template.instantiate()
 		row.set_sensor(sensor)
 		row.set_row_location(row_location)
-		row.size.y = row_size - row_margin
 		row.set_model(MITW.aim_model())
 		row.set_edit_mode(MITW.aim_model().get_edit_mode())
 		add_child(row)
 		sensor_graph_rows.set(sensor.get_name(), row)
-		row_location = row_location + row_size
+		row_location = row_location + row.size.y + row_margin
+		
+	var p = $ActionLineTemplate.get_point_position(1)
+	p.y = row_location - row_margin
+	$ActionLineTemplate.set_point_position(1, p)
 	
 func add_frame_to_graph() -> void:
 	for control in action_names:

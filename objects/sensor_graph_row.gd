@@ -21,11 +21,6 @@ func _ready() -> void:
 	point = $SensorLine.get_point_position(1)
 	point.y = sensor_value_y()
 	$SensorLine.set_point_position(1, point)
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func set_model(value: ActionInfluenceModel):

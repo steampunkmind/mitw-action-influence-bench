@@ -6,12 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_w0q86"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_m2as1"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_kc2xn"]
-font_size = 42
+[sub_resource type="LabelSettings" id="LabelSettings_2miot"]
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_lqfjh"]
-font_size = 32
+[sub_resource type="LabelSettings" id="LabelSettings_kyqjg"]
 font_color = Color(0, 0, 0, 1)
 
 [node name="SensorGraph" type="ColorRect"]
@@ -19,10 +18,10 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -1950.0
-offset_right = 3300.0
+offset_right = 1924.0
 offset_bottom = -390.0
 grow_vertical = 0
-color = Color(0.784314, 0.784314, 0.784314, 1)
+color = Color(0.777177, 0.777177, 0.777177, 1)
 script = ExtResource("1_kc2xn")
 sensor_array_dicts = Array[Dictionary]([{
 "max": 100.0,
@@ -33,13 +32,19 @@ sensor_array_dicts = Array[Dictionary]([{
 sensor_graph_row_template = ExtResource("3_vdl7c")
 metadata/_custom_type_script = "uid://3sk4l6dcbxo0"
 
+[node name="TopLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 2, 1924, 2)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+
 [node name="Header" type="Label" parent="."]
 layout_mode = 0
 offset_left = 17.0
-offset_right = 142.0
-offset_bottom = 58.0
-text = "Sensor"
-label_settings = SubResource("LabelSettings_kc2xn")
+offset_top = 2.0
+offset_right = 207.0
+offset_bottom = 28.0
+text = "Sensor 	 |  Action:"
+label_settings = SubResource("LabelSettings_2miot")
 
 [node name="AddButton" type="TextureButton" parent="."]
 visible = false
@@ -54,18 +59,18 @@ texture_hover = ExtResource("5_m2as1")
 
 [node name="ActionNameTemplate" type="Label" parent="."]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 40.0
-offset_right = 486.0
-offset_bottom = 85.0
+offset_left = 170.0
+offset_top = 4.0
+offset_right = 370.0
+offset_bottom = 27.0
 text = "Action"
-label_settings = SubResource("LabelSettings_lqfjh")
+label_settings = SubResource("LabelSettings_kyqjg")
 horizontal_alignment = 2
 
 [node name="ActionLineTemplate" type="Line2D" parent="."]
 z_index = 1000
-position = Vector2(500, 46)
-points = PackedVector2Array(0, 0, 0, 1500)
+position = Vector2(373, 0)
+points = PackedVector2Array(0, 4, 0, 1560)
 width = 2.0
 default_color = Color(0.313726, 0.470588, 0.705882, 1)
 
