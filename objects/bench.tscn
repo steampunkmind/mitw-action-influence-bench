@@ -105,6 +105,7 @@ grow_vertical = 1
 offset_top = 80.0
 offset_right = 1924.0
 offset_bottom = 280.0
+color = Color(0.972549, 1, 0.972549, 1)
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
@@ -143,8 +144,9 @@ text = "Action"
 
 [node name="EditActions" parent="." instance=ExtResource("8_cjidc")]
 visible = false
-offset_top = 160.0
-offset_bottom = 1950.0
+offset_top = 80.0
+offset_right = 1924.0
+offset_bottom = 1144.0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
