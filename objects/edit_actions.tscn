@@ -11,8 +11,9 @@ font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [node name="EditActions" type="ColorRect"]
+offset_top = 365.0
 offset_right = 1924.0
-offset_bottom = 1064.0
+offset_bottom = 1429.0
 color = Color(0.784314, 0.784314, 0.784314, 1)
 script = ExtResource("1_fsf4l")
 edit_action_row_template = ExtResource("2_iysti")
@@ -29,10 +30,10 @@ horizontal_alignment = 1
 
 [node name="AddButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 36.0
-offset_bottom = 36.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
 texture_normal = ExtResource("3_nksls")
 texture_pressed = ExtResource("4_tmxcf")
 texture_hover = ExtResource("5_and5y")
