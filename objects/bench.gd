@@ -66,7 +66,7 @@ func _on_action_button_pressed(action: Action) -> void:
 	
 ## File Functions ##
 func _on_file_new_menu_pressed() -> void:
-	$ActionButtons.set_new_model()
+	$ActionButtonScroll/ActionButtons.set_new_model()
 	$SensorGraph.set_new_model()
 	_set_is_model(true)
 	
@@ -82,7 +82,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	file.close()
 	
 	MITW.init(json, {})
-	$ActionButtons.update_buttons()
+	$ActionButtonScroll/ActionButtons.update_buttons()
 	$SensorGraph.update_sensors()
 	_set_is_model(true, path)
 	
@@ -181,13 +181,13 @@ func _set_is_dirty(is_dirty: bool) -> void:
 ## Edit Actions ##
 func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		$ActionButtons.clear_action_buttons()
+		$ActionButtonScroll/ActionButtons.clear_action_buttons()
 		$EditActions.set_actions(MITW.aim_model().get_actions())
 		$EditActionsButton.text = "Done"
 		_disable_interface()
 		$EditActionsButton.disabled = false
 	else:
-		$ActionButtons.update_buttons();
+		$ActionButtonScroll/ActionButtons.update_buttons();
 		$EditActions.clear_edit_action_rows()
 		$EditActionsButton.text = "Edit Actions"
 		_reset_interface()
@@ -206,7 +206,7 @@ func _disable_interface() -> void:
 	$FrameRateValue.visible = false
 	$FrameCount.visible = false
 	$EyeButton.visible = false
-	$ActionButtons.visible = false
+	$ActionButtonScroll/ActionButtons.visible = false
 	$SensorGraph.visible = false
 
 
@@ -221,9 +221,9 @@ func _reset_interface() -> void:
 	$FrameRateValue.visible = _is_model
 	$FrameCount.visible = _is_model
 	$EyeButton.visible = _is_model
-	$ActionButtons.visible = _is_model
+	$ActionButtonScroll/ActionButtons.visible = _is_model
 	$SensorGraph.visible = _is_model
-	$EditActionsButton.disabled = !_is_model
+	$EditActionsButton.visible = _is_model
 
 
 func _on_eye_button_toggled(toggled_on: bool) -> void:
@@ -233,7 +233,7 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 	# else:
 	# $EditActionsButton.hide()
 	MITW.aim_model().set_edit_mode(toggled_on)
-	$ActionButtons.show_hide_buttons()
+	$ActionButtonScroll/ActionButtons.show_hide_buttons()
 	$SensorGraph.update_edit_mode()
 
 

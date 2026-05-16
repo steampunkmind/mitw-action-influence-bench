@@ -33,7 +33,7 @@ sensor_graph_row_template = ExtResource("3_vdl7c")
 metadata/_custom_type_script = "uid://3sk4l6dcbxo0"
 
 [node name="TopLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 2, 1924, 2)
+points = PackedVector2Array(0, 2, 1941, 2)
 width = 4.0
 default_color = Color(0, 0, 0, 1)
 

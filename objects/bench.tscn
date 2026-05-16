@@ -19,9 +19,10 @@ frame_rate = 30.0
 
 [node name="FileMenu" type="MenuButton" parent="."]
 offset_left = 16.0
-offset_top = 8.0
+offset_top = 9.0
 offset_right = 51.0
-offset_bottom = 39.0
+offset_bottom = 40.0
+pivot_offset = Vector2(168, 106)
 text = "File"
 item_count = 5
 popup/item_0/text = "New"
@@ -71,19 +72,19 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="Header" type="Label" parent="."]
-offset_left = 400.0
-offset_top = 8.0
-offset_right = 1542.0
-offset_bottom = 31.0
+offset_left = 480.0
+offset_top = 12.0
+offset_right = 1462.0
+offset_bottom = 38.0
 text = "Action Influence Bench"
 label_settings = SubResource("LabelSettings_2ca8i")
 horizontal_alignment = 1
 
 [node name="EditActionsButton" type="Button" parent="."]
-offset_left = 16.0
-offset_top = 50.0
-offset_right = 115.0
-offset_bottom = 81.0
+offset_left = 1474.0
+offset_top = 8.0
+offset_right = 1573.0
+offset_bottom = 39.0
 toggle_mode = true
 text = "Edit Actions"
 
@@ -96,19 +97,16 @@ toggle_mode = true
 texture_normal = ExtResource("3_cjidc")
 texture_pressed = ExtResource("2_tjv83")
 
-[node name="SensorGraph" parent="." instance=ExtResource("2_yj3it")]
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 280.0
-offset_bottom = 1146.0
-grow_vertical = 1
-color = Color(0.501961, 0.501961, 0.501961, 1)
+[node name="ActionButtonScroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(1930, 200)
+offset_left = 6.0
+offset_top = 54.0
+offset_right = 1936.0
+offset_bottom = 254.0
 
-[node name="ActionButtons" type="ColorRect" parent="." node_paths=PackedStringArray("action_button_template")]
-offset_top = 80.0
-offset_right = 1924.0
-offset_bottom = 280.0
+[node name="ActionButtons" type="HFlowContainer" parent="ActionButtonScroll" node_paths=PackedStringArray("action_button_template")]
+custom_minimum_size = Vector2(1924, 200)
+layout_mode = 2
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{
 "influences": {
@@ -137,13 +135,21 @@ action_array = Array[Dictionary]([{
 }])
 action_button_template = NodePath("ActionButtonTemplate")
 
-[node name="ActionButtonTemplate" type="Button" parent="ActionButtons"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 62.0
-offset_bottom = 35.0
+[node name="ActionButtonTemplate" type="Button" parent="ActionButtonScroll/ActionButtons"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Action"
+
+[node name="SensorGraph" parent="." instance=ExtResource("2_yj3it")]
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 260.0
+offset_bottom = 1126.0
+grow_vertical = 1
+color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [node name="EditActions" parent="." instance=ExtResource("8_cjidc")]
 visible = false
@@ -178,8 +184,8 @@ dialog_text = "
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
 [connection signal="toggled" from="EditActionsButton" to="." method="_on_edit_actions_button_toggled"]
 [connection signal="toggled" from="EyeButton" to="." method="_on_eye_button_toggled"]
+[connection signal="action_button_pressed" from="ActionButtonScroll/ActionButtons" to="." method="_on_action_button_pressed"]
 [connection signal="model_changed" from="SensorGraph" to="." method="_on_sensor_graph_model_changed"]
-[connection signal="action_button_pressed" from="ActionButtons" to="." method="_on_action_button_pressed"]
 [connection signal="model_changed" from="EditActions" to="." method="_on_edit_actions_model_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="file_selected" from="OpenFileDialog" to="." method="_on_open_file_dialog_file_selected"]

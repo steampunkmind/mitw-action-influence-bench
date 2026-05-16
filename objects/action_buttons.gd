@@ -1,5 +1,5 @@
 class_name ActionButtons
-extends ColorRect
+extends HFlowContainer
 
 signal action_button_pressed
 
@@ -43,15 +43,15 @@ func add_action_buttons():
 	
 func add_action_button(action: Action) -> void:
 	var button = $ActionButtonTemplate.duplicate(1)
-	var button_margin = button.position.x
+	#var button_margin = button.position.x
 	button.name = action.get_name()
 	button.text = action.get_name()
-	button.offset_left = new_button_location
+	#button.offset_left = new_button_location
 	button.pressed.connect(_action_button_pressed.bind(action))
 	add_child(button)
 	action_buttons.append(button)
 	button.visible = true
-	new_button_location = button.position.x + (button.size.x * button.get_scale().x) + button_margin
+	#new_button_location = button.position.x + (button.size.x * button.get_scale().x) + button_margin
 	
 	
 func show_hide_buttons():
