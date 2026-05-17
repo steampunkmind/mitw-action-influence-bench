@@ -1,5 +1,5 @@
 class_name SensorGraph
-extends ColorRect
+extends VBoxContainer
 
 signal model_changed
 

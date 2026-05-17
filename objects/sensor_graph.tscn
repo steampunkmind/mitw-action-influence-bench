@@ -1,19 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx0kddlfv7xvs"]
+[gd_scene load_steps=7 format=3 uid="uid://bx0kddlfv7xvs"]
 
 [ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://objects/sensor_graph.gd" id="1_kc2xn"]
-[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/sensor_graph_row.tscn" id="3_vdl7c"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_w0q86"]
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_w0q86"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_m2as1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2miot"]
 font_size = 18
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kyqjg"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="SensorGraph" type="ColorRect"]
+[node name="SensorGraph" type="VBoxContainer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -21,48 +19,24 @@ offset_top = -1950.0
 offset_right = 1924.0
 offset_bottom = -390.0
 grow_vertical = 0
-color = Color(0.777177, 0.777177, 0.777177, 1)
+mouse_filter = 0
 script = ExtResource("1_kc2xn")
-sensor_array_dicts = Array[Dictionary]([{
-"max": 100.0,
-"min": 0.0,
-"name": "Sensor 1",
-"value": 50.0
-}])
-sensor_graph_row_template = ExtResource("3_vdl7c")
-metadata/_custom_type_script = "uid://3sk4l6dcbxo0"
-
-[node name="TopLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 2, 1941, 2)
-width = 4.0
-default_color = Color(0, 0, 0, 1)
 
 [node name="Header" type="Label" parent="."]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 2.0
-offset_right = 207.0
-offset_bottom = 28.0
-text = "Sensor 	 |  Action:"
+custom_minimum_size = Vector2(1924, 26)
+layout_mode = 2
+text = "  Sensor 	 |  Action:"
 label_settings = SubResource("LabelSettings_2miot")
 
 [node name="AddButton" type="TextureButton" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 161.0
-offset_top = 5.0
-offset_right = 193.0
-offset_bottom = 37.0
+layout_mode = 2
 texture_normal = ExtResource("3_w0q86")
 texture_pressed = ExtResource("4_w0q86")
 texture_hover = ExtResource("5_m2as1")
 
 [node name="ActionNameTemplate" type="Label" parent="."]
-layout_mode = 0
-offset_left = 170.0
-offset_top = 4.0
-offset_right = 370.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Action"
 label_settings = SubResource("LabelSettings_kyqjg")
 horizontal_alignment = 2

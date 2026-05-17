@@ -11,6 +11,7 @@ font_size = 14
 font_color = Color(0.313726, 0.54902, 0.784314, 1)
 
 [node name="SensorGraphRow" type="ColorRect"]
+custom_minimum_size = Vector2(1924, 100)
 offset_right = 1924.0
 offset_bottom = 100.0
 script = ExtResource("1_hncfd")

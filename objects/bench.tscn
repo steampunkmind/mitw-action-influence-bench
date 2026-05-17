@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=12 format=3 uid="uid://b4rb4np51o66m"]
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://objects/bench.gd" id="1_3f1fh"]
 [ext_resource type="Texture2D" uid="uid://cneet3pbcapoc" path="res://graphics/play.svg" id="2_2ca8i"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://burvtbie2tdjm" path="res://graphics/pause.svg" id="3_rpy7a"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://objects/bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://objects/edit_actions.tscn" id="8_cjidc"]
+[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/sensor_graph_row.tscn" id="8_rpy7a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ca8i"]
 font_size = 18
@@ -142,14 +143,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Action"
 
-[node name="SensorGraph" parent="." instance=ExtResource("2_yj3it")]
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 260.0
-offset_bottom = 1126.0
-grow_vertical = 1
-color = Color(0.501961, 0.501961, 0.501961, 1)
+[node name="SensorScroll" type="ScrollContainer" parent="."]
+offset_top = 268.0
+offset_right = 1936.0
+offset_bottom = 1134.0
+
+[node name="SensorGraph" parent="SensorScroll" instance=ExtResource("2_yj3it")]
+layout_mode = 2
+sensor_graph_row_template = ExtResource("8_rpy7a")
 
 [node name="EditActions" parent="." instance=ExtResource("8_cjidc")]
 visible = false
@@ -180,12 +181,17 @@ ok_button_text = "Save"
 dialog_text = "
       If you don't save, your changes will be lost."
 
+[node name="DivLine" type="Line2D" parent="."]
+position = Vector2(0, 260)
+points = PackedVector2Array(0, 2, 1941, 2)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+
 [connection signal="toggled" from="PlayButton" to="." method="_on_play_button_toggled"]
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
 [connection signal="toggled" from="EditActionsButton" to="." method="_on_edit_actions_button_toggled"]
 [connection signal="toggled" from="EyeButton" to="." method="_on_eye_button_toggled"]
 [connection signal="action_button_pressed" from="ActionButtonScroll/ActionButtons" to="." method="_on_action_button_pressed"]
-[connection signal="model_changed" from="SensorGraph" to="." method="_on_sensor_graph_model_changed"]
 [connection signal="model_changed" from="EditActions" to="." method="_on_edit_actions_model_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="file_selected" from="OpenFileDialog" to="." method="_on_open_file_dialog_file_selected"]

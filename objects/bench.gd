@@ -56,18 +56,18 @@ func _on_timer_timeout() -> void:
 	for sensor in MITW.aim_model().get_sensors():
 		sensor.update_value()
 	
-	$SensorGraph.add_frame_to_graph()
+	$SensorScroll/SensorGraph.add_frame_to_graph()
 	
 	
 func _on_action_button_pressed(action: Action) -> void:
-	$SensorGraph.set_action(action)
+	$SensorScroll/SensorGraph.set_action(action)
 	MITW.aim_model().set_action(action)
 	
 	
 ## File Functions ##
 func _on_file_new_menu_pressed() -> void:
 	$ActionButtonScroll/ActionButtons.set_new_model()
-	$SensorGraph.set_new_model()
+	$SensorScroll/SensorGraph.set_new_model()
 	_set_is_model(true)
 	
 	
@@ -83,7 +83,7 @@ func _on_open_file_dialog_file_selected(path: String) -> void:
 	
 	MITW.init(json, {})
 	$ActionButtonScroll/ActionButtons.update_buttons()
-	$SensorGraph.update_sensors()
+	$SensorScroll/SensorGraph.update_sensors()
 	_set_is_model(true, path)
 	
 	
@@ -207,7 +207,7 @@ func _disable_interface() -> void:
 	$FrameCount.visible = false
 	$EyeButton.visible = false
 	$ActionButtonScroll/ActionButtons.visible = false
-	$SensorGraph.visible = false
+	$SensorScroll/SensorGraph.visible = false
 
 
 func _reset_interface() -> void:
@@ -222,7 +222,7 @@ func _reset_interface() -> void:
 	$FrameCount.visible = _is_model
 	$EyeButton.visible = _is_model
 	$ActionButtonScroll/ActionButtons.visible = _is_model
-	$SensorGraph.visible = _is_model
+	$SensorScroll/SensorGraph.visible = _is_model
 	$EditActionsButton.visible = _is_model
 
 
@@ -234,7 +234,7 @@ func _on_eye_button_toggled(toggled_on: bool) -> void:
 	# $EditActionsButton.hide()
 	MITW.aim_model().set_edit_mode(toggled_on)
 	$ActionButtonScroll/ActionButtons.show_hide_buttons()
-	$SensorGraph.update_edit_mode()
+	$SensorScroll/SensorGraph.update_edit_mode()
 
 
 func _on_play_button_toggled(toggled_on: bool) -> void:
