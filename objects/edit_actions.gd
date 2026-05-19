@@ -1,5 +1,5 @@
 class_name EditActions
-extends ColorRect
+extends Control
 
 signal model_changed
 
@@ -27,18 +27,11 @@ func clear_edit_action_rows() -> void:
 
 
 func add_edit_action_rows() -> void:
-	var header_margin = 80
-	var row_margin = 10
-	var row_location = header_margin
-	var row_size = 100 #Calculate this based on size of formulas
 	for action: Action in actions:
 		var row = edit_action_row_template.instantiate()
 		row.set_action(action)
-		row.set_row_location(row_location)
-		row.size.y = row_size
-		add_child(row)
+		$ActionScroll/Actions.add_child(row)
 		_edit_action_rows.append(row)
-		row_location = row_location + row_size + row_margin
 
 
 func _on_add_button_button_up() -> void:

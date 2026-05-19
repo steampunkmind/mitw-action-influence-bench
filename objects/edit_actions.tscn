@@ -6,36 +6,51 @@
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_tmxcf"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_and5y"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_fsf4l"]
+[sub_resource type="LabelSettings" id="LabelSettings_q55xh"]
 font_size = 18
-font_color = Color(0, 0, 0, 1)
 
-[node name="EditActions" type="ColorRect"]
+[node name="EditActions" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_top = 365.0
-offset_right = 1924.0
-offset_bottom = 1429.0
-color = Color(0.784314, 0.784314, 0.784314, 1)
+offset_right = 1942.0
+offset_bottom = 1451.0
 script = ExtResource("1_fsf4l")
 edit_action_row_template = ExtResource("2_iysti")
 
-[node name="Label" type="Label" parent="."]
+[node name="TopLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 2, 1941, 2)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Header" type="Label" parent="."]
 layout_mode = 0
 offset_left = 902.0
-offset_top = 4.0
+offset_top = 6.0
 offset_right = 1038.0
-offset_bottom = 30.0
+offset_bottom = 32.0
 text = "Edit Actions"
-label_settings = SubResource("LabelSettings_fsf4l")
+label_settings = SubResource("LabelSettings_q55xh")
 horizontal_alignment = 1
 
 [node name="AddButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 26.0
-offset_bottom = 26.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 30.0
+offset_bottom = 31.0
 texture_normal = ExtResource("3_nksls")
 texture_pressed = ExtResource("4_tmxcf")
 texture_hover = ExtResource("5_and5y")
+
+[node name="ActionScroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(1937, 1050)
+layout_mode = 0
+offset_top = 36.0
+offset_right = 1922.0
+offset_bottom = 1060.0
+
+[node name="Actions" type="VBoxContainer" parent="ActionScroll"]
+layout_mode = 2
 
 [connection signal="button_up" from="AddButton" to="." method="_on_add_button_button_up"]
