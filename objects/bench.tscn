@@ -143,12 +143,20 @@ action_array = Array[Dictionary]([{
 }])
 action_button_template = NodePath("ActionButtonTemplate")
 
+[node name="TopSpacer" type="Control" parent="ActionButtonScroll/ActionButtons"]
+custom_minimum_size = Vector2(1924, 1)
+layout_mode = 2
+
 [node name="ActionButtonTemplate" type="Button" parent="ActionButtonScroll/ActionButtons"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Action"
+
+[node name="BottomSpacer" type="Control" parent="ActionButtonScroll/ActionButtons"]
+custom_minimum_size = Vector2(1924, 1)
+layout_mode = 2
 
 [node name="Sensors" type="Control" parent="."]
 layout_mode = 3

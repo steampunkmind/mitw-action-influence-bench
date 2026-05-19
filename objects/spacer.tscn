@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ujujegkt2xvq"]
+
+[node name="Spacer" type="Control"]
+custom_minimum_size = Vector2(1924, 4)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
