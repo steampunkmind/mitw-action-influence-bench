@@ -1,114 +1,105 @@
 class_name SensorGraph
-extends VBoxContainer
+extends ColorRect
 
-signal model_changed
-
-@export var sensor_array_dicts: Array[Dictionary]
-@export var sensor_graph_row_template: PackedScene
-
-var name_line_offset: float
-var action_names: Array[Control]
-var action_lines: Array[Node2D]
-var sensor_graph_rows: Dictionary[String, SensorGraphRow]
-
+var _model: ActionInfluenceModel
+var _sensor: Sensor 
+var edit_mode: bool = false:
+	get = get_edit_mode, set = set_edit_mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$ActionNameTemplate.visible = false
-	$ActionLineTemplate.visible = false
-	name_line_offset = $ActionLineTemplate.position.x - ($ActionNameTemplate.position.x + $ActionNameTemplate.size.x)
+	$SensorValue.position.y = (size.y/2) - ($SensorValue.size.y/2)
+	$SensorMin.position.y = size.y - $SensorValue.size.y
+
+	var point = $StartLine.get_point_position(1)
+	point.y = size.y
+	$StartLine.set_point_position(1, point)
+	
+	point = $SensorLine.get_point_position(0)
+	point.y = sensor_value_y()
+	$SensorLine.set_point_position(0, point)
+	point = $SensorLine.get_point_position(1)
+	point.y = sensor_value_y()
+	$SensorLine.set_point_position(1, point)
 
 
-func set_new_model() -> void:
-	MITW.aim_model().fill_sensors(sensor_array_dicts)
-	update_sensors()
+func set_model(value: ActionInfluenceModel):
+	_model = value
+
+
+func set_row_location(y: float) -> void:
+	var p = get_position()
+	p.y = y
+	set_position(p)
 	
+func set_sensor(sensor: Sensor) -> void:
+	_sensor = sensor
+	set_name(sensor.get_name()) # sets name of node
+	$Name.text = sensor.get_name()
 	
-func _on_add_button_button_up() -> void:
-	MITW.aim_model().new_sensor()
-	clear_sensor_graph_rows()
-	add_sensor_graph_rows()
-	model_changed.emit()
+func set_sensor_name(value: String) -> void:
+	_sensor.set_name(value)
+	set_name(value) # sets name of node
+	$Name.text = value
 	
+func set_sensor_min(value: float) -> void:
+	_sensor.set_min(value)
+	$SensorMin.text = str(value)
 	
-func update_sensors() -> void:
-	clear_sensor_graph_rows()
-	add_sensor_graph_rows()
+func set_sensor_max(value: float) -> void:
+	_sensor.set_max(value)
+	$SensorMax.text = str(value)
+
+func get_sensor_max() -> float:
+	return _sensor.get_max()
 	
+func set_sensor_value(value: float) -> void:
+	$SensorValue.text = str("%.1f" % value)
+
+func get_sensor_value() -> float:
+	return _sensor.get_value()
 	
-func clear_sensor_graph_rows() -> void:
-	# Clear all current children to clear screen
-	for action_name: Control in action_names:
-		remove_child(action_name)
-	action_names.clear()
-	
-	for action_line: Node2D in action_lines:
-		remove_child(action_line)
-	action_lines.clear()
-		
-	for sensor_graph_row: SensorGraphRow in sensor_graph_rows.values():
-		remove_child(sensor_graph_row)
-	
-	sensor_graph_rows.clear()
-	
-	
-func add_sensor_graph_rows() -> void:
-	var header_margin = 28
-	var row_margin = 4
-	var row_location = header_margin
-	for sensor: Sensor in MITW.aim_model().get_sensors():
-		var row = sensor_graph_row_template.instantiate()
-		row.set_sensor(sensor)
-		row.set_row_location(row_location)
-		row.set_model(MITW.aim_model())
-		row.set_edit_mode(MITW.aim_model().get_edit_mode())
-		add_child(row)
-		sensor_graph_rows.set(sensor.get_name(), row)
-		row_location = row_location + row.size.y + row_margin
-		
-	var p = $ActionLineTemplate.get_point_position(1)
-	p.y = row_location - row_margin
-	$ActionLineTemplate.set_point_position(1, p)
 	
 func add_frame_to_graph() -> void:
-	for control in action_names:
-		if (control.position.x + control.size.x + name_line_offset < size.x):
-			control.position.x = control.position.x + 1
-			
-	var waiting_count = 0
-	for node in action_lines:
-		node.position.x
-		if (node.position.x < size.x):
-			node.position.x = node.position.x + 1
-		else:
-			waiting_count += 1
-	
-	if (waiting_count > 0):
-		var i = action_names.size() - 1
-		remove_child(action_names.get(i))
-		remove_child(action_lines.get(i))
-		action_names.remove_at(i)
-		action_lines.remove_at(i)
+	var line = $SensorLine
 		
+	# Move points to right
+	for i in range(line.get_point_count()):
+		var point = line.get_point_position(i)
+		point.x = point.x + 1
+		line.set_point_position(i, point)
+		
+	# Remove if off right side
+	if (line.get_point_position(0).x > size.x):
+		line.remove_point(0)
 	
-	for row in sensor_graph_rows.values():
-		row.add_frame_to_graph()
+	# Add new point
+	var point = line.get_point_position(line.get_point_count()-1)
+	point.x = point.x - 1
+	set_sensor_value(_sensor.get_value())
+	point.y = sensor_value_y()
+	line.add_point(point)
 	
-	
-func set_action(action: Action) -> void:
-	if MITW.aim_model().get_edit_mode() or action.get_behavioral():
-		var new_action_name = $ActionNameTemplate.duplicate(1)
-		new_action_name.visible = true
-		new_action_name.text = action.get_name()
-		add_child(new_action_name)
-		action_names.insert(0, new_action_name)
-	
-		var new_action_line = $ActionLineTemplate.duplicate(1)
-		new_action_line.visible = true
-		add_child(new_action_line)
-		action_lines.insert(0, new_action_line)
+	if edit_mode:
+		$Formulas.text = str(_sensor.get_formula_text(_sensor.get_formulas()))
 
 
-func update_edit_mode() -> void:
-	for sensor_graph_row: SensorGraphRow in sensor_graph_rows.values():
-		sensor_graph_row.set_edit_mode(MITW.aim_model().get_edit_mode())
+### Utils ###	
+func sensor_value_y() -> float:
+	var value_above_min = _sensor.get_value() - _sensor.get_min()
+	var range = _sensor.get_max() - _sensor.get_min()
+	var ratio = size.y/range
+	var scaled_value = value_above_min * ratio
+	return size.y - scaled_value;
+	
+	
+func get_edit_mode() -> bool:
+	return edit_mode
+	
+	
+func set_edit_mode(value: bool) -> void:
+	edit_mode = value
+	if !edit_mode:
+		$Formulas.text = str("")
+		
+		

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx0kddlfv7xvs"]
+
+[ext_resource type="Script" uid="uid://3sk4l6dcbxo0" path="res://objects/old_sensor_graph.gd" id="1_8ra5w"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="2_orssr"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="3_xvgdw"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="4_cvvwu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2miot"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_kyqjg"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="OldSensorGraph" type="VBoxContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -1950.0
+offset_right = 1924.0
+offset_bottom = -390.0
+grow_vertical = 0
+mouse_filter = 0
+script = ExtResource("1_8ra5w")
+
+[node name="Header" type="Label" parent="."]
+custom_minimum_size = Vector2(1924, 26)
+layout_mode = 2
+text = "  Sensor 	 |  Action:"
+label_settings = SubResource("LabelSettings_2miot")
+
+[node name="AddButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("2_orssr")
+texture_pressed = ExtResource("3_xvgdw")
+texture_hover = ExtResource("4_cvvwu")
+
+[node name="ActionNameTemplate" type="Label" parent="."]
+layout_mode = 2
+text = "Action"
+label_settings = SubResource("LabelSettings_kyqjg")
+horizontal_alignment = 2
+
+[node name="ActionLineTemplate" type="Line2D" parent="."]
+z_index = 1000
+position = Vector2(373, 0)
+points = PackedVector2Array(0, 4, 0, 1560)
+width = 2.0
+default_color = Color(0.313726, 0.470588, 0.705882, 1)
+
+[connection signal="button_up" from="AddButton" to="." method="_on_add_button_button_up"]

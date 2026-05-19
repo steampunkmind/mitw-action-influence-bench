@@ -1,18 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=14 format=3 uid="uid://b4rb4np51o66m"]
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://objects/bench.gd" id="1_3f1fh"]
 [ext_resource type="Texture2D" uid="uid://cneet3pbcapoc" path="res://graphics/play.svg" id="2_2ca8i"]
 [ext_resource type="Script" uid="uid://domph6oksm6me" path="res://objects/action_buttons.gd" id="2_a5qnj"]
 [ext_resource type="Texture2D" uid="uid://6y74xinemfm1" path="res://graphics/eye_open.svg" id="2_tjv83"]
-[ext_resource type="PackedScene" uid="uid://bx0kddlfv7xvs" path="res://objects/sensor_graph.tscn" id="2_yj3it"]
+[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/sensor_graph.tscn" id="2_yj3it"]
 [ext_resource type="Texture2D" uid="uid://doomh0n86fwf4" path="res://graphics/eye_close.svg" id="3_cjidc"]
 [ext_resource type="Texture2D" uid="uid://burvtbie2tdjm" path="res://graphics/pause.svg" id="3_rpy7a"]
+[ext_resource type="Script" uid="uid://cwl5w3l5w6472" path="res://objects/sensors.gd" id="7_2ca8i"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://objects/bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://objects/edit_actions.tscn" id="8_cjidc"]
-[ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/sensor_graph_row.tscn" id="8_rpy7a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ca8i"]
 font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_rpy7a"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hvxyr"]
+font_color = Color(0.313726, 0.470588, 0.705882, 1)
 
 [node name="Bench" type="Node"]
 script = ExtResource("1_3f1fh")
@@ -143,14 +150,59 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Action"
 
-[node name="SensorScroll" type="ScrollContainer" parent="."]
-offset_top = 268.0
-offset_right = 1936.0
-offset_bottom = 1134.0
+[node name="Sensors" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 264.0
+offset_right = 1941.0
+offset_bottom = 1130.0
+script = ExtResource("7_2ca8i")
+sensor_graph_template = ExtResource("2_yj3it")
 
-[node name="SensorGraph" parent="SensorScroll" instance=ExtResource("2_yj3it")]
+[node name="TopLine" type="Line2D" parent="Sensors"]
+points = PackedVector2Array(0, 2, 1941, 2)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Header" type="ColorRect" parent="Sensors"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 1924.0
+offset_bottom = 30.0
+
+[node name="HeaderText" type="Label" parent="Sensors/Header"]
+custom_minimum_size = Vector2(1924, 26)
 layout_mode = 2
-sensor_graph_row_template = ExtResource("8_rpy7a")
+offset_right = 1924.0
+offset_bottom = 26.0
+text = "  Sensor 	 |  Action:"
+label_settings = SubResource("LabelSettings_rpy7a")
+
+[node name="ActionNameTemplate" type="Label" parent="Sensors"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 9.0
+offset_right = 370.0
+offset_bottom = 32.0
+text = "Action"
+label_settings = SubResource("LabelSettings_hvxyr")
+horizontal_alignment = 2
+
+[node name="ActionLineTemplate" type="Line2D" parent="Sensors"]
+z_index = 1000
+position = Vector2(373, 0)
+points = PackedVector2Array(0, 4, 0, 1560)
+width = 2.0
+default_color = Color(0.313726, 0.470588, 0.705882, 1)
+
+[node name="SensorScroll" type="ScrollContainer" parent="Sensors"]
+layout_mode = 0
+offset_top = 34.0
+offset_right = 1936.0
+offset_bottom = 878.0
+
+[node name="SensorGraphs" type="VBoxContainer" parent="Sensors/SensorScroll"]
+layout_mode = 2
 
 [node name="EditActions" parent="." instance=ExtResource("8_cjidc")]
 visible = false
@@ -180,12 +232,6 @@ theme = ExtResource("7_tjv83")
 ok_button_text = "Save"
 dialog_text = "
       If you don't save, your changes will be lost."
-
-[node name="DivLine" type="Line2D" parent="."]
-position = Vector2(0, 260)
-points = PackedVector2Array(0, 2, 1941, 2)
-width = 4.0
-default_color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="PlayButton" to="." method="_on_play_button_toggled"]
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
