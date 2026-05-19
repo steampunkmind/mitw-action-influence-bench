@@ -86,8 +86,9 @@ func add_frame_to_graph() -> void:
 
 ### Utils ###	
 func sensor_value_y() -> float:
-	var value_above_min = _sensor.get_value() - _sensor.get_min()
-	var range = _sensor.get_max() - _sensor.get_min()
+	var line_width = $SensorLine.get_width()
+	var value_above_min = _sensor.get_value() - _sensor.get_min() + (line_width/2)
+	var range = _sensor.get_max() - _sensor.get_min() + line_width
 	var ratio = size.y/range
 	var scaled_value = value_above_min * ratio
 	return size.y - scaled_value;
