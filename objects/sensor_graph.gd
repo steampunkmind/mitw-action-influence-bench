@@ -36,6 +36,8 @@ func set_sensor(sensor: Sensor) -> void:
 	_sensor = sensor
 	set_name(sensor.get_name()) # sets name of node
 	$Name.text = sensor.get_name()
+	$SensorMin.text = str(sensor.get_min())
+	$SensorMax.text = str(sensor.get_max())
 	
 func set_sensor_name(value: String) -> void:
 	_sensor.set_name(value)

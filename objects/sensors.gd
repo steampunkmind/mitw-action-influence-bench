@@ -56,7 +56,6 @@ func add_sensor_graphs() -> void:
 	for sensor: Sensor in MITW.aim_model().get_sensors():
 		var sensor_graph = sensor_graph_template.instantiate()
 		sensor_graph.set_sensor(sensor)
-		#graph.set_row_location(row_location)
 		sensor_graph.set_model(MITW.aim_model())
 		sensor_graph.set_edit_mode(MITW.aim_model().get_edit_mode())
 		$SensorScroll/SensorGraphs.add_child(sensor_graph)
