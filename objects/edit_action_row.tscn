@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cblkrfosd0s10"]
+[gd_scene load_steps=8 format=3 uid="uid://cblkrfosd0s10"]
 
 [ext_resource type="Script" uid="uid://sj762fijttxy" path="res://objects/edit_action_row.gd" id="1_qp8pv"]
+[ext_resource type="Script" uid="uid://be3u6d5qot0wq" path="res://objects/edit_influences.gd" id="2_fxg7q"]
 [ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="2_pjy43"]
 [ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="3_nanhg"]
 [ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="4_fxg7q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_meo7u"]
 font_color = Color(0.313726, 0.54902, 0.784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nanhg"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="EditActionRow" type="ColorRect"]
 custom_minimum_size = Vector2(1924, 23)
@@ -21,6 +25,21 @@ offset_right = 395.0
 offset_bottom = 23.0
 text = "Name"
 label_settings = SubResource("LabelSettings_meo7u")
+
+[node name="EditInfluences" type="Control" parent="."]
+custom_minimum_size = Vector2(24, 24)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 20.0
+script = ExtResource("2_fxg7q")
+
+[node name="Text" type="Label" parent="EditInfluences"]
+layout_mode = 0
+offset_left = 76.0
+offset_right = 153.0
+offset_bottom = 23.0
+text = "TextTemp"
+label_settings = SubResource("LabelSettings_nanhg")
 
 [node name="DeleteActionButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(24, 24)
