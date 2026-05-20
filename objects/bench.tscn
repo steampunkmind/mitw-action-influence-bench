@@ -106,14 +106,14 @@ texture_normal = ExtResource("3_cjidc")
 texture_pressed = ExtResource("2_tjv83")
 
 [node name="ActionButtonScroll" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(1930, 200)
+custom_minimum_size = Vector2(1930, 208)
 offset_left = 6.0
 offset_top = 54.0
 offset_right = 1936.0
 offset_bottom = 254.0
 
 [node name="ActionButtons" type="HFlowContainer" parent="ActionButtonScroll" node_paths=PackedStringArray("action_button_template")]
-custom_minimum_size = Vector2(1924, 200)
+custom_minimum_size = Vector2(1924, 208)
 layout_mode = 2
 script = ExtResource("2_a5qnj")
 action_array = Array[Dictionary]([{

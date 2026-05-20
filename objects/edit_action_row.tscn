@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cblkrfosd0s10"]
+[gd_scene load_steps=6 format=3 uid="uid://cblkrfosd0s10"]
 
 [ext_resource type="Script" uid="uid://sj762fijttxy" path="res://objects/edit_action_row.gd" id="1_qp8pv"]
+[ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="2_pjy43"]
+[ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="3_nanhg"]
+[ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="4_fxg7q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_meo7u"]
 font_color = Color(0.313726, 0.54902, 0.784314, 1)
@@ -18,3 +21,15 @@ offset_right = 395.0
 offset_bottom = 23.0
 text = "Name"
 label_settings = SubResource("LabelSettings_meo7u")
+
+[node name="DeleteActionButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 1901.0
+offset_right = 1925.0
+offset_bottom = 24.0
+texture_normal = ExtResource("2_pjy43")
+texture_pressed = ExtResource("3_nanhg")
+texture_hover = ExtResource("4_fxg7q")
+
+[connection signal="pressed" from="DeleteActionButton" to="." method="_on_delete_action_button_pressed"]
