@@ -12,6 +12,7 @@ func set_action(action: Action) -> void:
 	set_name(action.get_name()) # sets name of node
 	set_action_name(action.get_name())
 	$EditInfluences.set_action(action)
+	custom_minimum_size.y = $EditInfluences/Text.get_minimum_size().y
 
 
 func set_action_name(value: String) -> void:

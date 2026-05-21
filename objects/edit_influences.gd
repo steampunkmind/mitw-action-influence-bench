@@ -9,24 +9,20 @@ func set_action(action: Action) -> void:
 
 
 func _to_text() -> String:
-	var text: String = ""
+	var text: String = "behavioral: "
+	if _action.get_behavioral():
+		text += "true\r"
+	else:
+		text += "false\r"
+	
 	for influence: Influence in _action.get_influences():
-		if text.length() > 0:
-			text += ", "
 		text += influence.get_sensor_name()
-		
-		var formula: Formula = influence.get_formula()
 		text += "("
 		var i: int = 0
-		for key: String in formula.get_expressions().keys():
+		for key: String in influence.get_formula().get_expressions().keys():
 			if i > 0:
 				text += ", "
 			text += key
 			i += 1
-		text += ")"
-	text += ", behavioral: "
-	if _action.get_behavioral():
-		text += "true"
-	else:
-		text += "false"
+		text += ")\r"
 	return text

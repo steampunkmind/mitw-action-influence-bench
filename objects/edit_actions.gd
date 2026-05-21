@@ -3,8 +3,8 @@ extends Control
 
 signal model_changed
 
-
 @export var edit_action_row_template: PackedScene
+
 
 var actions:
 	get = get_actions, set = set_actions
