@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6y74xinemfm1" path="res://graphics/eye_open.svg" id="2_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sk6ele03t7qi" path="res://objects/sensor_graph.tscn" id="2_yj3it"]
 [ext_resource type="Texture2D" uid="uid://doomh0n86fwf4" path="res://graphics/eye_close.svg" id="3_cjidc"]
-[ext_resource type="Texture2D" uid="uid://burvtbie2tdjm" path="res://graphics/pause.svg" id="3_rpy7a"]
+[ext_resource type="Texture2D" uid="uid://k3de8sduevpa" path="res://graphics/pause.svg" id="3_rpy7a"]
 [ext_resource type="Script" uid="uid://cwl5w3l5w6472" path="res://objects/sensors.gd" id="7_2ca8i"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://objects/bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://objects/edit_actions.tscn" id="8_cjidc"]

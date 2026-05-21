@@ -33,4 +33,7 @@ func set_min_name_width(value: float) -> void:
 	var p = $HBox/Name.get_custom_minimum_size()
 	p.x = value
 	$HBox/Name.set_custom_minimum_size(p)
-	
+
+
+func _on_edit_button_toggled(toggled_on: bool) -> void:
+	print("_on_edit_button_toggled")
