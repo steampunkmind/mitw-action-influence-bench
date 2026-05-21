@@ -17,13 +17,6 @@ func _to_text() -> String:
 		text += "false\r"
 	
 	for influence: Influence in _action.get_influences():
-		text += influence.get_sensor_name()
-		text += "("
-		var i: int = 0
-		for key: String in influence.get_formula().get_expressions().keys():
-			if i > 0:
-				text += ", "
-			text += key
-			i += 1
-		text += ")\r"
+		text += influence.to_text() + "\r"
+	
 	return text
