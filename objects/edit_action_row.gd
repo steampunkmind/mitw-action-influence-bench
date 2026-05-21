@@ -11,12 +11,14 @@ func set_action(action: Action) -> void:
 	_action = action
 	set_name(action.get_name()) # sets name of node
 	set_action_name(action.get_name())
-	$EditInfluences.set_action(action)
-	custom_minimum_size.y = $EditInfluences/Text.get_minimum_size().y
+	$HBox/EditInfluences.set_action(action)
+	var p: Vector2 = get_combined_minimum_size()
+	p.y = $HBox/EditInfluences.get_combined_minimum_size().y
+	set_custom_minimum_size(p)
 
 
 func set_action_name(value: String) -> void:
-	$Name.text = value
+	$HBox/Name.text = value
 
 
 func _on_delete_action_button_pressed() -> void:

@@ -6,6 +6,7 @@ var _action: Action
 func set_action(action: Action) -> void:
 	_action = action
 	$Text.text = _to_text()
+	set_custom_minimum_size($Text.get_minimum_size())
 
 
 func _to_text() -> String:
