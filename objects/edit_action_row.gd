@@ -23,3 +23,14 @@ func set_action_name(value: String) -> void:
 
 func _on_delete_action_button_pressed() -> void:
 	delete_action_button_pressed.emit()
+
+
+func get_min_name_width() -> float:
+	return $HBox/Name.get_minimum_size().x
+
+
+func set_min_name_width(value: float) -> void:
+	var p = $HBox/Name.get_custom_minimum_size()
+	p.x = value
+	$HBox/Name.set_custom_minimum_size(p)
+	

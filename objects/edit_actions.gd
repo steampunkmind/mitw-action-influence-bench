@@ -34,6 +34,15 @@ func add_edit_action_rows() -> void:
 		row.delete_action_button_pressed.connect(_delete_action_button_pressed.bind(action))
 		$ActionScroll/Actions.add_child(row)
 		_edit_action_rows.append(row)
+		
+	var min_name_width: float = 0
+	for row: EditActionRow in _edit_action_rows:
+		var min = row.get_min_name_width()
+		if min_name_width < min:
+			min_name_width = min
+			
+	for row: EditActionRow in _edit_action_rows:
+		row.set_min_name_width(min_name_width)
 
 
 func _on_add_button_button_up() -> void:
