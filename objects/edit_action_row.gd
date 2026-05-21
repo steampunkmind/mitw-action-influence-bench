@@ -11,6 +11,8 @@ func set_action(action: Action) -> void:
 	_action = action
 	set_name(action.get_name()) # sets name of node
 	set_action_name(action.get_name())
+	$HBox/ViewParams.text = _param_text()
+	$HBox/ViewInfluences.text = _influences_text()
 	$HBox/EditInfluences.set_action(action)
 	var p: Vector2 = get_combined_minimum_size()
 	p.y = $HBox/EditInfluences.get_combined_minimum_size().y
@@ -19,6 +21,21 @@ func set_action(action: Action) -> void:
 
 func set_action_name(value: String) -> void:
 	$HBox/Name.text = value
+
+func _param_text() -> String:
+	var text: String = "behavioral: "
+	if _action.get_behavioral():
+		text += "true\r"
+	else:
+		text += "false\r"
+	return text
+
+
+func _influences_text() -> String:
+	var result: String = ""
+	for influence: Influence in _action.get_influences():
+		result += influence.to_text() + "\r"
+	return result
 
 
 func _on_delete_action_button_pressed() -> void:
@@ -38,9 +55,11 @@ func set_min_name_width(value: float) -> void:
 func _on_edit_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$HBox/ViewParams.hide()
+		$HBox/Spacer.hide()
 		$HBox/ViewInfluences.hide()
 		$HBox/EditInfluences.show()
 	else:
 		$HBox/ViewParams.show()
+		$HBox/Spacer.show()
 		$HBox/ViewInfluences.show()
 		$HBox/EditInfluences.hide()
