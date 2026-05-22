@@ -4,6 +4,7 @@ extends ColorRect
 var _action: Action
 var edit_influences: Array[Control]
 
+signal model_edited
 signal delete_action_button_pressed
 
 
@@ -67,3 +68,9 @@ func _on_edit_button_toggled(toggled_on: bool) -> void:
 		$HBox/Spacer.show()
 		$HBox/ViewInfluences.show()
 		$HBox/EditInfluences.hide()
+
+
+func _on_behavior_check_box_toggled(toggled_on: bool) -> void:
+	_action.set_behavioral(toggled_on)
+	$HBox/ViewParams.text = _param_text()
+	model_edited.emit()

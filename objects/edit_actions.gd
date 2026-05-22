@@ -32,6 +32,7 @@ func add_edit_action_rows() -> void:
 		var row = edit_action_row_template.instantiate()
 		row.set_action(action)
 		row.delete_action_button_pressed.connect(_delete_action_button_pressed.bind(action))
+		row.model_edited.connect(_model_edited)
 		$ActionScroll/Actions.add_child(row)
 		_edit_action_rows.append(row)
 		
@@ -59,4 +60,8 @@ func _delete_action_button_pressed(action: Action) -> void:
 func _model_changed() -> void:
 	clear_edit_action_rows()
 	add_edit_action_rows()
+	model_changed.emit()
+	
+	
+func _model_edited() -> void:
 	model_changed.emit()

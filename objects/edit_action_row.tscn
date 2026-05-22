@@ -88,5 +88,6 @@ texture_pressed = ExtResource("3_nanhg")
 texture_hover = ExtResource("4_fxg7q")
 
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
+[connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
 [connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="HBox/EditInfluences" method="_on_behavior_check_box_toggled"]
 [connection signal="pressed" from="HBox/DeleteActionButton" to="." method="_on_delete_action_button_pressed"]
