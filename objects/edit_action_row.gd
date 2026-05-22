@@ -14,8 +14,11 @@ func set_action(action: Action) -> void:
 	$HBox/ViewParams.text = _param_text()
 	$HBox/ViewInfluences.text = _influences_text()
 	$HBox/EditInfluences.set_action(action)
+	var y = $HBox/ViewInfluences.get_combined_minimum_size().y
+	if y < $HBox/EditInfluences.get_combined_minimum_size().y:
+		y = $HBox/EditInfluences.get_combined_minimum_size().y
 	var p: Vector2 = get_combined_minimum_size()
-	p.y = $HBox/EditInfluences.get_combined_minimum_size().y
+	p.y = y
 	set_custom_minimum_size(p)
 
 
