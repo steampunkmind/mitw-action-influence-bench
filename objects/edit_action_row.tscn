@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cblkrfosd0s10"]
+[gd_scene load_steps=12 format=3 uid="uid://cblkrfosd0s10"]
 
 [ext_resource type="Script" uid="uid://sj762fijttxy" path="res://objects/edit_action_row.gd" id="1_qp8pv"]
 [ext_resource type="Script" uid="uid://be3u6d5qot0wq" path="res://objects/edit_influences.gd" id="2_fxg7q"]
@@ -19,9 +19,6 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_l0sox"]
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_nanhg"]
-font_color = Color(0, 0, 0, 1)
-
 [node name="EditActionRow" type="ColorRect"]
 custom_minimum_size = Vector2(1924, 23)
 offset_right = 1924.0
@@ -31,7 +28,7 @@ script = ExtResource("1_qp8pv")
 custom_minimum_size = Vector2(1924, 23)
 layout_mode = 0
 offset_right = 1924.0
-offset_bottom = 24.0
+offset_bottom = 60.0
 
 [node name="EditButton" type="TextureButton" parent="HBox"]
 layout_mode = 2
@@ -67,20 +64,20 @@ size_flags_vertical = 0
 text = "Influences"
 label_settings = SubResource("LabelSettings_l0sox")
 
-[node name="EditInfluences" type="Control" parent="HBox"]
+[node name="EditInfluences" type="ColorRect" parent="HBox"]
 visible = false
 custom_minimum_size = Vector2(90, 24)
 layout_mode = 2
 size_flags_horizontal = 3
+color = Color(0.4, 0.4, 0.4, 1)
 script = ExtResource("2_fxg7q")
 
-[node name="Text" type="Label" parent="HBox/EditInfluences"]
-layout_mode = 2
-offset_left = 4.0
-offset_right = 84.0
-offset_bottom = 23.0
-text = "Influences"
-label_settings = SubResource("LabelSettings_nanhg")
+[node name="BehaviorCheckBox" type="CheckBox" parent="HBox/EditInfluences"]
+custom_minimum_size = Vector2(111, 31)
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+text = "Behavioral"
 
 [node name="DeleteActionButton" type="TextureButton" parent="HBox"]
 custom_minimum_size = Vector2(24, 24)

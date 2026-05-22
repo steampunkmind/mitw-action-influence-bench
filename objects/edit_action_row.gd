@@ -22,6 +22,7 @@ func set_action(action: Action) -> void:
 func set_action_name(value: String) -> void:
 	$HBox/Name.text = value
 
+
 func _param_text() -> String:
 	var text: String = "behavioral: "
 	if _action.get_behavioral():
