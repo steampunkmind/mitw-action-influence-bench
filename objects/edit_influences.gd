@@ -13,7 +13,7 @@ func set_action(action: Action) -> void:
 		edit_influence.set_influence(influence)
 		add_child(edit_influence)
 		_edit_influences.append(edit_influence)
-
+		
 	_set_minimum_y()
 
 

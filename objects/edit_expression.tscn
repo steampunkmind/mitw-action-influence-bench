@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b6g27dtxqiewo" path="res://objects/edit_expression.gd" id="1_eaqu2"]
 
 [node name="EditExpression" type="Control"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(32, 52)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,16 +12,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eaqu2")
 
-[node name="VBox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ExpressionType" type="Label" parent="VBox"]
+[node name="ExpressionType" type="Label" parent="."]
 custom_minimum_size = Vector2(40, 23)
 layout_mode = 2
+offset_right = 300.0
+offset_bottom = 23.0
+text = "ExpressionType"
 
-[node name="Expressions" type="Label" parent="VBox"]
+[node name="Expression" type="Label" parent="."]
 custom_minimum_size = Vector2(300, 23)
 layout_mode = 2
-text = "Expressions"
+offset_top = 24.0
+offset_right = 300.0
+offset_bottom = 47.0
+text = "Expression"

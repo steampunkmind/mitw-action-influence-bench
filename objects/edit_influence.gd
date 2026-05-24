@@ -12,10 +12,10 @@ func set_influence(influence: Influence) -> void:
 	var expressions: Dictionary = influence.get_formula().get_expressions()
 	for key: String in expressions.keys():
 		var expression: EditExpression = edit_expression_template.instantiate()
-		expression.set_expression_type(key)
+		expression.set_expression_type(key, expressions.get(key))
 		$VBox.add_child(expression)
 		_edit_expressions.append(expression)
-	
+		
 	_set_minimum_y()
 
 
@@ -24,4 +24,5 @@ func _set_minimum_y() -> void:
 	p.y += $SensorName.get_combined_minimum_size().y
 	for expression: EditExpression in _edit_expressions:
 		p.y += expression.get_combined_minimum_size().y
+	
 	set_custom_minimum_size(p)
