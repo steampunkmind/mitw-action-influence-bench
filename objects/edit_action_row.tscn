@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cblkrfosd0s10"]
+[gd_scene load_steps=13 format=3 uid="uid://cblkrfosd0s10"]
 
 [ext_resource type="Script" uid="uid://sj762fijttxy" path="res://objects/edit_action_row.gd" id="1_qp8pv"]
 [ext_resource type="Script" uid="uid://be3u6d5qot0wq" path="res://objects/edit_influences.gd" id="2_fxg7q"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="3_nanhg"]
 [ext_resource type="Texture2D" uid="uid://2yb01d58h2hn" path="res://graphics/edit_hover.svg" id="4_5a4pg"]
 [ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="4_fxg7q"]
+[ext_resource type="Script" uid="uid://cafnvbiqhc66p" path="res://objects/edit_params.gd" id="5_l3hbn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fr1ei"]
 font_size = 18
@@ -54,6 +55,16 @@ size_flags_vertical = 0
 text = "Params"
 label_settings = SubResource("LabelSettings_fxg7q")
 
+[node name="EditParams" type="VBoxContainer" parent="HBox"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_l3hbn")
+
+[node name="BehaviorCheckBox" type="CheckBox" parent="HBox/EditParams"]
+custom_minimum_size = Vector2(111, 31)
+layout_mode = 2
+text = "Behavioral"
+
 [node name="Spacer1" type="Control" parent="HBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -73,13 +84,6 @@ size_flags_horizontal = 3
 color = Color(0.266667, 0.266667, 0.266667, 1)
 script = ExtResource("2_fxg7q")
 
-[node name="BehaviorCheckBox" type="CheckBox" parent="HBox/EditInfluences"]
-custom_minimum_size = Vector2(111, 31)
-layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
-text = "Behavioral"
-
 [node name="DeleteActionButton" type="TextureButton" parent="HBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -98,6 +102,6 @@ width = 2.0
 default_color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
-[connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="HBox/EditInfluences" method="_on_behavior_check_box_toggled"]
-[connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
+[connection signal="toggled" from="HBox/EditParams/BehaviorCheckBox" to="HBox/EditInfluences" method="_on_behavior_check_box_toggled"]
+[connection signal="toggled" from="HBox/EditParams/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
 [connection signal="pressed" from="HBox/DeleteActionButton" to="." method="_on_delete_action_button_pressed"]
