@@ -11,24 +11,25 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_fr1ei"]
 font_size = 18
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fxg7q"]
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0sox"]
-font_color = Color(0, 0, 0, 1)
 
-[node name="EditActionRow" type="ColorRect"]
+[node name="EditActionRow" type="Control"]
 custom_minimum_size = Vector2(1924, 23)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1924.0
+offset_bottom = 23.0
 script = ExtResource("1_qp8pv")
 
 [node name="HBox" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(1924, 23)
 layout_mode = 0
+offset_top = 4.0
 offset_right = 1924.0
-offset_bottom = 60.0
+offset_bottom = 64.0
 
 [node name="EditButton" type="TextureButton" parent="HBox"]
 layout_mode = 2
@@ -53,7 +54,7 @@ size_flags_vertical = 0
 text = "Params"
 label_settings = SubResource("LabelSettings_fxg7q")
 
-[node name="Spacer" type="Control" parent="HBox"]
+[node name="Spacer1" type="Control" parent="HBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 
@@ -87,7 +88,16 @@ texture_normal = ExtResource("2_pjy43")
 texture_pressed = ExtResource("3_nanhg")
 texture_hover = ExtResource("4_fxg7q")
 
+[node name="Spacer2" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(2, 24)
+layout_mode = 2
+
+[node name="Line" type="Line2D" parent="."]
+points = PackedVector2Array(0, 1, 1928, 1)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
-[connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
 [connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="HBox/EditInfluences" method="_on_behavior_check_box_toggled"]
+[connection signal="toggled" from="HBox/EditInfluences/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
 [connection signal="pressed" from="HBox/DeleteActionButton" to="." method="_on_delete_action_button_pressed"]

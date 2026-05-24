@@ -43,12 +43,17 @@ texture_normal = ExtResource("3_nksls")
 texture_pressed = ExtResource("4_tmxcf")
 texture_hover = ExtResource("5_and5y")
 
+[node name="BottomLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 36, 1941, 36)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
 [node name="ActionScroll" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(1937, 1050)
 layout_mode = 0
-offset_top = 36.0
-offset_right = 1922.0
-offset_bottom = 1060.0
+offset_top = 38.0
+offset_right = 1937.0
+offset_bottom = 1088.0
 
 [node name="Actions" type="VBoxContainer" parent="ActionScroll"]
 layout_mode = 2

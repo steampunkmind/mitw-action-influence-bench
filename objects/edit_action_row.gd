@@ -1,5 +1,5 @@
 class_name EditActionRow
-extends ColorRect
+extends Control
 
 var _action: Action
 var edit_influences: Array[Control]
@@ -19,8 +19,12 @@ func set_action(action: Action) -> void:
 	if y < $HBox/EditInfluences.get_combined_minimum_size().y:
 		y = $HBox/EditInfluences.get_combined_minimum_size().y
 	var p: Vector2 = get_combined_minimum_size()
-	p.y = y
+	p.y = y + 4
 	set_custom_minimum_size(p)
+	
+	p = $Line.get_position()
+	p.y = y + 6
+	$Line.set_position(p)
 
 
 func set_action_name(value: String) -> void:
