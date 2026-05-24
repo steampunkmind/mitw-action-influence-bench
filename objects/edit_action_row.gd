@@ -64,12 +64,10 @@ func set_min_name_width(value: float) -> void:
 func _on_edit_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$HBox/ViewParams.hide()
-		$HBox/Spacer.hide()
 		$HBox/ViewInfluences.hide()
 		$HBox/EditInfluences.show()
 	else:
 		$HBox/ViewParams.show()
-		$HBox/Spacer.show()
 		$HBox/ViewInfluences.show()
 		$HBox/EditInfluences.hide()
 
