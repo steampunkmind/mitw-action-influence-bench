@@ -14,21 +14,6 @@ func set_action(action: Action) -> void:
 		row.set_influence(influence)
 		add_child(row)
 		_edit_influences.append(row)
-		
-		
-		#print influence.get_sensor_name()
-		 #-> Array[Influence]:
-	#return _influences
-	
-	#var row = edit_action_row_template.instantiate()
-		#row.set_action(action)
-		#row.delete_action_button_pressed.connect(_delete_action_button_pressed.bind(action))
-		#row.model_edited.connect(_model_edited)
-		#$ActionScroll/Actions.add_child(row)
-		#_edit_action_rows.append(row)
-		
-	
-	
 
 
 func _on_add_influence_button_pressed() -> void:
