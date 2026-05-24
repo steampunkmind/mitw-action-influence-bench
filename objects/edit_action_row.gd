@@ -4,6 +4,8 @@ extends Control
 var _action: Action
 var edit_influences: Array[Control]
 
+const BOTTOM_MARGIN = 6
+
 signal model_edited
 signal delete_action_button_pressed
 
@@ -16,16 +18,18 @@ func set_action(action: Action) -> void:
 	$HBox/EditParams.set_action(action)
 	$HBox/ViewInfluences.text = _influences_text()
 	$HBox/EditInfluences.set_action(action)
-	var y = $HBox/ViewInfluences.get_combined_minimum_size().y
-	if y < $HBox/EditInfluences.get_combined_minimum_size().y:
-		y = $HBox/EditInfluences.get_combined_minimum_size().y
+	_set_minimum_y(false)
+
+
+func _set_minimum_y(edit_mode: bool) -> void:
+	var y
+	if edit_mode:
+		y = max($HBox/EditParams.get_combined_minimum_size().y, $HBox/EditInfluences.get_combined_minimum_size().y) 
+	else:
+		y = max($HBox/ViewParams.get_combined_minimum_size().y, $HBox/ViewInfluences.get_combined_minimum_size().y) 
 	var p: Vector2 = get_combined_minimum_size()
-	p.y = y + 4
+	p.y = y + BOTTOM_MARGIN
 	set_custom_minimum_size(p)
-	
-	p = $Line.get_position()
-	p.y = y + 6
-	$Line.set_position(p)
 
 
 func set_action_name(value: String) -> void:
@@ -63,6 +67,7 @@ func set_min_name_width(value: float) -> void:
 
 
 func _on_edit_button_toggled(toggled_on: bool) -> void:
+	set_minimum_y(toggled_on)
 	if toggled_on:
 		$HBox/ViewParams.hide()
 		$HBox/EditParams.show()
