@@ -13,6 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_eaqu2")
 
 [node name="ExpressionType" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 23)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

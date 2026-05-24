@@ -67,7 +67,7 @@ func set_min_name_width(value: float) -> void:
 
 
 func _on_edit_button_toggled(toggled_on: bool) -> void:
-	set_minimum_y(toggled_on)
+	_set_minimum_y(toggled_on)
 	if toggled_on:
 		$HBox/ViewParams.hide()
 		$HBox/EditParams.show()
