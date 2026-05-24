@@ -14,16 +14,14 @@ func set_influence(influence: Influence) -> void:
 		var expression: EditExpression = edit_expression_template.instantiate()
 		expression.set_expression_type(key)
 		$VBox.add_child(expression)
-		_edit_expressions
+		_edit_expressions.append(expression)
 	
 	_set_minimum_y()
 
 
 func _set_minimum_y() -> void:
-	var y: float = $SensorName.get_combined_minimum_size().y
-	for expression: EditExpression in _edit_expressions:
-		y += expression.get_combined_minimum_size().y
-	
 	var p: Vector2 = get_combined_minimum_size()
-	p.y = y + 100 #TEMP
+	p.y += $SensorName.get_combined_minimum_size().y
+	for expression: EditExpression in _edit_expressions:
+		p.y += expression.get_combined_minimum_size().y
 	set_custom_minimum_size(p)

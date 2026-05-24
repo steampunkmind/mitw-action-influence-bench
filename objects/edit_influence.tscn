@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bm4ty7yre04h3" path="res://objects/edit_expression.tscn" id="2_ogcb5"]
 
 [node name="EditInfluence" type="Control"]
-custom_minimum_size = Vector2(0, 23)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
