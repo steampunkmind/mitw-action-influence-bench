@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0dww1abhumue"]
+
+[ext_resource type="Script" uid="uid://c0n5526pxa2ct" path="res://objects/edit_expressions/edit_linear_expression.gd" id="1_a61ou"]
+
+[node name="EditLinearExpression" type="Control"]
+custom_minimum_size = Vector2(49, 23)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1376.0
+offset_bottom = -1927.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a61ou")
+
+[node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(49, 23)
+layout_mode = 0
+offset_right = 49.0
+offset_bottom = 23.0
+text = "Linear"
