@@ -74,8 +74,10 @@ func _on_edit_button_toggled(toggled_on: bool) -> void:
 		$HBox/ViewInfluences.hide()
 		$HBox/EditInfluences.show()
 	else:
+		$HBox/ViewParams.text = _param_text()
 		$HBox/ViewParams.show()
 		$HBox/EditParams.hide()
+		$HBox/ViewInfluences.text = _influences_text()
 		$HBox/ViewInfluences.show()
 		$HBox/EditInfluences.hide()
 

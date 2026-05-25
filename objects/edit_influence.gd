@@ -12,7 +12,7 @@ func set_influence(influence: Influence) -> void:
 	$SensorName.text = influence.get_sensor_name()
 	var expressions: Dictionary = influence.get_formula().get_expressions()
 	for key: String in expressions.keys():
-		var expression: EditExpression = _expression_by_type(key, expressions.get(key))
+		var expression: EditExpression = _expression_by_type(key, expressions)
 		$VBox.add_child(expression)
 		_edit_expressions.append(expression)
 		
@@ -27,7 +27,7 @@ func _set_minimum_y() -> void:
 	set_custom_minimum_size(p)
 
 
-func _expression_by_type(type: String, expression) -> EditExpression:
+func _expression_by_type(type: String, expressions: Dictionary) -> EditExpression:
 	var result: EditExpression
 	match type:
 		SensorFormulaLinear.TYPE:
@@ -35,5 +35,5 @@ func _expression_by_type(type: String, expression) -> EditExpression:
 		_:
 			result = edit_default_expression_template.instantiate()
 	
-	result.init(type, expression)
+	result.init(type, expressions)
 	return result

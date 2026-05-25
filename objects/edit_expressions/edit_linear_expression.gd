@@ -1,10 +1,12 @@
 class_name EditLinearExpression extends EditExpression
 
 
-func init(expression_type: String, expression) -> void:
-	super.init(expression_type, expression)
-	$Value.text = str(expression)
+func init(key: String, expressions) -> void:
+	super.init(key, expressions)
+	$Value.text = str(expressions.get(key))
 
 
 func _on_text_edit_text_changed() -> void:
-	print("_on_text_edit_text_changed")
+	var text: String = $Value.get_text()
+	if text.is_valid_float():
+		_expressions.set(_key, text.to_float())
