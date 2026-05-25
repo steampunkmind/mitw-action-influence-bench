@@ -20,12 +20,12 @@ layout_mode = 0
 offset_top = 4.0
 offset_right = 121.0
 offset_bottom = 27.0
-text = "Linear:             %"
+text = "Linear:                %"
 
 [node name="Percent" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 56.0
-offset_right = 106.0
+offset_left = 58.0
+offset_right = 116.0
 offset_bottom = 35.0
 text = "0"
 
