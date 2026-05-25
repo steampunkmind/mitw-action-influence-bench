@@ -1,7 +1,7 @@
 class_name EditDefaultExpression extends EditExpression
 
 
-func init(expression_type: String, expression) -> void:
-	super.init(expression_type, expression)
-	$ExpressionType.text = expression_type
-	$Expression.text = str(expression)
+func init(key: String, expressions: Dictionary) -> void:
+	super.init(key, expressions)
+	$ExpressionType.text = key
+	$Expression.text = str(expressions.get(key))
