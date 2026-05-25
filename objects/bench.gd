@@ -4,7 +4,7 @@ const DONT_SAVE = "Don't Save"
 
 var _is_model: bool = false
 var _model_path: String = ""
-var _first_frame: bool = true
+var _frame_count: int = 0
 var _is_dirty: bool = false
 var _close_after_save: bool = false
 
@@ -49,14 +49,15 @@ func _on_frame_rate_slider_value_changed(new_value: float) -> void:
 	
 	
 func _on_timer_timeout() -> void:
-	if _first_frame:
+	if _frame_count == 0:
 		_on_action_button_pressed(MITW.aim_model().get_actions()[0])
-		_first_frame = false
 	
 	for sensor in MITW.aim_model().get_sensors():
 		sensor.update_value()
 	
 	$Sensors.add_frame_to_graph()
+	_frame_count += 1
+	$FrameCount.text = str(_frame_count)
 	
 	
 func _on_action_button_pressed(action: Action) -> void:
@@ -153,7 +154,8 @@ func _set_is_model(is_model: bool, model_path: String = "") -> void:
 	$Header.text = model_path.get_basename().get_file()
 	_model_path = model_path
 	if is_model:
-		_first_frame = true
+		_frame_count = 0
+		$FrameCount.text = str(_frame_count)
 	_reset_interface()
 	
 	
