@@ -10,3 +10,4 @@ func _on_text_edit_text_changed() -> void:
 	var text: String = $Value.get_text()
 	if text.is_valid_float():
 		_expressions.set(_key, text.to_float())
+		model_changed.emit()

@@ -36,4 +36,9 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 			result = edit_default_expression_template.instantiate()
 	
 	result.init(type, expressions)
+	result.model_changed.connect(_model_changed)
 	return result
+
+
+func _model_changed() -> void:
+	print("_model_changed in EditInfluence")
