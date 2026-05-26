@@ -113,5 +113,6 @@ default_color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
 [connection signal="toggled" from="HBox/EditParams/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
+[connection signal="model_changed" from="HBox/EditInfluences" to="." method="_model_changed"]
 [connection signal="pressed" from="HBox/EditInfluences/AddInfluenceButton" to="HBox/EditInfluences" method="_on_add_influence_button_pressed"]
 [connection signal="pressed" from="HBox/DeleteActionButton" to="." method="_on_delete_action_button_pressed"]

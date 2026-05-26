@@ -3,6 +3,8 @@ class_name EditInfluence extends Control
 var _influence: Influence
 var _edit_expressions: Array[EditExpression]
 
+signal model_changed
+
 @export var edit_default_expression_template: PackedScene
 @export var edit_linear_expression_template: PackedScene
 
@@ -41,4 +43,4 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 
 
 func _model_changed() -> void:
-	print("_model_changed in EditInfluence")
+	model_changed.emit()

@@ -86,3 +86,7 @@ func _on_behavior_check_box_toggled(toggled_on: bool) -> void:
 	_action.set_behavioral(toggled_on)
 	$HBox/ViewParams.text = _param_text()
 	model_edited.emit()
+
+
+func _model_changed() -> void:
+	model_edited.emit()
