@@ -8,14 +8,14 @@ func init(key: String, expressions) -> void:
 	var expression = expressions.get(key)
 	var x: float = $Name.size.x + 12
 	for dict: Dictionary in expression:
-		var edit_dict_entry = edit_dict_entry_template.instantiate()
+		var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
 		edit_dict_entry.init(dict)
 		add_child(edit_dict_entry)
 		
 		var p = edit_dict_entry.position
 		p.x = x
 		edit_dict_entry.set_position(p)
-		x += edit_dict_entry.size.x + 20
+		x += edit_dict_entry.get_custom_minimum_size().x + 20
 
 
 func _on_text_edit_text_changed() -> void:
