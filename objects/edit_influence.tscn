@@ -24,6 +24,7 @@ custom_minimum_size = Vector2(40, 23)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+text = "SensorName"
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 0

@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://cafcmo16ks5h6" path="res://objects/edit_expressions/edit_inflow_percent_expression.gd" id="1_umdvv"]
 [ext_resource type="PackedScene" uid="uid://dby8cmjcjfd1c" path="res://objects/edit_expressions/edit_dict_entry.tscn" id="2_muwyf"]
 
-[node name="EditInflowPercentExpression" type="Control"]
+[node name="EditInflowPercentExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(460, 35)
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,8 +17,8 @@ edit_dict_entry_template = ExtResource("2_muwyf")
 
 [node name="Name" type="Label" parent="."]
 custom_minimum_size = Vector2(120, 23)
-layout_mode = 0
-offset_top = 6.0
-offset_right = 120.0
-offset_bottom = 29.0
+layout_mode = 2
 text = "Inflow Percent:"
+
+[node name="HFlow" type="VFlowContainer" parent="."]
+layout_mode = 2

@@ -10,12 +10,7 @@ func init(key: String, expressions) -> void:
 	for dict: Dictionary in expression:
 		var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
 		edit_dict_entry.init(dict)
-		add_child(edit_dict_entry)
-		
-		var p = edit_dict_entry.position
-		p.x = x
-		edit_dict_entry.set_position(p)
-		x += edit_dict_entry.get_custom_minimum_size().x + 20
+		$HFlow.add_child(edit_dict_entry)
 
 
 func _on_text_edit_text_changed() -> void:
