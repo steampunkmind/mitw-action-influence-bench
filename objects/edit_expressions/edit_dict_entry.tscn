@@ -1,15 +1,35 @@
-[gd_scene format=3 uid="uid://dby8cmjcjfd1c"]
+[gd_scene load_steps=2 format=3 uid="uid://dby8cmjcjfd1c"]
+
+[ext_resource type="Script" uid="uid://d2wcv81yvh5ud" path="res://objects/edit_expressions/edit_dict_entry.gd" id="1_dxulm"]
 
 [node name="EditDictEntry" type="Control"]
-custom_minimum_size = Vector2(101, 23)
+custom_minimum_size = Vector2(170, 35)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 101.0
-offset_bottom = 23.0
+offset_right = 190.0
+offset_bottom = 35.0
+script = ExtResource("1_dxulm")
+
+[node name="Value" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(58, 35)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "0"
 
 [node name="Label" type="Label" parent="."]
-custom_minimum_size = Vector2(101, 23)
+custom_minimum_size = Vector2(60, 23)
+offset_left = 60.0
 offset_top = 6.0
-offset_right = 101.0
+offset_right = 120.0
 offset_bottom = 29.0
-text = "EditDictEntry"
+text = "% from "
+
+[node name="Sensor" type="MenuButton" parent="."]
+custom_minimum_size = Vector2(53, 31)
+layout_mode = 0
+offset_left = 118.0
+offset_top = 3.0
+offset_right = 171.0
+offset_bottom = 34.0
+text = "Menu"

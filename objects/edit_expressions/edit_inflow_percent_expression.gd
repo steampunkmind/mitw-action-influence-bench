@@ -9,6 +9,7 @@ func init(key: String, expressions) -> void:
 	var x: float = $Name.size.x + 12
 	for dict: Dictionary in expression:
 		var edit_dict_entry = edit_dict_entry_template.instantiate()
+		edit_dict_entry.init(dict)
 		add_child(edit_dict_entry)
 		
 		var p = edit_dict_entry.position
