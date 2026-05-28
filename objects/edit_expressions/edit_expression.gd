@@ -9,3 +9,7 @@ signal model_changed
 func init(key: String, expressions: Dictionary) -> void:
 	_key = key
 	_expressions = expressions
+
+
+func expression():
+	return _expressions.get(_key)

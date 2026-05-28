@@ -8,6 +8,7 @@ signal model_changed
 @export var edit_default_expression_template: PackedScene
 @export var edit_linear_expression_template: PackedScene
 @export var edit_percent_inflow_expression_template: PackedScene
+@export var edit_max_limit_expression_template: PackedScene
 
 
 func set_influence(influence: Influence) -> void:
@@ -37,6 +38,8 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 			result = edit_linear_expression_template.instantiate()
 		SensorFormulaInflowPercent.TYPE:
 			result = edit_percent_inflow_expression_template.instantiate()
+		SensorFormulaMaxLimit.TYPE:
+			result = edit_max_limit_expression_template.instantiate()
 		_:
 			result = edit_default_expression_template.instantiate()
 	
