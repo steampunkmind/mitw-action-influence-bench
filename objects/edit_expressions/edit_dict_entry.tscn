@@ -2,34 +2,27 @@
 
 [ext_resource type="Script" uid="uid://d2wcv81yvh5ud" path="res://objects/edit_expressions/edit_dict_entry.gd" id="1_dxulm"]
 
-[node name="EditDictEntry" type="Control"]
+[node name="EditDictEntry" type="HBoxContainer"]
 custom_minimum_size = Vector2(170, 35)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 190.0
 offset_bottom = 35.0
 script = ExtResource("1_dxulm")
 
 [node name="Value" type="TextEdit" parent="."]
 custom_minimum_size = Vector2(58, 35)
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 2
 text = "0"
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 23)
-offset_left = 60.0
-offset_top = 6.0
-offset_right = 120.0
-offset_bottom = 29.0
+layout_mode = 2
 text = "% from "
 
 [node name="Sensor" type="MenuButton" parent="."]
 custom_minimum_size = Vector2(53, 31)
-layout_mode = 0
-offset_left = 118.0
-offset_top = 3.0
-offset_right = 171.0
-offset_bottom = 34.0
+layout_mode = 2
 text = "Menu"
+
+[node name="Spacer" type="Control" parent="."]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
