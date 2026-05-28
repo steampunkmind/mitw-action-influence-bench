@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dgix7a4dv5n3w" path="res://objects/edit_influence.gd" id="1_s57et"]
 [ext_resource type="PackedScene" uid="uid://bm4ty7yre04h3" path="res://objects/edit_expressions/edit_default_expression.tscn" id="2_ogcb5"]
-[ext_resource type="PackedScene" uid="uid://d0dww1abhumue" path="res://objects/edit_expressions/edit_single_value_expression.tscn" id="3_04hob"]
+[ext_resource type="PackedScene" uid="uid://d0dww1abhumue" path="res://objects/edit_expressions/edit_value_expression.tscn" id="3_04hob"]
 [ext_resource type="PackedScene" uid="uid://j054b60wy3i2" path="res://objects/edit_expressions/edit_inflow_percent_expression.tscn" id="4_q3gcv"]
-[ext_resource type="PackedScene" uid="uid://esypxh0cw6cr" path="res://objects/edit_expressions/edit_max_limit_expression.tscn" id="5_04hob"]
+[ext_resource type="PackedScene" uid="uid://esypxh0cw6cr" path="res://objects/edit_expressions/edit_sensors_expression.tscn" id="5_04hob"]
 
 [node name="EditInfluence" type="Control"]
 layout_mode = 3
@@ -19,9 +19,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_s57et")
 edit_default_expression_template = ExtResource("2_ogcb5")
-edit_single_value_expression_template = ExtResource("3_04hob")
+edit_value_expression_template = ExtResource("3_04hob")
+edit_sensors_expression_template = ExtResource("5_04hob")
 edit_percent_inflow_expression_template = ExtResource("4_q3gcv")
-edit_max_limit_expression_template = ExtResource("5_04hob")
 
 [node name="SensorName" type="Label" parent="."]
 custom_minimum_size = Vector2(40, 23)

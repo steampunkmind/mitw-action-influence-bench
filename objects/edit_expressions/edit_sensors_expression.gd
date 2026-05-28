@@ -1,10 +1,11 @@
-class_name EditMaxLimitExpression extends EditExpression
+class_name EditSensorsExpression extends EditExpression
 
 @export var edit_dict_entry_template: PackedScene
 
 
 func init(key: String, expressions) -> void:
 	super.init(key, expressions)
+	$Name.text = key + ": "
 	for sensor: Sensor in MITW.aim_model().get_sensors():
 		$HFlow/SensorMenuTemplate.get_popup().add_item(sensor.get_name())
 		
