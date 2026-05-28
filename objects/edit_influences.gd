@@ -10,6 +10,10 @@ var _edit_influences: Array[EditInfluence]
 
 func set_action(action: Action) -> void:
 	_action = action
+	$AddEditInfluence.get_popup().index_pressed.connect(_on_add_edit_influence_index_pressed)
+	for sensor: Sensor in MITW.aim_model().get_sensors():
+		$AddEditInfluence.get_popup().add_item(sensor.get_name())
+		
 	for influence: Influence in action.get_influences():
 		var edit_influence: EditInfluence = edit_influence_template.instantiate()
 		edit_influence.set_influence(influence)
@@ -29,8 +33,14 @@ func _set_minimum_y() -> void:
 	set_custom_minimum_size(p)
 
 
-func _on_add_influence_button_pressed() -> void:
-	print("_on_add_influence_button_pressed")
+func _on_add_edit_influence_index_pressed(index) -> void:
+	var edit_influence: EditInfluence = edit_influence_template.instantiate()
+	#edit_influence.set_influence(influence)
+	edit_influence.model_changed.connect(_model_changed)
+	add_child(edit_influence)
+	_edit_influences.append(edit_influence)
+	_set_minimum_y()
+	_model_changed()
 
 
 func _model_changed() -> void:

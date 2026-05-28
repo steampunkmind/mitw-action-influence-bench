@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cblkrfosd0s10"]
+[gd_scene load_steps=15 format=3 uid="uid://cblkrfosd0s10"]
 
 [ext_resource type="Script" uid="uid://sj762fijttxy" path="res://objects/edit_action_row.gd" id="1_qp8pv"]
 [ext_resource type="Script" uid="uid://be3u6d5qot0wq" path="res://objects/edit_influences.gd" id="2_fxg7q"]
@@ -11,8 +11,6 @@
 [ext_resource type="Script" uid="uid://cafnvbiqhc66p" path="res://objects/edit_params.gd" id="5_l3hbn"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="7_7jjgo"]
 [ext_resource type="PackedScene" uid="uid://fgl237pqmu3l" path="res://objects/edit_influence.tscn" id="7_aa7xe"]
-[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="8_aa7xe"]
-[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="9_hyu8h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fr1ei"]
 font_size = 18
@@ -88,11 +86,10 @@ size_flags_horizontal = 3
 script = ExtResource("2_fxg7q")
 edit_influence_template = ExtResource("7_aa7xe")
 
-[node name="AddInfluenceButton" type="TextureButton" parent="HBox/EditInfluences"]
+[node name="AddEditInfluence" type="MenuButton" parent="HBox/EditInfluences"]
 layout_mode = 2
-texture_normal = ExtResource("7_7jjgo")
-texture_pressed = ExtResource("8_aa7xe")
-texture_hover = ExtResource("9_hyu8h")
+size_flags_horizontal = 0
+icon = ExtResource("7_7jjgo")
 
 [node name="DeleteActionButton" type="TextureButton" parent="HBox"]
 custom_minimum_size = Vector2(24, 24)
@@ -114,5 +111,4 @@ default_color = Color(0, 0, 0, 1)
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
 [connection signal="toggled" from="HBox/EditParams/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
 [connection signal="model_changed" from="HBox/EditInfluences" to="." method="_model_changed"]
-[connection signal="pressed" from="HBox/EditInfluences/AddInfluenceButton" to="HBox/EditInfluences" method="_on_add_influence_button_pressed"]
 [connection signal="pressed" from="HBox/DeleteActionButton" to="." method="_on_delete_action_button_pressed"]
