@@ -24,5 +24,7 @@ layout_mode = 2
 text = "Menu"
 
 [node name="Spacer" type="Control" parent="."]
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
+
+[connection signal="text_changed" from="Value" to="." method="_on_value_text_changed"]

@@ -9,11 +9,9 @@ func init(key: String, expressions) -> void:
 	for dict: Dictionary in expression:
 		var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
 		edit_dict_entry.init(dict)
+		edit_dict_entry.model_changed.connect(_model_changed)
 		$HFlow.add_child(edit_dict_entry)
 
 
-func _on_text_edit_text_changed() -> void:
-	var text: String = $Value.get_text()
-	if text.is_valid_float():
-		_expressions.set(_key, text.to_float())
-		model_changed.emit()
+func _model_changed() -> void:
+	model_changed.emit()
