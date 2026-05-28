@@ -6,7 +6,7 @@ var _edit_expressions: Array[EditExpression]
 signal model_changed
 
 @export var edit_default_expression_template: PackedScene
-@export var edit_linear_expression_template: PackedScene
+@export var edit_single_value_expression_template: PackedScene
 @export var edit_percent_inflow_expression_template: PackedScene
 @export var edit_max_limit_expression_template: PackedScene
 @export var edit_outflow_percent_expression_template: PackedScene
@@ -36,13 +36,13 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 	var result: EditExpression
 	match type:
 		SensorFormulaLinear.TYPE:
-			result = edit_linear_expression_template.instantiate()
+			result = edit_single_value_expression_template.instantiate()
 		SensorFormulaInflowPercent.TYPE:
 			result = edit_percent_inflow_expression_template.instantiate()
 		SensorFormulaMaxLimit.TYPE:
 			result = edit_max_limit_expression_template.instantiate()
 		SensorFormulaOutflowPercent.TYPE:
-			result = edit_linear_expression_template.instantiate()
+			result = edit_single_value_expression_template.instantiate()
 			result.show_percent()
 		_:
 			result = edit_default_expression_template.instantiate()

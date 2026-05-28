@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0dww1abhumue"]
 
-[ext_resource type="Script" uid="uid://c0n5526pxa2ct" path="res://objects/edit_expressions/edit_linear_expression.gd" id="1_a61ou"]
+[ext_resource type="Script" uid="uid://c0n5526pxa2ct" path="res://objects/edit_expressions/edit_single_value_expression.gd" id="1_111wc"]
 
-[node name="EditLinearExpression" type="HBoxContainer"]
+[node name="EditSingleValueExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(115, 35)
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ offset_right = -3184.0
 offset_bottom = -1915.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_a61ou")
+script = ExtResource("1_111wc")
 
 [node name="Name" type="Label" parent="."]
 custom_minimum_size = Vector2(54, 23)

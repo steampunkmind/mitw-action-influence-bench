@@ -1,4 +1,4 @@
-class_name EditLinearExpression extends EditExpression
+class_name EditSingleValueExpression extends EditExpression
 
 
 func init(key: String, expressions) -> void:
