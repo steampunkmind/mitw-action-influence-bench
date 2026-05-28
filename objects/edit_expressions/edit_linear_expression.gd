@@ -3,7 +3,7 @@ class_name EditLinearExpression extends EditExpression
 
 func init(key: String, expressions) -> void:
 	super.init(key, expressions)
-	$Value.text = str(expressions.get(key))
+	$Value.text = str(expression())
 
 
 func _on_text_edit_text_changed() -> void:

@@ -5,8 +5,7 @@ class_name EditInflowPercentExpression extends EditExpression
 
 func init(key: String, expressions) -> void:
 	super.init(key, expressions)
-	var expression = expressions.get(key)
-	for dict: Dictionary in expression:
+	for dict: Dictionary in expression():
 		var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
 		edit_dict_entry.init(dict)
 		edit_dict_entry.model_changed.connect(_model_changed)
