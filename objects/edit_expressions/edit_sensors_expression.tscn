@@ -14,9 +14,8 @@ grow_vertical = 2
 script = ExtResource("1_u7f85")
 
 [node name="Name" type="Label" parent="."]
-custom_minimum_size = Vector2(90, 26)
+custom_minimum_size = Vector2(10, 26)
 layout_mode = 2
-text = "Edit Sensors:"
 
 [node name="HFlow" type="VFlowContainer" parent="."]
 layout_mode = 2

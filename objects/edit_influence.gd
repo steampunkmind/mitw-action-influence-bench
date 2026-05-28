@@ -43,6 +43,8 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 		SensorFormulaOutflowPercent.TYPE:
 			result = edit_value_expression_template.instantiate()
 			result.show_percent()
+		SensorFormulaSum.TYPE:
+			result = edit_sensors_expression_template.instantiate()
 		_:
 			result = edit_default_expression_template.instantiate()
 	
