@@ -41,6 +41,7 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 			result = edit_percent_inflow_expression_template.instantiate()
 		SensorFormulaMaxLimit.TYPE:
 			result = edit_max_limit_expression_template.instantiate()
+		SensorFormulaOutflowPercent.TYPE:
 			result = edit_linear_expression_template.instantiate()
 			result.show_percent()
 		_:
