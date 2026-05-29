@@ -13,7 +13,11 @@ signal model_changed
 
 func set_influence(influence: Influence) -> void:
 	_influence = influence
-	$SensorName.text = influence.get_sensor_name()
+	$HBox/SensorName.text = influence.get_sensor_name()
+	$HBox/AddEditExpression.get_popup().index_pressed.connect(_on_add_edit_expression_index_pressed)
+	for expression_name: String in MITW.get_sensor_formula_types().keys():
+		$HBox/AddEditExpression.get_popup().add_item(expression_name)
+		
 	var expressions: Dictionary = influence.get_formula().get_expressions()
 	for key: String in expressions.keys():
 		var expression: EditExpression = _expression_by_type(key, expressions)
@@ -25,7 +29,7 @@ func set_influence(influence: Influence) -> void:
 
 func _set_minimum_y() -> void:
 	var p: Vector2 = get_combined_minimum_size()
-	p.y += $SensorName.get_combined_minimum_size().y
+	p.y += $HBox/SensorName.get_combined_minimum_size().y
 	for expression: EditExpression in _edit_expressions:
 		p.y += expression.get_combined_minimum_size().y
 	set_custom_minimum_size(p)
@@ -51,6 +55,17 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 	result.init(type, expressions)
 	result.model_changed.connect(_model_changed)
 	return result
+
+
+func _on_add_edit_expression_index_pressed(index) -> void:
+	var expression_name = $HBox/AddEditExpression.get_popup().get_item_text(index)
+	var expressions: Dictionary = _influence.get_formula().get_expressions()
+	expressions.set(expression_name, "-") # get default expression by type
+	var expression: EditExpression = _expression_by_type(expression_name, {})
+	$VBox.add_child(expression)
+	_edit_expressions.append(expression)
+	_set_minimum_y()
+	_model_changed()
 
 
 func _model_changed() -> void:
