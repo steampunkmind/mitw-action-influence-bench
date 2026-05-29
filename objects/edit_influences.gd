@@ -34,8 +34,10 @@ func _set_minimum_y() -> void:
 
 
 func _on_add_edit_influence_index_pressed(index) -> void:
+	var sensor_name = $AddEditInfluence.get_popup().get_item_text(index)
+	var influence = _action.add_influence(sensor_name)
 	var edit_influence: EditInfluence = edit_influence_template.instantiate()
-	#edit_influence.set_influence(influence)
+	edit_influence.set_influence(influence)
 	edit_influence.model_changed.connect(_model_changed)
 	add_child(edit_influence)
 	_edit_influences.append(edit_influence)
