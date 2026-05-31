@@ -33,3 +33,7 @@ func _on_sensor_menu_index_pressed(index) -> void:
 	$Sensor.text = sensor.get_name()
 	_dict.set(SENSOR_NAME, sensor.get_name())
 	model_changed.emit()
+
+
+func _new_expression() -> Variant:
+	return {}

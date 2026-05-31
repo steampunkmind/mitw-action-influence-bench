@@ -16,3 +16,7 @@ func _on_text_edit_text_changed() -> void:
 
 func show_percent() -> void:
 	$Percent.visible = true
+
+
+func _new_expression() -> Variant:
+	return {}

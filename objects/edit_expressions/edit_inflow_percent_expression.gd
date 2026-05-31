@@ -12,5 +12,9 @@ func init(key: String, expressions) -> void:
 		$HFlow.add_child(edit_dict_entry)
 
 
+func _new_expression() -> Variant:
+	return 0
+
+
 func _model_changed() -> void:
 	model_changed.emit()
