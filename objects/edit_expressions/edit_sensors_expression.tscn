@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://esypxh0cw6cr"]
+[gd_scene load_steps=3 format=3 uid="uid://esypxh0cw6cr"]
 
 [ext_resource type="Script" uid="uid://c2rqunr0cxxs3" path="res://objects/edit_expressions/edit_sensors_expression.gd" id="1_u7f85"]
+[ext_resource type="PackedScene" uid="uid://dby8cmjcjfd1c" path="res://objects/edit_expressions/edit_dict_entry.tscn" id="2_6nf8c"]
 
 [node name="EditSensorsExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(460, 35)
@@ -12,6 +13,7 @@ offset_bottom = -1915.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u7f85")
+edit_dict_entry_template = ExtResource("2_6nf8c")
 
 [node name="Name" type="Label" parent="."]
 custom_minimum_size = Vector2(10, 26)

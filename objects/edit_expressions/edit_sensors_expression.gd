@@ -22,5 +22,13 @@ func init(key: String, expressions) -> void:
 func _on_sensor_menu_index_pressed(index, sensor_menu, expression_index) -> void:
 	var sensor_name = sensor_menu.get_popup().get_item_text(index)
 	sensor_menu.text = sensor_name
-	expression().set(expression_index, sensor_name)
+	var expression = expression()
+	if expression is String:
+		expression = {}
+		_expressions.set(_key, expression)
+	expression.set(expression_index, sensor_name)
 	model_changed.emit()
+
+
+func _new_expression() -> Variant:
+	return {}
