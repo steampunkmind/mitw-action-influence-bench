@@ -190,7 +190,7 @@ func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 		$EditActionsButton.disabled = false
 	else:
 		$ActionButtonScroll/ActionButtons.update_buttons();
-		$EditActions.clear_edit_action_rows()
+		$EditActions._clear_edit_action_rows()
 		$EditActionsButton.text = "Edit Actions"
 		_reset_interface()
 		
