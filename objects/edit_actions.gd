@@ -17,17 +17,17 @@ func get_actions() -> Array[Action]:
 
 func set_actions(value: Array[Action]):
 	actions = value
-	clear_edit_action_rows()
-	add_edit_action_rows()
+	_clear_edit_action_rows()
+	_add_edit_action_rows()
 
 
-func clear_edit_action_rows() -> void:
+func _clear_edit_action_rows() -> void:
 	for edit_action_row: EditActionRow in _edit_action_rows:
 		$ActionScroll/Actions.remove_child(edit_action_row)
 	_edit_action_rows.clear()
 
 
-func add_edit_action_rows() -> void:
+func _add_edit_action_rows() -> void:
 	for action: Action in actions:
 		var row = edit_action_row_template.instantiate()
 		row.set_action(action)
@@ -58,8 +58,8 @@ func _delete_action_button_pressed(action: Action) -> void:
 
 
 func _model_changed() -> void:
-	clear_edit_action_rows()
-	add_edit_action_rows()
+	_clear_edit_action_rows()
+	_add_edit_action_rows()
 	model_changed.emit()
 	
 	

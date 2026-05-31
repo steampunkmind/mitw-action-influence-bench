@@ -4,6 +4,7 @@ var _influence: Influence
 var _edit_expressions: Array[EditExpression]
 
 signal model_changed
+signal delete_influence
 
 @export var edit_default_expression_template: PackedScene
 @export var edit_value_expression_template: PackedScene
@@ -66,6 +67,10 @@ func _on_add_edit_expression_index_pressed(index) -> void:
 	_edit_expressions.append(expression)
 	_set_minimum_y()
 	_model_changed()
+
+
+func _on_delete_influence_button_pressed() -> void:
+	delete_influence.emit()
 
 
 func _model_changed() -> void:

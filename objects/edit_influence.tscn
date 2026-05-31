@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://fgl237pqmu3l"]
+[gd_scene load_steps=10 format=3 uid="uid://fgl237pqmu3l"]
 
 [ext_resource type="Script" uid="uid://dgix7a4dv5n3w" path="res://objects/edit_influence.gd" id="1_s57et"]
 [ext_resource type="PackedScene" uid="uid://bm4ty7yre04h3" path="res://objects/edit_expressions/edit_default_expression.tscn" id="2_ogcb5"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://j054b60wy3i2" path="res://objects/edit_expressions/edit_inflow_percent_expression.tscn" id="4_q3gcv"]
 [ext_resource type="PackedScene" uid="uid://esypxh0cw6cr" path="res://objects/edit_expressions/edit_sensors_expression.tscn" id="5_04hob"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="6_nuxno"]
+[ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="7_d5lgd"]
+[ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="8_aoqhe"]
+[ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="9_0pb27"]
 
 [node name="EditInfluence" type="Control"]
 layout_mode = 3
@@ -26,7 +29,7 @@ edit_percent_inflow_expression_template = ExtResource("4_q3gcv")
 
 [node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
+offset_right = 163.0
 offset_bottom = 40.0
 
 [node name="SensorName" type="Label" parent="HBox"]
@@ -38,9 +41,19 @@ text = "SensorName"
 layout_mode = 2
 icon = ExtResource("6_nuxno")
 
+[node name="DeleteInfluenceButton" type="TextureButton" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture_normal = ExtResource("7_d5lgd")
+texture_pressed = ExtResource("8_aoqhe")
+texture_hover = ExtResource("9_0pb27")
+
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 24.0
 offset_right = 52.0
 offset_bottom = 64.0
+
+[connection signal="pressed" from="HBox/DeleteInfluenceButton" to="." method="_on_delete_influence_button_pressed"]
