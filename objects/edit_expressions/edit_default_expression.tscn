@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b6g27dtxqiewo" path="res://objects/edit_expressions/edit_default_expression.gd" id="1_rbojd"]
 
-[node name="EditDefaultExpression" type="Control"]
+[node name="EditDefaultExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(32, 52)
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,14 +16,9 @@ script = ExtResource("1_rbojd")
 [node name="ExpressionType" type="Label" parent="."]
 custom_minimum_size = Vector2(40, 23)
 layout_mode = 2
-offset_right = 300.0
-offset_bottom = 23.0
 text = "ExpressionType"
 
 [node name="Expression" type="Label" parent="."]
 custom_minimum_size = Vector2(300, 23)
 layout_mode = 2
-offset_top = 24.0
-offset_right = 300.0
-offset_bottom = 47.0
 text = "Expression"
