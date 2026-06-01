@@ -19,20 +19,15 @@ font_size = 18
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0sox"]
 
-[node name="EditActionRow" type="Control"]
+[node name="EditActionRow" type="VBoxContainer"]
 custom_minimum_size = Vector2(1924, 23)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 1924.0
-offset_bottom = 23.0
+offset_bottom = 26.0
 script = ExtResource("1_qp8pv")
 
 [node name="HBox" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(1924, 23)
-layout_mode = 0
-offset_top = 4.0
-offset_right = 1924.0
-offset_bottom = 64.0
+layout_mode = 2
 
 [node name="EditButton" type="TextureButton" parent="HBox"]
 layout_mode = 2
@@ -103,10 +98,10 @@ texture_hover = ExtResource("4_fxg7q")
 custom_minimum_size = Vector2(2, 24)
 layout_mode = 2
 
-[node name="Line" type="Line2D" parent="."]
-points = PackedVector2Array(0, 1, 1928, 1)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
+[node name="Line" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
 [connection signal="toggled" from="HBox/EditParams/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
