@@ -18,13 +18,18 @@ offset_right = -1376.0
 offset_bottom = -1886.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("1_s57et")
 edit_default_expression_template = ExtResource("2_ogcb5")
 edit_value_expression_template = ExtResource("3_04hob")
 edit_sensors_expression_template = ExtResource("5_04hob")
 edit_percent_inflow_expression_template = ExtResource("4_q3gcv")
+
+[node name="Line" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
 
 [node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2
