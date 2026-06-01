@@ -24,23 +24,12 @@ func _add_edit_influences() -> void:
 		edit_influence.delete_influence.connect(_delete_influence.bind(influence))
 		add_child(edit_influence)
 		_edit_influences.append(edit_influence)
-		
-	_set_minimum_y()
 
 
 func _clear_edit_influences() -> void:
 	for edit_influence: EditInfluence in _edit_influences:
 		remove_child(edit_influence)
 	_edit_influences.clear()
-
-
-func _set_minimum_y() -> void:
-	var y: float = 0.0
-	for edit_influence: EditInfluence in _edit_influences:
-		y += edit_influence.get_combined_minimum_size().y
-	var p: Vector2 = get_combined_minimum_size()
-	p.y = y
-	set_custom_minimum_size(p)
 
 
 func _on_add_edit_influence_index_pressed(index) -> void:
@@ -51,7 +40,6 @@ func _on_add_edit_influence_index_pressed(index) -> void:
 	edit_influence.model_changed.connect(_model_changed)
 	add_child(edit_influence)
 	_edit_influences.append(edit_influence)
-	_set_minimum_y()
 	_model_changed()
 
 

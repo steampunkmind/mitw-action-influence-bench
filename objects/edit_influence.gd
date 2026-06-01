@@ -1,4 +1,4 @@
-class_name EditInfluence extends Control
+class_name EditInfluence extends VBoxContainer
 
 var _influence: Influence
 var _edit_expressions: Array[EditExpression]
@@ -24,16 +24,6 @@ func set_influence(influence: Influence) -> void:
 		var expression: EditExpression = _expression_by_type(key, expressions)
 		$VBox.add_child(expression)
 		_edit_expressions.append(expression)
-		
-	_set_minimum_y()
-
-
-func _set_minimum_y() -> void:
-	var p: Vector2 = get_combined_minimum_size()
-	p.y += $HBox/SensorName.get_combined_minimum_size().y
-	for expression: EditExpression in _edit_expressions:
-		p.y += expression.get_combined_minimum_size().y
-	set_custom_minimum_size(p)
 
 
 func _expression_by_type(type: String, expressions: Dictionary) -> EditExpression:
@@ -65,7 +55,6 @@ func _on_add_edit_expression_index_pressed(index) -> void:
 	var expression: EditExpression = _expression_by_type(expression_name, {})
 	$VBox.add_child(expression)
 	_edit_expressions.append(expression)
-	_set_minimum_y()
 	_model_changed()
 
 
