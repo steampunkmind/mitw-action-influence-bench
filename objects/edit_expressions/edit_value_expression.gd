@@ -18,5 +18,5 @@ func show_percent() -> void:
 	$Percent.visible = true
 
 
-func _new_expression() -> Variant:
-	return {}
+func new_expression() -> Variant:
+	return 0.0

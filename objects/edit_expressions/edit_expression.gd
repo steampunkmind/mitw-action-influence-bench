@@ -14,11 +14,10 @@ func init(key: String, expressions: Dictionary) -> void:
 func expression() -> Variant:
 	var result = _expressions.get(_key)
 	if result == null:
-		result = _new_expression()
-		_expressions.set(_key, result)
+		result = new_expression()
 	return result
 
 
-func _new_expression() -> Variant:
-	print("Override _new_expression in EditExpression")
+func new_expression() -> Variant: 
+	print("Override new_expression in EditExpression")
 	return null

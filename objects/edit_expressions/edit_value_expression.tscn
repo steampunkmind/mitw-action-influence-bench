@@ -20,7 +20,6 @@ layout_mode = 2
 [node name="Value" type="TextEdit" parent="."]
 custom_minimum_size = Vector2(58, 35)
 layout_mode = 2
-text = "0"
 
 [node name="Percent" type="Label" parent="."]
 visible = false

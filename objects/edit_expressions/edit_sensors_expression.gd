@@ -30,5 +30,5 @@ func _on_sensor_menu_index_pressed(index, sensor_menu, expression_index) -> void
 	model_changed.emit()
 
 
-func _new_expression() -> Variant:
+func new_expression() -> Variant:
 	return {}

@@ -21,12 +21,13 @@ func set_influence(influence: Influence) -> void:
 		
 	var expressions: Dictionary = influence.get_formula().get_expressions()
 	for key: String in expressions.keys():
-		var expression: EditExpression = _expression_by_type(key, expressions)
-		$ExpressionBox/Expressions.add_child(expression)
-		_edit_expressions.append(expression)
+		var edit_expression: EditExpression = _expression_by_type(key)
+		edit_expression.init(key,expressions)
+		$ExpressionBox/Expressions.add_child(edit_expression)
+		_edit_expressions.append(edit_expression)
 
 
-func _expression_by_type(type: String, expressions: Dictionary) -> EditExpression:
+func _expression_by_type(type: String) -> EditExpression:
 	var result: EditExpression
 	match type:
 		SensorFormulaLinear.TYPE:
@@ -43,18 +44,19 @@ func _expression_by_type(type: String, expressions: Dictionary) -> EditExpressio
 		_:
 			result = edit_default_expression_template.instantiate()
 	
-	result.init(type, expressions)
 	result.model_changed.connect(_model_changed)
 	return result
 
 
 func _on_add_edit_expression_index_pressed(index) -> void:
-	var expression_name = $SensorBox/AddEditExpression.get_popup().get_item_text(index)
 	var expressions: Dictionary = _influence.get_formula().get_expressions()
-	expressions.set(expression_name, "-") # get default expression by type
-	var expression: EditExpression = _expression_by_type(expression_name, {})
-	$ExpressionBox/Expressions.add_child(expression)
-	_edit_expressions.append(expression)
+	var expression_name = $SensorBox/AddEditExpression.get_popup().get_item_text(index)
+	var edit_expression: EditExpression = _expression_by_type(expression_name)
+	expressions.set(expression_name, edit_expression.new_expression())
+	edit_expression.init(expression_name, expressions)
+	
+	$ExpressionBox/Expressions.add_child(edit_expression)
+	_edit_expressions.append(edit_expression)
 	_model_changed()
 
 
