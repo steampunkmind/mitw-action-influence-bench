@@ -7,10 +7,9 @@ func init(key: String, expressions) -> void:
 	$Value.text = str(expression())
 
 
-func _on_text_edit_text_changed() -> void:
-	var text: String = $Value.get_text()
-	if text.is_valid_float():
-		_expressions.set(_key, text.to_float())
+func _on_value_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		_expressions.set(_key, new_text.to_float())
 		model_changed.emit()
 
 

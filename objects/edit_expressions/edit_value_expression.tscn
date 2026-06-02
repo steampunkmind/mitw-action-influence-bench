@@ -20,10 +20,11 @@ layout_mode = 2
 [node name="Value" type="LineEdit" parent="."]
 custom_minimum_size = Vector2(58, 35)
 layout_mode = 2
+max_length = 12
 
 [node name="Percent" type="Label" parent="."]
 visible = false
 layout_mode = 2
 text = "%"
 
-[connection signal="text_changed" from="Value" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="Value" to="." method="_on_value_text_changed"]
