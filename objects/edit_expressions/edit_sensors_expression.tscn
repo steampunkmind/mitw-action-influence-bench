@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://esypxh0cw6cr"]
+[gd_scene load_steps=6 format=3 uid="uid://esypxh0cw6cr"]
 
 [ext_resource type="Script" uid="uid://c2rqunr0cxxs3" path="res://objects/edit_expressions/edit_sensors_expression.gd" id="1_u7f85"]
 [ext_resource type="PackedScene" uid="uid://dby8cmjcjfd1c" path="res://objects/edit_expressions/edit_dict_entry.tscn" id="2_6nf8c"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_x1ucj"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_tgv0f"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_tvd52"]
 
 [node name="EditSensorsExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(460, 35)
@@ -22,7 +25,15 @@ layout_mode = 2
 [node name="HFlow" type="VFlowContainer" parent="."]
 layout_mode = 2
 
+[node name="AddSensorButton" type="TextureButton" parent="HFlow"]
+layout_mode = 2
+texture_normal = ExtResource("3_x1ucj")
+texture_pressed = ExtResource("4_tgv0f")
+texture_hover = ExtResource("5_tvd52")
+
 [node name="SensorMenuTemplate" type="MenuButton" parent="HFlow"]
 visible = false
 layout_mode = 2
 text = "SensorMenu"
+
+[connection signal="pressed" from="HFlow/AddSensorButton" to="." method="_on_add_sensor_button_pressed"]

@@ -1,5 +1,7 @@
 class_name EditSensorsExpression extends EditExpression
 
+const DEFAULT_SELECTION = "---"
+
 @export var edit_dict_entry_template: PackedScene
 
 
@@ -22,13 +24,21 @@ func init(key: String, expressions) -> void:
 func _on_sensor_menu_index_pressed(index, sensor_menu, expression_index) -> void:
 	var sensor_name = sensor_menu.get_popup().get_item_text(index)
 	sensor_menu.text = sensor_name
-	var expression = expression()
-	if expression is String:
-		expression = {}
-		_expressions.set(_key, expression)
-	expression.set(expression_index, sensor_name)
+	expression().set(expression_index, sensor_name)
 	model_changed.emit()
 
 
 func new_expression() -> Variant:
-	return {}
+	return ["---"]
+
+
+func _on_add_sensor_button_pressed() -> void:
+	var expression: Array = expression()
+	var expression_index = expression.size()
+	expression.append(DEFAULT_SELECTION)
+	
+	var sensor_menu = $HFlow/SensorMenuTemplate.duplicate(DuplicateFlags.DUPLICATE_SIGNALS)
+	sensor_menu.get_popup().index_pressed.connect(_on_sensor_menu_index_pressed.bind(sensor_menu, expression_index))
+	sensor_menu.text = DEFAULT_SELECTION
+	sensor_menu.set_visible(true)
+	$HFlow.add_child(sensor_menu)
