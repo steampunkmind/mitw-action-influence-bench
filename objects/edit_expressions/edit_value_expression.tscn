@@ -17,7 +17,7 @@ script = ExtResource("1_111wc")
 custom_minimum_size = Vector2(10, 23)
 layout_mode = 2
 
-[node name="Value" type="TextEdit" parent="."]
+[node name="Value" type="LineEdit" parent="."]
 custom_minimum_size = Vector2(58, 35)
 layout_mode = 2
 
