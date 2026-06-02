@@ -45,6 +45,7 @@ func _expression_by_type(type: String) -> EditExpression:
 			result = edit_default_expression_template.instantiate()
 	
 	result.model_changed.connect(_model_changed)
+	result.delete_edit_expression.connect(_delete_edit_expression.bind(result))
 	return result
 
 
@@ -57,6 +58,11 @@ func _on_add_edit_expression_index_pressed(index) -> void:
 	
 	$ExpressionBox/Expressions.add_child(edit_expression)
 	_edit_expressions.append(edit_expression)
+	_model_changed()
+
+
+func _delete_edit_expression(edit_expression: EditExpression) -> void:
+	$ExpressionBox/Expressions.remove_child(edit_expression)
 	_model_changed()
 
 

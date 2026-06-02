@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0dww1abhumue"]
+[gd_scene load_steps=5 format=3 uid="uid://d0dww1abhumue"]
 
 [ext_resource type="Script" uid="uid://c0n5526pxa2ct" path="res://objects/edit_expressions/edit_value_expression.gd" id="1_111wc"]
+[ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="2_s6iwf"]
+[ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="3_rgefn"]
+[ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="4_xx68q"]
 
 [node name="EditValueExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(115, 35)
@@ -27,4 +30,13 @@ visible = false
 layout_mode = 2
 text = "%"
 
+[node name="DeleteButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture_normal = ExtResource("2_s6iwf")
+texture_pressed = ExtResource("3_rgefn")
+texture_hover = ExtResource("4_xx68q")
+
 [connection signal="text_changed" from="Value" to="." method="_on_value_text_changed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]

@@ -4,6 +4,7 @@ var _key: String
 var _expressions: Dictionary
 
 signal model_changed
+signal delete_edit_expression
 
 
 func init(key: String, expressions: Dictionary) -> void:
@@ -21,3 +22,8 @@ func expression() -> Variant:
 func new_expression() -> Variant: 
 	print("Override new_expression in EditExpression")
 	return null
+
+
+func _on_delete_button_pressed() -> void:
+	_expressions.erase(_key)
+	delete_edit_expression.emit()
