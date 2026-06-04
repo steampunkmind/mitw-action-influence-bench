@@ -46,4 +46,13 @@ texture_normal = ExtResource("6_fbinq")
 texture_pressed = ExtResource("7_1eddt")
 texture_hover = ExtResource("8_31g4k")
 
+[node name="DeleteButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture_normal = ExtResource("6_fbinq")
+texture_pressed = ExtResource("7_1eddt")
+texture_hover = ExtResource("8_31g4k")
+
 [connection signal="pressed" from="HFlow/AddSensorButton" to="." method="_on_add_sensor_button_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
