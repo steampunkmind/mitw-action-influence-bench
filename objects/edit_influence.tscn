@@ -60,6 +60,7 @@ layout_mode = 2
 
 [node name="Expressions" type="VBoxContainer" parent="ExpressionBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 14
 
 [connection signal="pressed" from="SensorBox/DeleteInfluenceButton" to="." method="_on_delete_influence_button_pressed"]

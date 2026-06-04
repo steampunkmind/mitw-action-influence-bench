@@ -18,6 +18,12 @@ func init(key: String, expressions) -> void:
 		sensor_menu.text = sensor_name
 		sensor_menu.set_visible(true)
 		$HFlow.add_child(sensor_menu)
+		
+		var delete_sensor_button = $HFlow/DeleteSensorButtonTemplate.duplicate()
+		delete_sensor_button.pressed.connect(_on_delete_sensor_button_pressed.bind(delete_sensor_button, sensor_menu, expression_index))
+		delete_sensor_button.set_visible(true)
+		$HFlow.add_child(delete_sensor_button)
+		
 		expression_index += 1
 
 
@@ -37,8 +43,20 @@ func _on_add_sensor_button_pressed() -> void:
 	var expression_index = expression.size()
 	expression.append(DEFAULT_SELECTION)
 	
-	var sensor_menu = $HFlow/SensorMenuTemplate.duplicate(DuplicateFlags.DUPLICATE_SIGNALS)
+	var sensor_menu = $HFlow/SensorMenuTemplate.duplicate()
 	sensor_menu.get_popup().index_pressed.connect(_on_sensor_menu_index_pressed.bind(sensor_menu, expression_index))
 	sensor_menu.text = DEFAULT_SELECTION
 	sensor_menu.set_visible(true)
 	$HFlow.add_child(sensor_menu)
+	
+	var delete_sensor_button = $HFlow/DeleteSensorButtonTemplate.duplicate()
+	delete_sensor_button.pressed.connect(_on_delete_sensor_button_pressed.bind(delete_sensor_button, sensor_menu, expression_index))
+	delete_sensor_button.set_visible(true)
+	$HFlow.add_child(delete_sensor_button)
+
+
+func _on_delete_sensor_button_pressed(delete_sensor_button, sensor_menu, expression_index) -> void:
+	$HFlow.remove_child(delete_sensor_button)
+	$HFlow.remove_child(sensor_menu)
+	expression().remove_at(expression_index)
+	model_changed.emit()

@@ -198,6 +198,7 @@ func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 
 
 func _disable_interface() -> void:
+	$FileMenu.visible = false
 	$FileMenu.get_popup().set_item_disabled(FILE_NEW, true)
 	$FileMenu.get_popup().set_item_disabled(FILE_OPEN, true)
 	$FileMenu.get_popup().set_item_disabled(FILE_CLOSE, true)
@@ -213,6 +214,7 @@ func _disable_interface() -> void:
 
 
 func _reset_interface() -> void:
+	$FileMenu.visible = true
 	$FileMenu.get_popup().set_item_disabled(FILE_NEW, _is_model)
 	$FileMenu.get_popup().set_item_disabled(FILE_OPEN, _is_model)
 	$FileMenu.get_popup().set_item_disabled(FILE_CLOSE, !_is_model)
