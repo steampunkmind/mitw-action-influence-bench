@@ -16,17 +16,17 @@ func init(key: String, expressions) -> void:
 
 
 func new_expression() -> Variant:
-	return [EditDictEntry.new_sub_expression()]
+	return [EditDictEntry.new_subexpression()]
 
 
 func _on_add_button_pressed() -> void:
 	var expression: Array = expression()
 	var expression_index = expression.size()
-	var sub_expression = EditDictEntry.new_sub_expression()
-	expression.append(sub_expression)
+	var subexpression = EditDictEntry.new_subexpression()
+	expression.append(subexpression)
 	
 	var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
-	edit_dict_entry.init(sub_expression)
+	edit_dict_entry.init(subexpression)
 	edit_dict_entry.model_changed.connect(_model_changed)
 	edit_dict_entry.delete_edit_dict_entry.connect(_delete_edit_dict_entry.bind(edit_dict_entry, expression_index))	
 	$HFlow.add_child(edit_dict_entry)

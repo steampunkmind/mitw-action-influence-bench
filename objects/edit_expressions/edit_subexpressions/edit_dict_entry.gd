@@ -4,7 +4,7 @@ var _dict: Dictionary
 
 const INFLOW_PERCENT = "inflow_percent"
 const SENSOR_NAME = "sensor_name"
-const SUB_EXPRESSION = {INFLOW_PERCENT: 0.0, SENSOR_NAME: EditExpression.DEFAULT_SELECTION}
+const SUBEXPRESSION = {INFLOW_PERCENT: 0.0, SENSOR_NAME: EditExpression.DEFAULT_SELECTION}
 
 
 signal model_changed
@@ -37,8 +37,8 @@ func _on_sensor_menu_index_pressed(index) -> void:
 	model_changed.emit()
 
 
-static func new_sub_expression() -> Variant:
-	return SUB_EXPRESSION.duplicate()
+static func new_subexpression() -> Variant:
+	return SUBEXPRESSION.duplicate()
 
 
 func _on_delete_button_pressed() -> void:
