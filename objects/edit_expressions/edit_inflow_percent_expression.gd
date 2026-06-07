@@ -1,7 +1,5 @@
 class_name EditInflowPercentExpression extends EditExpression
 
-const SUB_EXPRESSION = {"inflow_percent": 0.0, "sensor_name": DEFAULT_SELECTION}
-
 @export var edit_dict_entry_template: PackedScene
 
 
@@ -18,13 +16,13 @@ func init(key: String, expressions) -> void:
 
 
 func new_expression() -> Variant:
-	return [SUB_EXPRESSION.duplicate()]
+	return [EditDictEntry.new_sub_expression()]
 
 
 func _on_add_button_pressed() -> void:
 	var expression: Array = expression()
 	var expression_index = expression.size()
-	var sub_expression = SUB_EXPRESSION.duplicate()
+	var sub_expression = EditDictEntry.new_sub_expression()
 	expression.append(sub_expression)
 	
 	var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
