@@ -25,14 +25,14 @@ edit_dict_entry_template = ExtResource("2_6nf8c")
 custom_minimum_size = Vector2(10, 26)
 layout_mode = 2
 
-[node name="HFlow" type="VFlowContainer" parent="."]
-layout_mode = 2
-
-[node name="AddSensorButton" type="TextureButton" parent="HFlow"]
+[node name="AddSensorButton" type="TextureButton" parent="."]
 layout_mode = 2
 texture_normal = ExtResource("3_x1ucj")
 texture_pressed = ExtResource("4_tgv0f")
 texture_hover = ExtResource("5_tvd52")
+
+[node name="HFlow" type="VFlowContainer" parent="."]
+layout_mode = 2
 
 [node name="SensorMenuTemplate" type="MenuButton" parent="HFlow"]
 visible = false
@@ -54,5 +54,5 @@ texture_normal = ExtResource("6_fbinq")
 texture_pressed = ExtResource("7_1eddt")
 texture_hover = ExtResource("8_31g4k")
 
-[connection signal="pressed" from="HFlow/AddSensorButton" to="." method="_on_add_sensor_button_pressed"]
+[connection signal="pressed" from="AddSensorButton" to="." method="_on_add_sensor_button_pressed"]
 [connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]

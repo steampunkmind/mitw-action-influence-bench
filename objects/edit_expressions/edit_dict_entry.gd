@@ -36,3 +36,7 @@ func _on_sensor_menu_index_pressed(index) -> void:
 
 func _new_expression() -> Variant:
 	return {}
+
+
+func _on_delete_button_pressed() -> void:
+	print("_on_delete_button_pressed")

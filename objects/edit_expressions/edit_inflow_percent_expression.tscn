@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://csnh2gi1bvkgm"]
+[gd_scene load_steps=9 format=3 uid="uid://csnh2gi1bvkgm"]
 
 [ext_resource type="Script" uid="uid://dhucubmlguvpx" path="res://objects/edit_expressions/edit_inflow_percent_expression.gd" id="1_umdvv"]
 [ext_resource type="PackedScene" uid="uid://dby8cmjcjfd1c" path="res://objects/edit_expressions/edit_dict_entry.tscn" id="2_muwyf"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_ppnin"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_7hxf7"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_a1v6l"]
+[ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="6_88fon"]
+[ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="7_my86g"]
+[ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="8_n8qqo"]
 
 [node name="EditInflowPercentExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(460, 35)
@@ -20,5 +26,23 @@ custom_minimum_size = Vector2(120, 23)
 layout_mode = 2
 text = "Inflow Percent:"
 
+[node name="AddButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("3_ppnin")
+texture_pressed = ExtResource("4_7hxf7")
+texture_hover = ExtResource("5_a1v6l")
+
 [node name="HFlow" type="VFlowContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DeleteButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("6_88fon")
+texture_pressed = ExtResource("7_my86g")
+texture_hover = ExtResource("8_n8qqo")
+
+[connection signal="pressed" from="AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]

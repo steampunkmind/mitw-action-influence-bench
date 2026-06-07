@@ -18,3 +18,7 @@ func new_expression() -> Variant:
 
 func _model_changed() -> void:
 	model_changed.emit()
+
+
+func _on_add_button_pressed() -> void:
+	print("_on_add_button_pressed")
