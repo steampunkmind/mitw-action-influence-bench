@@ -6,6 +6,7 @@ const INFLOW_PERCENT = "inflow_percent"
 const SENSOR_NAME = "sensor_name"
 
 signal model_changed
+signal delete_edit_dict_entry
 
 
 func init(dict: Dictionary) -> void:
@@ -39,4 +40,5 @@ func _new_expression() -> Variant:
 
 
 func _on_delete_button_pressed() -> void:
-	print("_on_delete_button_pressed")
+	print("_on_delete_button_pressed in EditDictEntry")
+	delete_edit_dict_entry.emit()

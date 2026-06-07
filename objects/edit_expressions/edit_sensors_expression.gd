@@ -1,7 +1,5 @@
 class_name EditSensorsExpression extends EditExpression
 
-@export var edit_dict_entry_template: PackedScene
-
 
 func init(key: String, expressions) -> void:
 	super.init(key, expressions)
