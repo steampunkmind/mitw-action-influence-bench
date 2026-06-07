@@ -3,6 +3,8 @@ class_name EditExpression extends Control
 var _key: String
 var _expressions: Dictionary
 
+const DEFAULT_SELECTION = "---"
+
 signal model_changed
 signal delete_edit_expression
 

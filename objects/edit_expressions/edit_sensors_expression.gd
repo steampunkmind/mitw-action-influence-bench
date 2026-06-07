@@ -1,7 +1,5 @@
 class_name EditSensorsExpression extends EditExpression
 
-const DEFAULT_SELECTION = "---"
-
 @export var edit_dict_entry_template: PackedScene
 
 

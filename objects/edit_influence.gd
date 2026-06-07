@@ -9,6 +9,7 @@ signal delete_influence
 @export var edit_default_expression_template: PackedScene
 @export var edit_value_expression_template: PackedScene
 @export var edit_sensors_expression_template: PackedScene
+@export var edit_inflow_percent_exception: PackedScene
 
 
 func set_influence(influence: Influence) -> void:
@@ -31,11 +32,13 @@ func _expression_by_type(type: String) -> EditExpression:
 	match type:
 		SensorFormulaLinear.TYPE:
 			result = edit_value_expression_template.instantiate()
-		SensorFormulaInflowPercent.TYPE, SensorFormulaOutflowPercent.TYPE:
+		SensorFormulaOutflowPercent.TYPE:
 			result = edit_value_expression_template.instantiate()
 			result.show_percent()
 		SensorFormulaMaxLimit.TYPE, SensorFormulaSum.TYPE:
 			result = edit_sensors_expression_template.instantiate()
+		SensorFormulaInflowPercent.TYPE:
+			result = edit_inflow_percent_exception.instantiate()
 		_:
 			result = edit_default_expression_template.instantiate()
 	
