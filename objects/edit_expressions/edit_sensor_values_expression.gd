@@ -1,4 +1,4 @@
-class_name EditInflowPercentExpression extends EditExpression
+class_name EditSensorValuesExpression extends EditExpression
 
 @export var edit_dict_entry_template: PackedScene
 
