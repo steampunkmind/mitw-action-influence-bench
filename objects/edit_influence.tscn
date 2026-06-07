@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://fgl237pqmu3l"]
+[gd_scene load_steps=11 format=3 uid="uid://fgl237pqmu3l"]
 
 [ext_resource type="Script" uid="uid://dgix7a4dv5n3w" path="res://objects/edit_influence.gd" id="1_s57et"]
 [ext_resource type="PackedScene" uid="uid://bm4ty7yre04h3" path="res://objects/edit_expressions/edit_default_expression.tscn" id="2_ogcb5"]
 [ext_resource type="PackedScene" uid="uid://d0dww1abhumue" path="res://objects/edit_expressions/edit_value_expression.tscn" id="3_04hob"]
 [ext_resource type="PackedScene" uid="uid://esypxh0cw6cr" path="res://objects/edit_expressions/edit_sensors_expression.tscn" id="5_04hob"]
 [ext_resource type="PackedScene" uid="uid://csnh2gi1bvkgm" path="res://objects/edit_expressions/edit_sensor_values_expression.tscn" id="5_d5lgd"]
+[ext_resource type="PackedScene" uid="uid://l2dfvtxlcerh" path="res://objects/edit_expressions/edit_action_min_max_expression.tscn" id="6_aoqhe"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="6_nuxno"]
 [ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="7_d5lgd"]
 [ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="8_aoqhe"]
@@ -24,7 +25,8 @@ script = ExtResource("1_s57et")
 edit_default_expression_template = ExtResource("2_ogcb5")
 edit_value_expression_template = ExtResource("3_04hob")
 edit_sensors_expression_template = ExtResource("5_04hob")
-edit_inflow_percent_exception = ExtResource("5_d5lgd")
+edit_sensor_values_exception = ExtResource("5_d5lgd")
+edit_action_min_max_exception = ExtResource("6_aoqhe")
 
 [node name="Line" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(0, 1)

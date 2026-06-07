@@ -9,7 +9,8 @@ signal delete_influence
 @export var edit_default_expression_template: PackedScene
 @export var edit_value_expression_template: PackedScene
 @export var edit_sensors_expression_template: PackedScene
-@export var edit_inflow_percent_exception: PackedScene
+@export var edit_sensor_values_exception: PackedScene
+@export var edit_action_min_max_exception: PackedScene
 
 
 func set_influence(influence: Influence) -> void:
@@ -38,7 +39,12 @@ func _expression_by_type(type: String) -> EditExpression:
 		SensorFormulaMaxLimit.TYPE, SensorFormulaSum.TYPE:
 			result = edit_sensors_expression_template.instantiate()
 		SensorFormulaInflowPercent.TYPE:
-			result = edit_inflow_percent_exception.instantiate()
+			result = edit_sensor_values_exception.instantiate()
+		SensorFormulaDelayAction.TYPE:
+			result = edit_action_min_max_exception.instantiate()
+		#SensorFormulaSelectAction.TYPE:
+		#SensorFormulaSet.TYPE:
+		#SensorFormulaShuffleAction.TYPE:
 		_:
 			result = edit_default_expression_template.instantiate()
 	
