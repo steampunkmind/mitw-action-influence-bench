@@ -31,7 +31,7 @@ func _on_sensor_menu_index_pressed(index, sensor_menu, expression_index) -> void
 
 
 func new_expression() -> Variant:
-	return ["---"]
+	return [DEFAULT_SELECTION]
 
 
 func _on_add_sensor_button_pressed() -> void:
