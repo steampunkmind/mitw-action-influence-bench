@@ -37,9 +37,8 @@ func _on_add_button_pressed() -> void:
 
 
 func _delete_edit_dict_entry(edit_dict_entry, expression_index) -> void:
-	print("_on_add_button_pressed in EditInflowPercentExpression")
-	print(edit_dict_entry)
-	print(expression_index)
+	$HFlow.remove_child(edit_dict_entry)
+	expression().remove_at(expression_index)
 	_model_changed()
 
 

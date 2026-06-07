@@ -40,5 +40,4 @@ func _new_expression() -> Variant:
 
 
 func _on_delete_button_pressed() -> void:
-	print("_on_delete_button_pressed in EditDictEntry")
 	delete_edit_dict_entry.emit()
