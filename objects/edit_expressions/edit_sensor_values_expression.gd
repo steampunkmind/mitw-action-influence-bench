@@ -1,41 +1,41 @@
 class_name EditSensorValuesExpression extends EditExpression
 
-@export var edit_dict_entry_template: PackedScene
+@export var edit_sensor_value_template: PackedScene
 
 
 func init(key: String, expressions) -> void:
 	super.init(key, expressions)
 	var expression_index = 0
-	for dict: Dictionary in expression():
-		var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
-		edit_dict_entry.init(dict)
-		edit_dict_entry.model_changed.connect(_model_changed)
-		edit_dict_entry.delete_edit_dict_entry.connect(_delete_edit_dict_entry.bind(edit_dict_entry, expression_index))	
-		$HFlow.add_child(edit_dict_entry)
+	for expression: Dictionary in expression():
+		var edit_sensor_value: EditSensorValue = edit_sensor_value_template.instantiate()
+		edit_sensor_value.init(expression)
+		edit_sensor_value.model_changed.connect(_model_changed)
+		edit_sensor_value.delete_edit_sensor_value.connect(_delete_edit_sensor_value.bind(edit_sensor_value, expression_index))	
+		$HFlow.add_child(edit_sensor_value)
 		expression_index += 1
 
 
 func new_expression() -> Variant:
-	return [EditDictEntry.new_subexpression()]
+	return [EditSensorValue.new_subexpression()]
 
 
 func _on_add_button_pressed() -> void:
 	var expression: Array = expression()
 	var expression_index = expression.size()
-	var subexpression = EditDictEntry.new_subexpression()
+	var subexpression = EditSensorValue.new_subexpression()
 	expression.append(subexpression)
 	
-	var edit_dict_entry: EditDictEntry = edit_dict_entry_template.instantiate()
-	edit_dict_entry.init(subexpression)
-	edit_dict_entry.model_changed.connect(_model_changed)
-	edit_dict_entry.delete_edit_dict_entry.connect(_delete_edit_dict_entry.bind(edit_dict_entry, expression_index))	
-	$HFlow.add_child(edit_dict_entry)
+	var edit_sensor_value: EditSensorValue = edit_sensor_value_template.instantiate()
+	edit_sensor_value.init(subexpression)
+	edit_sensor_value.model_changed.connect(_model_changed)
+	edit_sensor_value.delete_edit_sensor_value.connect(_delete_edit_sensor_value.bind(edit_sensor_value, expression_index))	
+	$HFlow.add_child(edit_sensor_value)
 
 	_model_changed()
 
 
-func _delete_edit_dict_entry(edit_dict_entry, expression_index) -> void:
-	$HFlow.remove_child(edit_dict_entry)
+func _delete_edit_sensor_value(edit_sensor_value, expression_index) -> void:
+	$HFlow.remove_child(edit_sensor_value)
 	expression().remove_at(expression_index)
 	_model_changed()
 

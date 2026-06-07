@@ -1,4 +1,4 @@
-class_name EditDictEntry extends Control
+class_name EditSensorValue extends Control
 
 var _dict: Dictionary
 
@@ -8,7 +8,7 @@ const SUBEXPRESSION = {INFLOW_PERCENT: 0.0, SENSOR_NAME: EditExpression.DEFAULT_
 
 
 signal model_changed
-signal delete_edit_dict_entry
+signal delete_edit_sensor_value
 
 
 func init(dict: Dictionary) -> void:
@@ -42,4 +42,4 @@ static func new_subexpression() -> Variant:
 
 
 func _on_delete_button_pressed() -> void:
-	delete_edit_dict_entry.emit()
+	delete_edit_sensor_value.emit()

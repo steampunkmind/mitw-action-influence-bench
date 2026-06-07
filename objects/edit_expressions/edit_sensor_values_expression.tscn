@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://csnh2gi1bvkgm"]
 
 [ext_resource type="Script" uid="uid://dhucubmlguvpx" path="res://objects/edit_expressions/edit_sensor_values_expression.gd" id="1_umdvv"]
-[ext_resource type="PackedScene" uid="uid://dby8cmjcjfd1c" path="res://objects/edit_expressions/edit_subexpressions/edit_dict_entry.tscn" id="2_muwyf"]
+[ext_resource type="PackedScene" uid="uid://dby8cmjcjfd1c" path="res://objects/edit_expressions/edit_subexpressions/edit_sensor_value.tscn" id="2_muwyf"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_ppnin"]
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_7hxf7"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_a1v6l"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="7_my86g"]
 [ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="8_n8qqo"]
 
-[node name="EditInflowPercentExpression" type="HBoxContainer"]
+[node name="EditSensorValuesExpression" type="HBoxContainer"]
 custom_minimum_size = Vector2(460, 35)
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ offset_bottom = -1915.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_umdvv")
-edit_dict_entry_template = ExtResource("2_muwyf")
+edit_sensor_value_template = ExtResource("2_muwyf")
 
 [node name="Name" type="Label" parent="."]
 custom_minimum_size = Vector2(120, 23)
