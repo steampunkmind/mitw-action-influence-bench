@@ -9,7 +9,7 @@ func init(key: String, expressions) -> void:
 		
 	var expression_index = 0
 	for sensor_name: String in expression():
-		var sensor_menu = $HFlow/SensorMenuTemplate.duplicate(DuplicateFlags.DUPLICATE_SIGNALS)
+		var sensor_menu = $HFlow/SensorMenuTemplate.duplicate()
 		sensor_menu.get_popup().index_pressed.connect(_on_sensor_menu_index_pressed.bind(sensor_menu, expression_index))
 		sensor_menu.text = sensor_name
 		sensor_menu.set_visible(true)
