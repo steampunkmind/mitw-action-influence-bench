@@ -25,8 +25,8 @@ script = ExtResource("1_s57et")
 edit_default_expression_template = ExtResource("2_ogcb5")
 edit_value_expression_template = ExtResource("3_04hob")
 edit_sensors_expression_template = ExtResource("5_04hob")
-edit_sensor_values_exception = ExtResource("5_d5lgd")
-edit_action_min_max_exception = ExtResource("6_aoqhe")
+edit_sensor_values_expression_template = ExtResource("5_d5lgd")
+edit_action_min_max_expression_template = ExtResource("6_aoqhe")
 
 [node name="Line" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(0, 1)
