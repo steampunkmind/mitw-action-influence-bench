@@ -11,31 +11,31 @@ func init(key: String, expressions) -> void:
 	$Name.text = key + ": "
 	$MinValue.text = str(expression.get(MIN_VALUE_KEY))
 	$MaxValue.text = str(expression.get(MAX_VALUE_KEY))
-	$Action.text = expression.get(ACTION_KEY)
+	$ActionMenu.text = expression.get(ACTION_KEY)
 	
 	var id = 1
-	for sensor: Sensor in MITW.aim_model().get_sensors():
-		$Action.get_popup().add_item(sensor.get_name(), id)
+	for action: Action in MITW.aim_model().get_actions():
+		$ActionMenu.get_popup().add_item(action.get_name(), id)
 		id += 1
 		
-	$Action.get_popup().index_pressed.connect(_on_action_menu_index_pressed)
+	$ActionMenu.get_popup().index_pressed.connect(_on_action_menu_index_pressed)
 
 
 func _on_min_value_text_changed(new_text: String) -> void:
 	if new_text.is_valid_float():
-		_expressions.set(_key, new_text.to_float())
+		expression().set(MIN_VALUE_KEY, new_text.to_float())
 		model_changed.emit()
 
 
 func _on_max_value_text_changed(new_text: String) -> void:
 	if new_text.is_valid_float():
-		_expressions.set(_key, new_text.to_float())
+		expression().set(MAX_VALUE_KEY, new_text.to_float())
 		model_changed.emit()
 
 
 func _on_action_menu_index_pressed(index) -> void:
 	var action: Action = MITW.aim_model().get_actions().get(index)
-	$Action.text = action.get_name()
+	$ActionMenu.text = action.get_name()
 	expression().set(ACTION_KEY, action.get_name())
 	model_changed.emit()
 
