@@ -78,5 +78,5 @@ func _on_add_action_button_pressed() -> void:
 func _on_delete_action_button_pressed(delete_action_button, action_menu, expression_index) -> void:
 	$HFlow.remove_child(delete_action_button)
 	$HFlow.remove_child(action_menu)
-	expression().remove_at(expression_index)
+	expression().get(ACTIONS_KEY).remove_at(expression_index)
 	model_changed.emit()
