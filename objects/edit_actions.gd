@@ -1,5 +1,4 @@
-class_name EditActions
-extends Control
+class_name EditActions extends Control
 
 signal model_changed
 
@@ -17,11 +16,11 @@ func get_actions() -> Array[Action]:
 
 func set_actions(value: Array[Action]):
 	actions = value
-	_clear_edit_action_rows()
+	clear_edit_action_rows()
 	_add_edit_action_rows()
 
 
-func _clear_edit_action_rows() -> void:
+func clear_edit_action_rows() -> void:
 	for edit_action_row: EditActionRow in _edit_action_rows:
 		$ActionScroll/Actions.remove_child(edit_action_row)
 	_edit_action_rows.clear()
@@ -58,7 +57,7 @@ func _delete_action_button_pressed(action: Action) -> void:
 
 
 func _model_changed() -> void:
-	_clear_edit_action_rows()
+	clear_edit_action_rows()
 	_add_edit_action_rows()
 	model_changed.emit()
 	

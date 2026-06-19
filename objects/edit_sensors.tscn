@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2j1uhnbgu7vk"]
+[gd_scene load_steps=7 format=3 uid="uid://d2j1uhnbgu7vk"]
 
 [ext_resource type="Script" uid="uid://uxguijlqjqgw" path="res://objects/edit_sensors.gd" id="1_gqdnc"]
+[ext_resource type="PackedScene" uid="uid://ciueryfn1relk" path="res://objects/edit_sensor_row.tscn" id="2_iujym"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_h67sv"]
 [ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_h3jem"]
 [ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_1vpub"]
@@ -15,6 +16,7 @@ offset_top = 365.0
 offset_right = 1942.0
 offset_bottom = 1451.0
 script = ExtResource("1_gqdnc")
+edit_sensor_row_template = ExtResource("2_iujym")
 
 [node name="TopLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 2, 1941, 2)

@@ -188,7 +188,7 @@ func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 		$EditActionsButton.visible = true
 		$EditActions.set_actions(MITW.aim_model().get_actions())
 	else:
-		$EditActions._clear_edit_action_rows()
+		$EditActions.clear_edit_action_rows()
 		$ActionButtonScroll/ActionButtons.update_buttons();
 		$EditActionsButton.text = "Edit Actions"
 		_reset_interface()
@@ -201,7 +201,9 @@ func _on_edit_sensors_button_toggled(toggled_on: bool) -> void:
 		_disable_interface()
 		$EditSensorsButton.text = "Done"
 		$EditSensorsButton.visible = true
+		$EditSensors.set_sensors(MITW.aim_model().get_sensors())
 	else:
+		$EditSensors.clear_edit_sensor_rows()
 		$Sensors.update_sensors()
 		$EditSensorsButton.text = "Edit Sensors"
 		_reset_interface()

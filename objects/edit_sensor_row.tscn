@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://ciueryfn1relk"]
+
+[ext_resource type="Script" uid="uid://yxg4sgp7dnj2" path="res://objects/edit_sensor_row.gd" id="1_v5ixm"]
+[ext_resource type="Texture2D" uid="uid://chqr8w7v4vx83" path="res://graphics/edit.svg" id="2_prom5"]
+[ext_resource type="Texture2D" uid="uid://yvmmu1ugymcu" path="res://graphics/edit_pressed.svg" id="3_rj0dn"]
+[ext_resource type="Texture2D" uid="uid://2yb01d58h2hn" path="res://graphics/edit_hover.svg" id="4_ls72a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fr1ei"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_fxg7q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l0sox"]
+
+[node name="EditSensorRow" type="VBoxContainer"]
+custom_minimum_size = Vector2(1924, 23)
+offset_right = 1924.0
+offset_bottom = 26.0
+script = ExtResource("1_v5ixm")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(1924, 23)
+layout_mode = 2
+
+[node name="EditButton" type="TextureButton" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("2_prom5")
+texture_pressed = ExtResource("3_rj0dn")
+texture_hover = ExtResource("4_ls72a")
+
+[node name="Name" type="Label" parent="HBox"]
+custom_minimum_size = Vector2(8, 23)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Name"
+label_settings = SubResource("LabelSettings_fr1ei")
+
+[node name="ViewParams" type="Label" parent="HBox"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Params"
+label_settings = SubResource("LabelSettings_fxg7q")
+
+[node name="EditParams" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+
+[node name="Spacer1" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="ViewInfluences" type="Label" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Influences"
+label_settings = SubResource("LabelSettings_l0sox")
+
+[node name="EditInfluences" type="VBoxContainer" parent="HBox"]
+custom_minimum_size = Vector2(90, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer2" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(2, 24)
+layout_mode = 2
+
+[node name="Line" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
