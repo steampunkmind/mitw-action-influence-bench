@@ -32,7 +32,7 @@ func set_influence(influence: Influence) -> void:
 func _expression_by_type(type: String) -> EditExpression:
 	var result: EditExpression
 	match type:
-		SensorFormulaLinear.TYPE:
+		SensorFormulaLinear.TYPE, SensorFormulaSet.TYPE:
 			result = edit_value_expression_template.instantiate()
 		SensorFormulaOutflowPercent.TYPE:
 			result = edit_value_expression_template.instantiate()
@@ -45,7 +45,6 @@ func _expression_by_type(type: String) -> EditExpression:
 			result = edit_action_min_max_expression_template.instantiate()
 		SensorFormulaSelectAction.TYPE, SensorFormulaShuffleAction.TYPE:
 			result = edit_actions_min_max_expression_template.instantiate()
-		#SensorFormulaSet.TYPE:
 		_:
 			print("Used edit_default_expression_template for: " + type)
 			result = edit_default_expression_template.instantiate()
