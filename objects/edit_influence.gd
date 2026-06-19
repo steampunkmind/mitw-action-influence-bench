@@ -43,10 +43,9 @@ func _expression_by_type(type: String) -> EditExpression:
 			result = edit_sensor_values_expression_template.instantiate()
 		SensorFormulaDelayAction.TYPE:
 			result = edit_action_min_max_expression_template.instantiate()
-		SensorFormulaSelectAction.TYPE:
+		SensorFormulaSelectAction.TYPE, SensorFormulaShuffleAction.TYPE:
 			result = edit_actions_min_max_expression_template.instantiate()
 		#SensorFormulaSet.TYPE:
-		#SensorFormulaShuffleAction.TYPE:
 		_:
 			print("Used edit_default_expression_template for: " + type)
 			result = edit_default_expression_template.instantiate()
