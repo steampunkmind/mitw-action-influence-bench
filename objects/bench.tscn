@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4rb4np51o66m"]
+[gd_scene load_steps=15 format=3 uid="uid://b4rb4np51o66m"]
 
 [ext_resource type="Script" uid="uid://bca7xre80o3an" path="res://objects/bench.gd" id="1_3f1fh"]
 [ext_resource type="Texture2D" uid="uid://cneet3pbcapoc" path="res://graphics/play.svg" id="2_2ca8i"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cwl5w3l5w6472" path="res://objects/sensors.gd" id="7_2ca8i"]
 [ext_resource type="Theme" uid="uid://b17c7kcu4qhib" path="res://objects/bench.tres" id="7_tjv83"]
 [ext_resource type="PackedScene" uid="uid://sutkkenme5nk" path="res://objects/edit_actions.tscn" id="8_cjidc"]
+[ext_resource type="PackedScene" uid="uid://d2j1uhnbgu7vk" path="res://objects/edit_sensors.tscn" id="9_hvxyr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ca8i"]
 font_size = 18
@@ -96,6 +97,15 @@ offset_bottom = 39.0
 toggle_mode = true
 text = "Edit Actions"
 
+[node name="EditSensorsButton" type="Button" parent="."]
+offset_left = 1585.0
+offset_top = 8.0
+offset_right = 1688.0
+offset_bottom = 39.0
+scale = Vector2(1.00273, 1)
+toggle_mode = true
+text = "Edit Sensors"
+
 [node name="EyeButton" type="TextureButton" parent="."]
 offset_left = 1867.0
 offset_top = 8.0
@@ -159,6 +169,7 @@ custom_minimum_size = Vector2(1924, 1)
 layout_mode = 2
 
 [node name="Sensors" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 264.0
@@ -217,6 +228,11 @@ visible = false
 offset_top = 54.0
 offset_bottom = 1144.0
 
+[node name="EditSensors" parent="." instance=ExtResource("9_hvxyr")]
+visible = false
+offset_top = 54.0
+offset_bottom = 1144.0
+
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
@@ -244,6 +260,7 @@ dialog_text = "
 [connection signal="toggled" from="PlayButton" to="." method="_on_play_button_toggled"]
 [connection signal="value_changed" from="FrameRateSlider" to="." method="_on_frame_rate_slider_value_changed"]
 [connection signal="toggled" from="EditActionsButton" to="." method="_on_edit_actions_button_toggled"]
+[connection signal="toggled" from="EditSensorsButton" to="." method="_on_edit_sensors_button_toggled"]
 [connection signal="toggled" from="EyeButton" to="." method="_on_eye_button_toggled"]
 [connection signal="action_button_pressed" from="ActionButtonScroll/ActionButtons" to="." method="_on_action_button_pressed"]
 [connection signal="model_changed" from="EditActions" to="." method="_on_edit_actions_model_changed"]

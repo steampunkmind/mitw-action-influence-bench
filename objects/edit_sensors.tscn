@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2j1uhnbgu7vk"]
+
+[ext_resource type="Script" uid="uid://uxguijlqjqgw" path="res://objects/edit_sensors.gd" id="1_gqdnc"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="3_h67sv"]
+[ext_resource type="Texture2D" uid="uid://cabj3kvxw7dok" path="res://graphics/add_pressed.svg" id="4_h3jem"]
+[ext_resource type="Texture2D" uid="uid://c082kq4f2nay" path="res://graphics/add_hover.svg" id="5_1vpub"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q55xh"]
+font_size = 18
+
+[node name="EditSensors" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 365.0
+offset_right = 1942.0
+offset_bottom = 1451.0
+script = ExtResource("1_gqdnc")
+
+[node name="TopLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 2, 1941, 2)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 0
+offset_left = 902.0
+offset_top = 6.0
+offset_right = 1038.0
+offset_bottom = 32.0
+text = "Edit Sensors"
+label_settings = SubResource("LabelSettings_q55xh")
+horizontal_alignment = 1
+
+[node name="AddButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 30.0
+offset_bottom = 31.0
+texture_normal = ExtResource("3_h67sv")
+texture_pressed = ExtResource("4_h3jem")
+texture_hover = ExtResource("5_1vpub")
+
+[node name="BottomLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 36, 1941, 36)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="SensorScroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(1937, 1050)
+layout_mode = 0
+offset_top = 38.0
+offset_right = 1937.0
+offset_bottom = 1088.0
+
+[node name="Sensors" type="VBoxContainer" parent="SensorScroll"]
+layout_mode = 2
+
+[connection signal="button_up" from="AddButton" to="." method="_on_add_button_button_up"]

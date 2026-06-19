@@ -183,18 +183,30 @@ func _set_is_dirty(is_dirty: bool) -> void:
 ## Edit Actions ##
 func _on_edit_actions_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		$ActionButtonScroll/ActionButtons.clear_action_buttons()
-		$EditActions.set_actions(MITW.aim_model().get_actions())
-		$EditActionsButton.text = "Done"
 		_disable_interface()
-		$EditActionsButton.disabled = false
+		$EditActionsButton.text = "Done"
+		$EditActionsButton.visible = true
+		$EditActions.set_actions(MITW.aim_model().get_actions())
 	else:
-		$ActionButtonScroll/ActionButtons.update_buttons();
 		$EditActions._clear_edit_action_rows()
+		$ActionButtonScroll/ActionButtons.update_buttons();
 		$EditActionsButton.text = "Edit Actions"
 		_reset_interface()
 		
 	$EditActions.visible = toggled_on
+
+
+func _on_edit_sensors_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		_disable_interface()
+		$EditSensorsButton.text = "Done"
+		$EditSensorsButton.visible = true
+	else:
+		$Sensors.update_sensors()
+		$EditSensorsButton.text = "Edit Sensors"
+		_reset_interface()
+		
+	$EditSensors.visible = toggled_on
 
 
 func _disable_interface() -> void:
@@ -208,6 +220,8 @@ func _disable_interface() -> void:
 	$FrameRateSlider.visible = false
 	$FrameRateValue.visible = false
 	$FrameCount.visible = false
+	$EditActionsButton.visible = false
+	$EditSensorsButton.visible = false
 	$EyeButton.visible = false
 	$ActionButtonScroll/ActionButtons.visible = false
 	$Sensors.visible = false
@@ -224,6 +238,8 @@ func _reset_interface() -> void:
 	$FrameRateSlider.visible = _is_model
 	$FrameRateValue.visible = _is_model
 	$FrameCount.visible = _is_model
+	$EditActionsButton.visible = _is_model
+	$EditSensorsButton.visible = _is_model
 	$EyeButton.visible = _is_model
 	$ActionButtonScroll/ActionButtons.visible = _is_model
 	$Sensors.visible = _is_model
