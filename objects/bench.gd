@@ -167,7 +167,7 @@ func _get_is_model_file() -> bool:
 	return _model_path != ""
 	
 	
-func _on_edit_actions_model_changed() -> void:
+func _on_model_changed() -> void:
 	_set_is_dirty(true)
 	
 	

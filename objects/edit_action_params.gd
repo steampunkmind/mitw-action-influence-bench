@@ -1,4 +1,4 @@
-class_name EditParams extends VBoxContainer
+class_name EditActionParams extends VBoxContainer
 
 var _action: Action
 

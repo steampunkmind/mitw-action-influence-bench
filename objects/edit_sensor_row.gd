@@ -14,7 +14,7 @@ func set_sensor(sensor: Sensor) -> void:
 	set_name(sensor.get_name()) # sets name of node
 	set_sensor_name(sensor.get_name())
 	$HBox/ViewParams.text = _param_text()
-	#$HBox/EditParams.set_sensor(sensor)
+	$HBox/EditSensorParams.set_sensor(sensor)
 	$HBox/ViewInfluences.text = _influences_text()
 	#$HBox/EditInfluences.set_sensor(sensor)
 
@@ -24,6 +24,7 @@ func set_sensor_name(value: String) -> void:
 
 
 func _param_text() -> String:
+	
 	return str(_sensor.get_dict())
 
 
@@ -48,21 +49,21 @@ func set_min_name_width(value: float) -> void:
 func _on_edit_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$HBox/ViewParams.hide()
-		$HBox/EditParams.show()
+		$HBox/EditSensorParams.show()
 		$HBox/ViewInfluences.hide()
 		$HBox/EditInfluences.show()
 	else:
 		$HBox/ViewParams.text = _param_text()
 		$HBox/ViewParams.show()
-		$HBox/EditParams.hide()
+		$HBox/EditSensorParams.hide()
 		$HBox/ViewInfluences.text = _influences_text()
 		$HBox/ViewInfluences.show()
 		$HBox/EditInfluences.hide()
 
 
-func _on_behavior_check_box_toggled(toggled_on: bool) -> void:
-	_sensor.set_behavioral(toggled_on)
-	#$HBox/ViewParams.text = _param_text()
+func _on_name_text_changed(new_text: String) -> void:
+	$HBox/Name.text = new_text
+	_sensor.set_name(new_text)
 	model_edited.emit()
 
 

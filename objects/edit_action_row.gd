@@ -14,7 +14,7 @@ func set_action(action: Action) -> void:
 	set_name(action.get_name()) # sets name of node
 	set_action_name(action.get_name())
 	$HBox/ViewParams.text = _param_text()
-	$HBox/EditParams.set_action(action)
+	$HBox/EditActionParams.set_action(action)
 	$HBox/ViewInfluences.text = _influences_text()
 	$HBox/EditInfluences.set_action(action)
 
@@ -56,13 +56,13 @@ func set_min_name_width(value: float) -> void:
 func _on_edit_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$HBox/ViewParams.hide()
-		$HBox/EditParams.show()
+		$HBox/EditActionParams.show()
 		$HBox/ViewInfluences.hide()
 		$HBox/EditInfluences.show()
 	else:
 		$HBox/ViewParams.text = _param_text()
 		$HBox/ViewParams.show()
-		$HBox/EditParams.hide()
+		$HBox/EditActionParams.hide()
 		$HBox/ViewInfluences.text = _influences_text()
 		$HBox/ViewInfluences.show()
 		$HBox/EditInfluences.hide()

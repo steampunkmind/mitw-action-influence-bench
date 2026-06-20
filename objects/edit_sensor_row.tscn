@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciueryfn1relk"]
+[gd_scene load_steps=9 format=3 uid="uid://ciueryfn1relk"]
 
 [ext_resource type="Script" uid="uid://yxg4sgp7dnj2" path="res://objects/edit_sensor_row.gd" id="1_v5ixm"]
 [ext_resource type="Texture2D" uid="uid://chqr8w7v4vx83" path="res://graphics/edit.svg" id="2_prom5"]
 [ext_resource type="Texture2D" uid="uid://yvmmu1ugymcu" path="res://graphics/edit_pressed.svg" id="3_rj0dn"]
 [ext_resource type="Texture2D" uid="uid://2yb01d58h2hn" path="res://graphics/edit_hover.svg" id="4_ls72a"]
+[ext_resource type="Script" uid="uid://bumwy170jsx3r" path="res://objects/edit_sensor_params.gd" id="5_r288k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fr1ei"]
 font_size = 18
@@ -40,12 +41,17 @@ text = "Name"
 label_settings = SubResource("LabelSettings_fr1ei")
 
 [node name="ViewParams" type="Label" parent="HBox"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 text = "Params"
 label_settings = SubResource("LabelSettings_fxg7q")
 
-[node name="EditParams" type="VBoxContainer" parent="HBox"]
+[node name="EditSensorParams" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+script = ExtResource("5_r288k")
+
+[node name="Name" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
 
 [node name="Spacer1" type="Control" parent="HBox"]
@@ -74,3 +80,4 @@ layout_mode = 2
 color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
+[connection signal="text_changed" from="HBox/EditSensorParams/Name" to="." method="_on_name_text_changed"]
