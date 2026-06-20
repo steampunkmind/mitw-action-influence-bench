@@ -1,4 +1,4 @@
-class_name EditInfluence extends VBoxContainer
+class_name EditActionInfluence extends VBoxContainer
 
 var _influence: Influence
 var _edit_expressions: Array[EditExpression]
