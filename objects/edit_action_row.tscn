@@ -46,7 +46,7 @@ size_flags_vertical = 0
 text = "Name"
 label_settings = SubResource("LabelSettings_fr1ei")
 
-[node name="ViewParams" type="Label" parent="HBox"]
+[node name="ViewActionParams" type="Label" parent="HBox"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Params"
@@ -66,7 +66,7 @@ text = "Behavioral"
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 
-[node name="ViewInfluences" type="Label" parent="HBox"]
+[node name="ViewActionInfluences" type="Label" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -106,5 +106,4 @@ color = Color(0, 0, 0, 1)
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
 [connection signal="toggled" from="HBox/EditActionParams/BehaviorCheckBox" to="." method="_on_behavior_check_box_toggled"]
 [connection signal="model_changed" from="HBox/EditActionInfluences" to="." method="_model_changed"]
-[connection signal="pressed" from="HBox/EditActionInfluences/AddEditActionInfluence" to="." method="_on_add_edit_action_influence_pressed"]
 [connection signal="pressed" from="HBox/DeleteActionButton" to="." method="_on_delete_action_button_pressed"]

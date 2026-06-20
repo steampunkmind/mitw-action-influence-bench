@@ -13,9 +13,9 @@ func set_action(action: Action) -> void:
 	_action = action
 	set_name(action.get_name()) # sets name of node
 	set_action_name(action.get_name())
-	$HBox/ViewParams.text = _param_text()
+	$HBox/ViewActionParams.text = _param_text()
 	$HBox/EditActionParams.set_action(action)
-	$HBox/ViewInfluences.text = _influences_text()
+	$HBox/ViewActionInfluences.text = _influences_text()
 	$HBox/EditActionInfluences.set_action(action)
 
 
@@ -55,28 +55,24 @@ func set_min_name_width(value: float) -> void:
 
 func _on_edit_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		$HBox/ViewParams.hide()
+		$HBox/ViewActionParams.hide()
 		$HBox/EditActionParams.show()
-		$HBox/ViewInfluences.hide()
+		$HBox/ViewActionInfluences.hide()
 		$HBox/EditActionInfluences.show()
 	else:
-		$HBox/ViewParams.text = _param_text()
-		$HBox/ViewParams.show()
+		$HBox/ViewActionParams.text = _param_text()
+		$HBox/ViewActionParams.show()
 		$HBox/EditActionParams.hide()
-		$HBox/ViewInfluences.text = _influences_text()
-		$HBox/ViewInfluences.show()
+		$HBox/ViewActionInfluences.text = _influences_text()
+		$HBox/ViewActionInfluences.show()
 		$HBox/EditActionInfluences.hide()
 
 
 func _on_behavior_check_box_toggled(toggled_on: bool) -> void:
 	_action.set_behavioral(toggled_on)
-	$HBox/ViewParams.text = _param_text()
+	$HBox/ViewActionParams.text = _param_text()
 	model_edited.emit()
 
 
 func _model_changed() -> void:
 	model_edited.emit()
-
-
-func _on_add_edit_action_influence_pressed() -> void:
-	pass # Replace with function body.
