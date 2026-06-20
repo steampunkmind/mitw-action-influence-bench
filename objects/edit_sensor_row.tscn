@@ -41,17 +41,43 @@ text = "Name"
 label_settings = SubResource("LabelSettings_fr1ei")
 
 [node name="ViewParams" type="Label" parent="HBox"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 0
 text = "Params"
 label_settings = SubResource("LabelSettings_fxg7q")
 
-[node name="EditSensorParams" type="VBoxContainer" parent="HBox"]
+[node name="EditSensorParams" type="HBoxContainer" parent="HBox"]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("5_r288k")
 
-[node name="Name" type="LineEdit" parent="HBox/EditSensorParams"]
+[node name="NameLabel" type="Label" parent="HBox/EditSensorParams"]
+layout_mode = 2
+text = "  Name"
+
+[node name="NameValue" type="LineEdit" parent="HBox/EditSensorParams"]
+layout_mode = 2
+
+[node name="MinLabel" type="Label" parent="HBox/EditSensorParams"]
+layout_mode = 2
+text = "  Min"
+
+[node name="MinValue" type="LineEdit" parent="HBox/EditSensorParams"]
+layout_mode = 2
+
+[node name="MaxLabel" type="Label" parent="HBox/EditSensorParams"]
+layout_mode = 2
+text = "  Max"
+
+[node name="MaxValue" type="LineEdit" parent="HBox/EditSensorParams"]
+layout_mode = 2
+
+[node name="InitLabel" type="Label" parent="HBox/EditSensorParams"]
+layout_mode = 2
+text = "  Init"
+
+[node name="InitValue" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
 
 [node name="Spacer1" type="Control" parent="HBox"]
@@ -80,4 +106,7 @@ layout_mode = 2
 color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="HBox/EditButton" to="." method="_on_edit_button_toggled"]
-[connection signal="text_changed" from="HBox/EditSensorParams/Name" to="." method="_on_name_text_changed"]
+[connection signal="text_changed" from="HBox/EditSensorParams/NameValue" to="." method="_on_name_text_changed"]
+[connection signal="text_changed" from="HBox/EditSensorParams/MinValue" to="." method="_on_min_value_text_changed"]
+[connection signal="text_changed" from="HBox/EditSensorParams/MaxValue" to="." method="_on_max_value_text_changed"]
+[connection signal="text_changed" from="HBox/EditSensorParams/InitValue" to="." method="_on_init_value_text_changed"]

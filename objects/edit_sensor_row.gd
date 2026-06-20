@@ -24,7 +24,6 @@ func set_sensor_name(value: String) -> void:
 
 
 func _param_text() -> String:
-	
 	return str(_sensor.get_dict())
 
 
@@ -64,7 +63,26 @@ func _on_edit_button_toggled(toggled_on: bool) -> void:
 func _on_name_text_changed(new_text: String) -> void:
 	$HBox/Name.text = new_text
 	_sensor.set_name(new_text)
-	model_edited.emit()
+	_model_changed()
+
+
+func _on_min_value_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		_sensor.set_min(new_text.to_float())
+		_model_changed()
+
+
+func _on_max_value_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		_sensor.set_max(new_text.to_float())
+		_model_changed()
+
+
+func _on_init_value_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		_sensor.set_init(new_text.to_float())
+		_sensor.set_value(new_text.to_float())
+		_model_changed()
 
 
 func _model_changed() -> void:
