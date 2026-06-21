@@ -16,7 +16,7 @@ func set_sensor(sensor: Sensor) -> void:
 	$HBox/ViewParams.text = _param_text()
 	$HBox/EditSensorParams.set_sensor(sensor)
 	$HBox/ViewInfluences.text = _influences_text()
-	#$HBox/EditInfluences.set_sensor(sensor)
+	#$HBox/EditSensorInfluences.set_sensor(sensor)
 
 
 func set_sensor_name(value: String) -> void:
@@ -28,7 +28,13 @@ func _param_text() -> String:
 
 
 func _influences_text() -> String:
-	return "edit influences"
+	var result: Dictionary = {}
+	var sensor_name = _sensor.get_name()
+	for action: Action in MITW.aim_model().get_actions():
+		for influence: Influence in action.get_influences():
+			if influence.get_sensor_name() == sensor_name:
+				result.set(action.get_name(), influence.get_dict())
+	return str(result)
 
 
 func _on_delete_sensor_button_pressed() -> void:
