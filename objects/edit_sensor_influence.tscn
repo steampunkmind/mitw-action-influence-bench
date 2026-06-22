@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8hry00m2ub28"]
+
+[ext_resource type="Script" uid="uid://b0667y4i5t3s3" path="res://objects/edit_sensor_influence.gd" id="1_cdweo"]
+[ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="8_cfgth"]
+[ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="9_hy4pb"]
+[ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="10_ta77j"]
+[ext_resource type="Texture2D" uid="uid://bnpg5wr4drrev" path="res://graphics/trash_hover.svg" id="11_oo1rr"]
+
+[node name="EditSensorInfluence" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1376.0
+offset_bottom = -1886.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_cdweo")
+
+[node name="Line" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ActionBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ActionName" type="Label" parent="ActionBox"]
+custom_minimum_size = Vector2(40, 23)
+layout_mode = 2
+text = "ActionName"
+
+[node name="AddEditExpression" type="MenuButton" parent="ActionBox"]
+layout_mode = 2
+icon = ExtResource("8_cfgth")
+
+[node name="DeleteInfluenceButton" type="TextureButton" parent="ActionBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture_normal = ExtResource("9_hy4pb")
+texture_pressed = ExtResource("10_ta77j")
+texture_hover = ExtResource("11_oo1rr")
+
+[node name="ExpressionBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ExpressionBox"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Expressions" type="VBoxContainer" parent="ExpressionBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[connection signal="pressed" from="ActionBox/DeleteInfluenceButton" to="." method="_on_delete_influence_button_pressed"]

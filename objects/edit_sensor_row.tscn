@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ciueryfn1relk"]
+[gd_scene load_steps=11 format=3 uid="uid://ciueryfn1relk"]
 
 [ext_resource type="Script" uid="uid://yxg4sgp7dnj2" path="res://objects/edit_sensor_row.gd" id="1_v5ixm"]
 [ext_resource type="Texture2D" uid="uid://chqr8w7v4vx83" path="res://graphics/edit.svg" id="2_prom5"]
 [ext_resource type="Texture2D" uid="uid://yvmmu1ugymcu" path="res://graphics/edit_pressed.svg" id="3_rj0dn"]
 [ext_resource type="Texture2D" uid="uid://2yb01d58h2hn" path="res://graphics/edit_hover.svg" id="4_ls72a"]
 [ext_resource type="Script" uid="uid://bumwy170jsx3r" path="res://objects/edit_sensor_params.gd" id="5_r288k"]
+[ext_resource type="Script" uid="uid://cnmcdkrno2mgt" path="res://objects/edit_sensor_influences.gd" id="6_fuis8"]
+[ext_resource type="PackedScene" uid="uid://b8hry00m2ub28" path="res://objects/edit_sensor_influence.tscn" id="7_1fbee"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fr1ei"]
 font_size = 18
@@ -49,36 +51,43 @@ label_settings = SubResource("LabelSettings_fxg7q")
 [node name="EditSensorParams" type="HBoxContainer" parent="HBox"]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
 script = ExtResource("5_r288k")
 
 [node name="NameLabel" type="Label" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "  Name"
 
 [node name="NameValue" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="MinLabel" type="Label" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "  Min"
 
 [node name="MinValue" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="MaxLabel" type="Label" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "  Max"
 
 [node name="MaxValue" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="InitLabel" type="Label" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "  Init"
 
 [node name="InitValue" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Spacer1" type="Control" parent="HBox"]
 custom_minimum_size = Vector2(24, 24)
@@ -91,10 +100,13 @@ size_flags_vertical = 0
 text = "Influences"
 label_settings = SubResource("LabelSettings_l0sox")
 
-[node name="EditInfluences" type="VBoxContainer" parent="HBox"]
+[node name="EditSensorInfluences" type="VBoxContainer" parent="HBox"]
+visible = false
 custom_minimum_size = Vector2(90, 24)
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("6_fuis8")
+edit_sensor_influence_template = ExtResource("7_1fbee")
 
 [node name="Spacer2" type="Control" parent="HBox"]
 custom_minimum_size = Vector2(2, 24)

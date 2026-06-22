@@ -16,7 +16,7 @@ func set_sensor(sensor: Sensor) -> void:
 	$HBox/ViewParams.text = _param_text()
 	$HBox/EditSensorParams.set_sensor(sensor)
 	$HBox/ViewInfluences.text = _influences_text()
-	#$HBox/EditSensorInfluences.set_sensor(sensor)
+	$HBox/EditSensorInfluences.set_sensor(sensor)
 
 
 func set_sensor_name(value: String) -> void:
@@ -56,14 +56,14 @@ func _on_edit_button_toggled(toggled_on: bool) -> void:
 		$HBox/ViewParams.hide()
 		$HBox/EditSensorParams.show()
 		$HBox/ViewInfluences.hide()
-		$HBox/EditInfluences.show()
+		$HBox/EditSensorInfluences.show()
 	else:
 		$HBox/ViewParams.text = _param_text()
 		$HBox/ViewParams.show()
 		$HBox/EditSensorParams.hide()
 		$HBox/ViewInfluences.text = _influences_text()
 		$HBox/ViewInfluences.show()
-		$HBox/EditInfluences.hide()
+		$HBox/EditSensorInfluences.hide()
 
 
 func _on_name_text_changed(new_text: String) -> void:
