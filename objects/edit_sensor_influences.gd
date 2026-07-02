@@ -35,15 +35,31 @@ func _clear_edit_sensor_influences() -> void:
 
 
 func _on_add_edit_sensor_influence_index_pressed(index) -> void:
-	print("_on_add_edit_sensor_influence_index_pressed")
-	#var sensor_name = $AddEditSensorInfluence.get_popup().get_item_text(index)
+	var sensor_name = $AddEditSensorInfluence.get_popup().get_item_text(index)
+	print("_on_add_edit_sensor_influence_index_pressed: sensor_name: " + sensor_name)
 	#var influence = _sensor.add_influence(sensor_name)
 	#var edit_sensor_influence: EditSensorInfluence = edit_sensor_influence_template.instantiate()
-	#edit_sensor_influence.set_influence(influence)
+	#edit_sensor_influence.set_influence(_action(), _influence())
 	#edit_sensor_influence.model_changed.connect(_model_changed)
 	#add_child(edit_sensor_influence)
 	#_edit_sensor_influences.append(edit_sensor_influence)
-	#_model_changed()
+	_model_changed()
+
+
+func _action() -> Action:
+	for action: Action in MITW.aim_model().get_actions():
+		for influence: Influence in action.get_influences():
+			if influence.get_sensor_name() == _sensor.get_name():
+				return action
+	return null
+
+
+func _influence() -> Influence:
+	for action: Action in MITW.aim_model().get_actions():
+		for influence: Influence in action.get_influences():
+			if influence.get_sensor_name() == _sensor.get_name():
+				return influence
+	return null
 
 
 func _delete_influence(influence) -> void:
