@@ -91,5 +91,9 @@ func _on_init_value_text_changed(new_text: String) -> void:
 		_model_changed()
 
 
+func _on_edit_sensor_influences_model_changed() -> void:
+	_model_changed()
+
+
 func _model_changed() -> void:
 	model_edited.emit()

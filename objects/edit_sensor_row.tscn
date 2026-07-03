@@ -139,4 +139,5 @@ color = Color(0, 0, 0, 1)
 [connection signal="text_changed" from="HBox/EditSensorParams/MinValue" to="." method="_on_min_value_text_changed"]
 [connection signal="text_changed" from="HBox/EditSensorParams/MaxValue" to="." method="_on_max_value_text_changed"]
 [connection signal="text_changed" from="HBox/EditSensorParams/InitValue" to="." method="_on_init_value_text_changed"]
+[connection signal="model_changed" from="HBox/EditSensorInfluences" to="." method="_on_edit_sensor_influences_model_changed"]
 [connection signal="pressed" from="HBox/DeleteSensorButton" to="." method="_on_delete_sensor_button_pressed"]
