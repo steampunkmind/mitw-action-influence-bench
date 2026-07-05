@@ -4,17 +4,10 @@ signal model_changed
 
 @export var edit_sensor_row_template: PackedScene
 
-
-var _sensors: Array
 var _edit_sensor_rows: Array[EditSensorRow]
 
 
-func get_sensors():
-	return _sensors
-
-
-func set_sensors(value):
-	_sensors = value	
+func init():
 	clear_edit_sensor_rows()
 	_add_edit_sensor_rows()
 
@@ -26,7 +19,7 @@ func clear_edit_sensor_rows() -> void:
 
 
 func _add_edit_sensor_rows() -> void:
-	for sensor: Sensor in _sensors:
+	for sensor: Sensor in MITW.aim_model().get_sensors():
 		var row = edit_sensor_row_template.instantiate()
 		row.set_sensor(sensor)
 		row.delete_sensor_button_pressed.connect(_delete_sensor_button_pressed.bind(sensor))
@@ -45,13 +38,12 @@ func _add_edit_sensor_rows() -> void:
 
 
 func _on_add_button_button_up() -> void:
-	var sensor = Sensor.new("Sensor " + str(_sensors.size() + 1), 0.0, 100.0, 50.0)
-	_sensors.append(sensor)
+	MITW.aim_model().new_sensor()
 	_model_changed()
 
 
 func _delete_sensor_button_pressed(sensor: Sensor) -> void:
-	_sensors.erase(sensor)
+	MITW.aim_model().delete_sensor(sensor)
 	_model_changed()
 
 
