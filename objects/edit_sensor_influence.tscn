@@ -1,6 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8hry00m2ub28"]
+[gd_scene load_steps=12 format=3 uid="uid://b8hry00m2ub28"]
 
 [ext_resource type="Script" uid="uid://b0667y4i5t3s3" path="res://objects/edit_sensor_influence.gd" id="1_cdweo"]
+[ext_resource type="PackedScene" uid="uid://bm4ty7yre04h3" path="res://objects/edit_expressions/edit_default_expression.tscn" id="2_8tem6"]
+[ext_resource type="PackedScene" uid="uid://d0dww1abhumue" path="res://objects/edit_expressions/edit_value_expression.tscn" id="3_obtqc"]
+[ext_resource type="PackedScene" uid="uid://esypxh0cw6cr" path="res://objects/edit_expressions/edit_sensors_expression.tscn" id="4_lsou4"]
+[ext_resource type="PackedScene" uid="uid://csnh2gi1bvkgm" path="res://objects/edit_expressions/edit_sensor_values_expression.tscn" id="5_hkr3u"]
+[ext_resource type="PackedScene" uid="uid://l2dfvtxlcerh" path="res://objects/edit_expressions/edit_action_min_max_expression.tscn" id="6_ye42k"]
+[ext_resource type="PackedScene" uid="uid://b302utvmrks7x" path="res://objects/edit_expressions/edit_actions_min_max_expression.tscn" id="7_lpdow"]
 [ext_resource type="Texture2D" uid="uid://cfhh2p1hg0lew" path="res://graphics/add.svg" id="8_cfgth"]
 [ext_resource type="Texture2D" uid="uid://ckyfmvcdqijtx" path="res://graphics/trash.svg" id="9_hy4pb"]
 [ext_resource type="Texture2D" uid="uid://bqj7uussfft3m" path="res://graphics/trash_pressed.svg" id="10_ta77j"]
@@ -17,6 +23,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("1_cdweo")
+edit_default_expression_template = ExtResource("2_8tem6")
+edit_value_expression_template = ExtResource("3_obtqc")
+edit_sensors_expression_template = ExtResource("4_lsou4")
+edit_sensor_values_expression_template = ExtResource("5_hkr3u")
+edit_action_min_max_expression_template = ExtResource("6_ye42k")
+edit_actions_min_max_expression_template = ExtResource("7_lpdow")
 
 [node name="Line" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(0, 1)

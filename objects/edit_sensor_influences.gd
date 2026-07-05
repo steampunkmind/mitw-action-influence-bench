@@ -1,12 +1,12 @@
 class_name EditSensorInfluences extends VBoxContainer
 
 var _sensor: Sensor
+var _edit_sensor_influences: Array[EditSensorInfluence]
 
 signal model_changed
 
 @export var edit_sensor_influence_template: PackedScene
 
-var _edit_sensor_influences: Array[EditSensorInfluence]
 
 func set_sensor(sensor: Sensor) -> void:
 	_sensor = sensor
@@ -23,7 +23,7 @@ func _add_edit_sensor_influences() -> void:
 				var edit_sensor_influence: EditSensorInfluence = edit_sensor_influence_template.instantiate()
 				edit_sensor_influence.set_influence(action, influence)
 				edit_sensor_influence.model_changed.connect(_model_changed)
-				edit_sensor_influence.delete_influence.connect(_delete_influence.bind(influence))
+				edit_sensor_influence.delete_influence.connect(_delete_influence.bind(action, influence))
 				add_child(edit_sensor_influence)
 				_edit_sensor_influences.append(edit_sensor_influence)
 
@@ -45,12 +45,11 @@ func _on_add_edit_sensor_influence_index_pressed(index) -> void:
 	_model_changed()
 
 
-func _delete_influence(influence) -> void:
-	print("_delete_influence: " + str(influence))
-	#_sensor.delete_influence(influence)
-	#_clear_edit_sensor_influences()
-	#_add_edit_sensor_influences()
-	#_model_changed()
+func _delete_influence(action, influence) -> void:
+	action.delete_influence(influence)
+	_clear_edit_sensor_influences()
+	_add_edit_sensor_influences()
+	_model_changed()
 
 
 func _model_changed() -> void:
