@@ -65,6 +65,7 @@ text = "  Name"
 [node name="NameValue" type="LineEdit" parent="HBox/EditSensorParams"]
 layout_mode = 2
 size_flags_vertical = 0
+expand_to_text_length = true
 
 [node name="MinLabel" type="Label" parent="HBox/EditSensorParams"]
 layout_mode = 2
