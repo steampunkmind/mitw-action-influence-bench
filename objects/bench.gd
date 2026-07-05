@@ -201,7 +201,7 @@ func _on_edit_sensors_button_toggled(toggled_on: bool) -> void:
 		_disable_interface()
 		$EditSensorsButton.text = "Done"
 		$EditSensorsButton.visible = true
-		$EditSensors.set_sensors(MITW.aim_model().get_sensors())
+		$EditSensors.init()
 	else:
 		$EditSensors.clear_edit_sensor_rows()
 		$Sensors.update_sensors()
