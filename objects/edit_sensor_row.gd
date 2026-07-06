@@ -68,7 +68,7 @@ func _on_edit_button_toggled(toggled_on: bool) -> void:
 
 func _on_name_text_changed(new_text: String) -> void:
 	$HBox/Name.text = new_text
-	_sensor.set_name(new_text)
+	MITW.aim_model().rename_sensor(_sensor, new_text)
 	_model_changed()
 
 
