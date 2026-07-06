@@ -32,7 +32,9 @@ func set_influence(influence: Influence) -> void:
 func _expression_by_type(type: String) -> EditExpression:
 	var result: EditExpression
 	match type:
-		SensorFormulaLinear.TYPE, SensorFormulaSet.TYPE:
+		SensorFormulaLinear.TYPE, \
+		SensorFormulaAdd.TYPE, SensorFormulaSubtract.TYPE, \
+		SensorFormulaMultiply.TYPE, SensorFormulaSet.TYPE:
 			result = edit_value_expression_template.instantiate()
 		SensorFormulaOutflowPercent.TYPE:
 			result = edit_value_expression_template.instantiate()
